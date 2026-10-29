@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Typography: Wix Madefor Display (Variable Font)
+   ========================================================================== */
+@font-face {
+  font-family: 'Wix Madefor Display';
+  src: url('/fonts/Wix_Madefor_Display/WixMadeforDisplay-VariableFont_wght.ttf') format('truetype-variations'),
+       url('/fonts/Wix_Madefor_Display/WixMadeforDisplay-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tailwind CSS v4 Theme Extension */
+@theme {
+  --font-sans: 'Wix Madefor Display', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-wix: 'Wix Madefor Display', sans-serif;
+}
+
+/* Global Font & Crisp Rendering */
+/* Global Font & Crisp Rendering */
+:root {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #000304;
+  color: #f8fafc;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Hide Scrollbar Utility
+   ========================================================================== */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   Custom Sleek Dark Scrollbar
+   ========================================================================== */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0099ff;
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+/* ==========================================================================
+   Apollo NavLink Smooth Animated Underline & Left Accent (#000304 Dark Theme)
+   ========================================================================== */
+.apollo-nav-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 0.65rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.apollo-nav-item:hover {
+  color: #38bdf8;
+}
+
+.apollo-nav-item.active {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+/* Smooth Underline expanding from center outwards to both left & right (Solid Color, No Gradient) */
+.apollo-nav-item .nav-underline {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  width: calc(100% - 1rem);
+  height: 2.5px;
+  background-color: #0099ff;
+  border-radius: 9999px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  pointer-events: none;
+}
+
+.apollo-nav-item:hover .nav-underline {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.apollo-nav-item.active .nav-underline {
+  transform: translateX(-50%) scaleX(1);
+  box-shadow: 0 0 10px rgba(0, 153, 255, 0.6), 0 0 20px rgba(0, 153, 255, 0.3);
+}
+
+/* Left Accent Indicator */
+.apollo-nav-item .nav-left-accent {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background-color: #0099ff;
+  margin-right: 6px;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+  box-shadow: 0 0 6px #0099ff;
+  flex-shrink: 0;
+}
+
+.apollo-nav-item:hover .nav-left-accent {
+  transform: scale(1);
+  opacity: 0.75;
+}
+
+.apollo-nav-item.active .nav-left-accent {
+  transform: scale(1);
+  opacity: 1;
+}
