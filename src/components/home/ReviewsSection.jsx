@@ -1,81 +1,81 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const reviews = [
+const reviewsData = [
   {
     id: 1,
     name: 'Marcus Vance',
-    location: 'United States',
-    flag: '🇺🇸',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    role: 'verified subscriber • 🇺🇸 United States',
     plan: 'Elite 180 Days Member',
-    headline: 'Best IPTV service by far. Zero buffering on live UFC fights!',
-    comment:
-      'I have tried at least 4 different streaming providers over the years and Apollo Group TV blows them all out of the water. Watched the entire UFC PPV card in 4K 60FPS without a single glitch or stutter. The anti-freeze servers are legit.',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&auto=format&fit=crop&q=80',
+    shortComment:
+      'Best IPTV service by far. Watched the entire UFC PPV card in 4K 60FPS without a single glitch or stutter. The anti-freeze servers are legit and streaming quality is incredible.',
+    fullComment:
+      'Best IPTV service by far. I have tried at least 4 different streaming providers over the years and Apollo Group TV blows them all out of the water. Watched the entire UFC PPV card in 4K 60FPS without a single glitch or stutter. The anti-freeze servers are legit, channel switching is instantaneous, and customer support via WhatsApp replied within 2 minutes. Best decision I made for live sports!',
     rating: 5,
     date: '3 days ago',
   },
   {
     id: 2,
     name: 'Liam Davies',
-    location: 'United Kingdom',
-    flag: '🇬🇧',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+    role: 'verified subscriber • 🇬🇧 United Kingdom',
     plan: 'Professional 365 Days',
-    headline: 'Saved over £1,100 this year. Premier League streams are flawless.',
-    comment:
-      'Completely cancelled Sky and Virgin Media. Apollo has every single 3 PM Saturday kickoff, Champions League, and F1 race in true HD. Super easy to configure on my Amazon Firestick 4K Max.',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&auto=format&fit=crop&q=80',
+    shortComment:
+      'Saved over £1,100 this year. Completely cancelled Sky and Virgin Media. Apollo has every single 3 PM Saturday kickoff, Champions League, and F1 race in true HD.',
+    fullComment:
+      'Saved over £1,100 this year. Completely cancelled Sky and Virgin Media. Apollo has every single 3 PM Saturday kickoff, Champions League, and F1 race in true HD. Super easy to configure on my Amazon Firestick 4K Max with Tivimate. EPG guide is always up to date and playback is silky smooth.',
     rating: 5,
     date: '1 week ago',
   },
   {
     id: 3,
     name: 'David Tremblay',
-    location: 'Canada',
-    flag: '🇨🇦',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
+    role: 'verified subscriber • 🇨🇦 Canada',
     plan: 'Growth 90 Days',
-    headline: 'WhatsApp customer support replied in under 2 minutes!',
-    comment:
-      'Had a quick question setting up Tivimate on my Android TV box. Reached out to their WhatsApp support and had my playlist active and customized within minutes. Incredible customer service.',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&auto=format&fit=crop&q=80',
+    shortComment:
+      'WhatsApp customer support replied in under 2 minutes! Had a quick question setting up Tivimate on my Android TV box and had my playlist active right away.',
+    fullComment:
+      'WhatsApp customer support replied in under 2 minutes! Had a quick question setting up Tivimate on my Android TV box. Reached out to their WhatsApp support and had my playlist active and customized within minutes. Incredible customer service that actually cares about solving your problem.',
     rating: 5,
     date: '2 weeks ago',
   },
   {
     id: 4,
     name: 'Sarah Jenkins',
-    location: 'Australia',
-    flag: '🇦🇺',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    role: 'verified subscriber • 🇦🇺 Australia',
     plan: 'Elite 180 Days Member',
-    headline: 'Massive VOD catalog with cinema releases and TV series.',
-    comment:
-      'The on-demand movies section gets updated literally every week with the newest 4K releases. My entire family uses it daily across our Smart TV and iPad without needing separate accounts.',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80',
+    shortComment:
+      'The on-demand movies section gets updated literally every week with the newest 4K releases. My entire family uses it daily across our Smart TV and iPad seamlessly.',
+    fullComment:
+      'The on-demand movies section gets updated literally every week with the newest 4K releases. My entire family uses it daily across our Smart TV and iPad without needing separate accounts. Outstanding audio and video quality on every stream.',
     rating: 5,
     date: '2 weeks ago',
   },
   {
     id: 5,
     name: 'Michael Schmidt',
-    location: 'Germany',
-    flag: '🇩🇪',
-    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80',
+    role: 'verified subscriber • 🇩🇪 Germany',
     plan: 'Professional 365 Days',
-    headline: 'Reliable high-bandwidth servers. Never going back to cable.',
-    comment:
-      'Crystal clear quality with EPG TV guide that actually works. The interface is responsive and fast channel switching takes less than a second. 10/10 recommendation for sports fans.',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=80',
+    shortComment:
+      'Reliable high-bandwidth servers. Crystal clear quality with EPG TV guide that actually works. Fast channel switching takes less than a second.',
+    fullComment:
+      'Reliable high-bandwidth servers. Never going back to cable. Crystal clear quality with EPG TV guide that actually works. The interface is responsive and fast channel switching takes less than a second. 10/10 recommendation for sports and entertainment fans alike.',
     rating: 5,
     date: '3 weeks ago',
   },
   {
     id: 6,
     name: 'Hamza Rehman',
-    location: 'Pakistan',
-    flag: '🇵🇰',
-    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&auto=format&fit=crop&q=80',
+    role: 'verified subscriber • 🇵🇰 Pakistan',
     plan: '1 Year Subscriber',
-    headline: 'Instant activation and every sports channel in crisp quality.',
-    comment:
-      'Got my login credentials within 60 seconds after signing up. Cricket matches, European football, and global news channels load immediately with zero lag. Outstanding value for the money.',
+    avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&auto=format&fit=crop&q=80',
+    shortComment:
+      'Got my login credentials within 60 seconds after signing up. Cricket matches, European football, and global news channels load immediately with zero lag.',
+    fullComment:
+      'Got my login credentials within 60 seconds after signing up. Cricket matches, European football, and global news channels load immediately with zero lag. Outstanding value for money with high-definition servers and zero buffering.',
     rating: 5,
     date: '1 month ago',
   },
@@ -97,11 +97,20 @@ const StarRating = ({ count = 5 }) => (
 )
 
 const ReviewsSection = () => {
+  const [expandedIds, setExpandedIds] = useState({})
+
+  const toggleExpand = (id) => {
+    setExpandedIds((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
+
   return (
     <section className="relative z-10 w-full py-16 lg:py-24 text-white overflow-hidden border-t border-white/5 bg-[#000304]">
       {/* Background Ambient Glows */}
-      <div className="absolute top-1/3 left-1/4 w-[650px] h-[350px] bg-[#0099ff]/5 rounded-full blur-[150px] pointer-events-none -z-10" />
-      <div className="absolute bottom-10 right-10 w-80 h-80 bg-amber-400/5 rounded-full blur-[130px] pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#0099ff]/10 rounded-full blur-[160px] pointer-events-none -z-10" />
+      <div className="absolute bottom-10 right-10 w-80 h-80 bg-sky-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
       {/* 80% Container width matching Navbar & Hero */}
       <div className="w-[88%] lg:w-[80%] mx-auto">
@@ -122,80 +131,67 @@ const ReviewsSection = () => {
           {/* Social Proof Rating Banner */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <StarRating count={5} />
-            <span className="text-sm font-bold text-white">
-              4.9 out of 5.0
-            </span>
+            <span className="text-sm font-bold text-white">4.9 out of 5.0</span>
             <span className="text-xs sm:text-sm text-slate-400">
               based on 2,500+ verified customer reviews
             </span>
           </div>
         </div>
 
-        {/* 6 Reviews Grid (3 columns on desktop, 2 on tablet, 1 on mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((rev) => (
-            <div
-              key={rev.id}
-              className="rounded-2xl p-6 sm:p-7 bg-[#0c1015] border border-white/10 hover:border-[#0099ff]/45 transition-colors duration-300 flex flex-col justify-between text-left group"
-            >
-              <div>
-                {/* 5 Proper Golden Stars & Verified Badge Header */}
-                <div className="flex items-center justify-between gap-2 mb-3.5">
-                  <StarRating count={rev.rating} />
+        {/* Reviews Grid Inspired Exactly by Image 2 (Horizontal White Cards with Circular Avatar & Read More Button) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+          {reviewsData.map((rev) => {
+            const isExpanded = !!expandedIds[rev.id]
 
-                  <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full">
-                    <svg className="w-3 h-3" viewBox="0 0 20 20" fill="currentColor">
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Verified Subscriber
-                  </span>
+            return (
+              <div
+                key={rev.id}
+                className="bg-white rounded-[28px] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(0,153,255,0.08)] flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 text-left transition-all duration-300 hover:shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_35px_rgba(0,153,255,0.18)]"
+              >
+                {/* Circular Avatar on Left (Matching Image 2) */}
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0 shadow-md ring-4 ring-slate-100 bg-slate-100">
+                  <img
+                    src={rev.avatar}
+                    alt={rev.name}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
 
-                {/* Review Headline */}
-                <h3 className="text-base font-bold text-white tracking-tight mb-2 group-hover:text-[#0099ff] transition-colors leading-snug">
-                  "{rev.headline}"
-                </h3>
+                {/* Right Content Column (Name, Role, Text, Stars, Read More Button) */}
+                <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start text-center sm:text-left">
+                  {/* Name in Accent Blue (from Image 2) */}
+                  <h3 className="text-lg sm:text-xl font-bold text-[#0099ff] tracking-tight">
+                    {rev.name}
+                  </h3>
 
-                {/* Review Comment */}
-                <p className="text-xs sm:text-[13px] text-slate-300 leading-relaxed font-normal mb-5">
-                  {rev.comment}
-                </p>
-              </div>
-
-              {/* Reviewer Details Footer with Real User Photo */}
-              <div className="pt-4 border-t border-white/5 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  {/* Real User Photo Avatar */}
-                  <div className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-[#0099ff]/30 shrink-0 bg-zinc-800">
-                    <img
-                      src={rev.avatar}
-                      alt={rev.name}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
+                  {/* Subtitle / Role (from Image 2) */}
+                  <div className="text-xs sm:text-[13px] text-slate-500 font-medium italic mt-0.5 mb-2">
+                    {rev.role}
                   </div>
 
-                  <div>
-                    <div className="text-sm font-semibold text-white flex items-center gap-1.5">
-                      <span>{rev.name}</span>
-                      <span title={rev.location} className="text-xs">{rev.flag}</span>
-                    </div>
-                    <div className="text-[11px] text-slate-400 font-medium">
-                      {rev.plan}
-                    </div>
+                  {/* 5 Golden Stars */}
+                  <div className="mb-3">
+                    <StarRating count={rev.rating} />
                   </div>
+
+                  {/* Review Text */}
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mb-4">
+                    {isExpanded ? rev.fullComment : rev.shortComment}
+                  </p>
+
+                  {/* "read more" Pill Button (Matching Image 2) */}
+                  <button
+                    type="button"
+                    onClick={() => toggleExpand(rev.id)}
+                    className="px-6 py-2 rounded-full bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] text-white text-xs sm:text-sm font-semibold shadow-md shadow-[#0099ff]/25 hover:shadow-lg hover:shadow-[#0099ff]/35 transition-all cursor-pointer"
+                  >
+                    {isExpanded ? 'read less' : 'read more'}
+                  </button>
                 </div>
-
-                <span className="text-[11px] text-slate-500 shrink-0">
-                  {rev.date}
-                </span>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
