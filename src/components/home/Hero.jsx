@@ -522,13 +522,7 @@ const Hero = () => {
 
               {/* Trustpilot Review Floating Badge */}
               <a
-                href="#"
-                onClick={(e) => {
-                  // Ready for when the user provides the real Trustpilot link
-                  if (e.currentTarget.getAttribute('href') === '#') {
-                    e.preventDefault()
-                  }
-                }}
+                href="https://www.trustpilot.com/review/apollogroup.click?utm_medium=trustbox&utm_source=TrustBoxReviewCollector"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute -left-3 sm:-left-6 lg:-left-8 top-1/2 lg:top-[68%] xl:top-[72%] -translate-y-1/2 z-30 flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-white rounded-lg shadow-[0_10px_25px_rgba(0,0,0,0.5)] border border-[#005128]/40 hover:border-[#00b67a] hover:scale-105 active:scale-95 transition-all select-none cursor-pointer"

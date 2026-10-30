@@ -100,23 +100,6 @@ const Footer = () => {
                 Need immediate assistance? Our support agents are active 24/7 via WhatsApp chat.
               </p>
 
-              <Link
-                to="/get-trail"
-                className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg text-xs font-semibold text-white bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] shadow-md shadow-[#0099ff]/25 transition-all"
-              >
-                <svg
-                  className="w-4 h-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                </svg>
-                <span>Live Chat Support</span>
-              </Link>
             </div>
           </div>
 

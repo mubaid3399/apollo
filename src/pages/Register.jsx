@@ -1,28 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import bannerImg from '../assets/login_signup.jfif'
-
-const countriesList = [
-  { name: 'Pakistan', dial: '+92' },
-  { name: 'United States', dial: '+1' },
-  { name: 'United Kingdom', dial: '+44' },
-  { name: 'Canada', dial: '+1' },
-  { name: 'United Arab Emirates', dial: '+971' },
-  { name: 'Saudi Arabia', dial: '+966' },
-  { name: 'Australia', dial: '+61' },
-  { name: 'Germany', dial: '+49' },
-  { name: 'India', dial: '+91' },
-  { name: 'Qatar', dial: '+974' },
-  { name: 'Kuwait', dial: '+965' },
-  { name: 'Oman', dial: '+968' },
-  { name: 'France', dial: '+33' },
-  { name: 'Italy', dial: '+39' },
-  { name: 'Spain', dial: '+34' },
-  { name: 'Netherlands', dial: '+31' },
-]
+import { useCountryGeo } from '../hooks/useCountryGeo'
+import CountryPhoneField from '../components/common/CountryPhoneField'
 
 const Register = () => {
   const navigate = useNavigate()
+  const geo = useCountryGeo()
+  const { countries, selectedCountry, setSelectedCountry } = geo
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -30,7 +16,7 @@ const Register = () => {
     birthday: '',
     promoCode: '',
     email: '',
-    country: 'Pakistan',
+    country: selectedCountry.name,
     state: '',
     phoneNumber: '',
     password: '',
@@ -38,16 +24,33 @@ const Register = () => {
     agreeTerms: false,
   })
 
+  // Sync country name whenever selectedCountry changes (via IP detection or manual selection)
+  useEffect(() => {
+    if (selectedCountry?.name) {
+      setFormData((prev) => ({
+        ...prev,
+        country: selectedCountry.name,
+      }))
+    }
+  }, [selectedCountry?.name])
+
   const [showPassword, setShowPassword] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [successMessage, setSuccessMessage] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
-  const selectedCountryObj =
-    countriesList.find((c) => c.name === formData.country) || countriesList[0]
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
+
+    if (name === 'country') {
+      const matched = countries.find((c) => c.name === value)
+      if (matched) {
+        setSelectedCountry(matched)
+      }
+      setFormData((prev) => ({ ...prev, country: value }))
+      return
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
@@ -82,7 +85,6 @@ const Register = () => {
 
   return (
     <div className="w-full min-h-screen bg-[#000304] text-white flex flex-col lg:flex-row">
-      
       {/* Left Column: 50% Full-Bleed Clean Banner Image (No border, No text overwrite) */}
       <div className="w-full lg:w-1/2 min-h-[360px] sm:min-h-[480px] lg:min-h-screen relative overflow-hidden bg-black shrink-0">
         <img
@@ -95,7 +97,6 @@ const Register = () => {
       {/* Right Column: 50% Registration Form (No outer border, seamless dark theme) */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-10 lg:p-12 xl:p-16">
         <div className="w-full max-w-xl mx-auto py-6">
-          
           {/* Header */}
           <div className="mb-8 text-left">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
@@ -110,7 +111,11 @@ const Register = () => {
           {errorMessage && (
             <div className="mb-6 p-3.5 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm flex items-center gap-2">
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span>{errorMessage}</span>
             </div>
@@ -119,7 +124,11 @@ const Register = () => {
           {successMessage && (
             <div className="mb-6 p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm flex items-center gap-2">
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span>{successMessage}</span>
             </div>
@@ -220,20 +229,35 @@ const Register = () => {
 
                 {/* Country & State */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                  {/* Select Country */}
-                  <div>
+                  {/* Select Country (Synced with IP Geolocation) */}
+                  <div className="relative">
                     <select
                       name="country"
                       value={formData.country}
                       onChange={handleChange}
-                      className="w-full bg-[#0c1015] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#0099ff] focus:ring-1 focus:ring-[#0099ff] transition-all cursor-pointer"
+                      className="w-full bg-[#0c1015] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-[#0099ff] focus:ring-1 focus:ring-[#0099ff] transition-all cursor-pointer appearance-none"
                     >
-                      {countriesList.map((c) => (
-                        <option key={c.name} value={c.name} className="bg-[#0c1015] text-white">
-                          {c.name}
+                      {countries.map((c) => (
+                        <option
+                          key={`${c.code}-${c.dial_code}`}
+                          value={c.name}
+                          className="bg-[#0c1015] text-white"
+                        >
+                          {c.name} ({c.dial_code})
                         </option>
                       ))}
                     </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-400">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
                   </div>
 
                   {/* State */}
@@ -249,21 +273,14 @@ const Register = () => {
                   </div>
                 </div>
 
-                {/* Phone Number Option (With Country Dial Code) */}
+                {/* Phone Number Option (With Auto IP Flag & Dial Code Selector) */}
                 <div>
-                  <div className="flex items-center w-full bg-[#0c1015] border border-white/10 rounded-xl overflow-hidden focus-within:border-[#0099ff] focus-within:ring-1 focus-within:ring-[#0099ff] transition-all">
-                    <span className="px-4 py-3.5 bg-white/[0.04] border-r border-white/10 text-xs sm:text-sm font-semibold text-slate-300 select-none shrink-0">
-                      {selectedCountryObj.dial}
-                    </span>
-                    <input
-                      type="tel"
-                      name="phoneNumber"
-                      value={formData.phoneNumber}
-                      onChange={handleChange}
-                      placeholder={selectedCountryObj.dial === '+92' ? '300 1234567' : '123 456 7890'}
-                      className="w-full bg-transparent px-4 py-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none"
-                    />
-                  </div>
+                  <CountryPhoneField
+                    geo={geo}
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    name="phoneNumber"
+                  />
                 </div>
               </div>
             </div>
@@ -288,7 +305,7 @@ const Register = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white cursor-pointer"
                     tabIndex={-1}
                   >
                     {showPassword ? (
@@ -374,7 +391,6 @@ const Register = () => {
           </form>
         </div>
       </div>
-
     </div>
   )
 }
