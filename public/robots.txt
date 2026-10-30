@@ -1,8 +1,9 @@
-# robots.txt for Apollo Group TV (https://apollogroup.click)
+# robots.txt for Apollo Group TV (https://apollogroup-tv.xyz)
 # Conforms to Google Search Central specifications (Updated November 2026)
 
 User-agent: *
 Allow: /
+Allow: /home/
 Allow: /about
 Allow: /services
 Allow: /pricing
@@ -21,4 +22,5 @@ Disallow: /*?*search=*
 Disallow: /*?*sort=*
 
 # Sitemap Index
-Sitemap: https://apollogroup.click/sitemap.xml
+Sitemap: https://apollogroup-tv.xyz/sitemap.xml
+

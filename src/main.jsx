@@ -5,9 +5,17 @@ import 'phosphor-icons/src/css/icons.css'
 import './index.css'
 import App from './App.jsx'
 
+// Dynamically support /home/ subfolder or root domain seamlessly
+const getBasename = () => {
+  if (typeof window !== 'undefined' && window.location.pathname.startsWith('/home')) {
+    return '/home'
+  }
+  return ''
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={getBasename()}>
       <App />
     </BrowserRouter>
   </StrictMode>,
