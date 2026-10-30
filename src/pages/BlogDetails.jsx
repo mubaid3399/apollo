@@ -76,7 +76,7 @@ const BlogDetails = () => {
     dateModified: '2026-10-30T12:00:00+00:00',
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://apollogroup.click/blog/${article.slug}`,
+      '@id': `https://apollogroup-tv.xyz/blog/${article.slug}`,
     },
     author: {
       '@type': 'Person',
@@ -88,7 +88,7 @@ const BlogDetails = () => {
       name: 'Apollo Group TV',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://apollogroup.click/favicon.png',
+        url: 'https://apollogroup-tv.xyz/favicon.png',
       },
     },
   }

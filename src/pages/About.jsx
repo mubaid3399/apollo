@@ -86,7 +86,7 @@ const About = () => {
     mainEntity: {
       '@type': 'Organization',
       name: 'Apollo Group TV',
-      url: 'https://apollogroup.click',
+      url: 'https://apollogroup-tv.xyz',
       description:
         'Apollo Group TV is a premier global entertainment network delivering 20,000+ live HD/4K channels, 100,000+ VOD movies, and PPV sports to over 150,000 active subscribers worldwide.',
     },

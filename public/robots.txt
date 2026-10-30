@@ -18,6 +18,7 @@ Allow: /terms-conditions
 Disallow: /login
 Disallow: /register
 Disallow: /signup
+Disallow: /dashboard
 Disallow: /*?*search=*
 Disallow: /*?*sort=*
 

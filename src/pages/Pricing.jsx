@@ -27,7 +27,7 @@ const pricingSchema = {
         price: '24.99',
         priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
-        url: 'https://apollogroup.click/pricing',
+        url: 'https://apollogroup-tv.xyz/pricing',
       },
       {
         '@type': 'Offer',
@@ -35,7 +35,7 @@ const pricingSchema = {
         price: '51.99',
         priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
-        url: 'https://apollogroup.click/pricing',
+        url: 'https://apollogroup-tv.xyz/pricing',
       },
       {
         '@type': 'Offer',
@@ -43,7 +43,7 @@ const pricingSchema = {
         price: '89.99',
         priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
-        url: 'https://apollogroup.click/pricing',
+        url: 'https://apollogroup-tv.xyz/pricing',
       },
       {
         '@type': 'Offer',
@@ -51,7 +51,7 @@ const pricingSchema = {
         price: '159.99',
         priceCurrency: 'USD',
         availability: 'https://schema.org/InStock',
-        url: 'https://apollogroup.click/pricing',
+        url: 'https://apollogroup-tv.xyz/pricing',
       },
     ],
   },
