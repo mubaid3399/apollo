@@ -251,3 +251,4 @@ export const submitFreeTrial = async (trialData) => {
     message: 'Free trial request submitted successfully!',
   }
 }
+
