@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import Home from './pages/Home'
@@ -15,6 +15,9 @@ import PrivicyPolicy from './pages/PrivicyPolicy'
 import TermsConditon from './pages/TermsConditon'
 
 const App = () => {
+  const location = useLocation()
+  const isAuthPage = ['/login', '/register', '/signup'].includes(location.pathname)
+
   return (
     <div className="min-h-screen bg-[#000304] text-white font-sans antialiased flex flex-col justify-between">
       <Navbar />
@@ -29,11 +32,12 @@ const App = () => {
           <Route path="/get-trail" element={<GetTrail />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/signup" element={<Register />} />
           <Route path="/privacy-policy" element={<PrivicyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditon />} />
         </Routes>
       </main>
-      <Footer />
+      {!isAuthPage && <Footer />}
     </div>
   )
 }
