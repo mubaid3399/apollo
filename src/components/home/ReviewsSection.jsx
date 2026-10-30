@@ -138,7 +138,7 @@ const ReviewsSection = () => {
           </div>
         </div>
 
-        {/* Reviews Grid Inspired Exactly by Image 2 (Horizontal White Cards with Circular Avatar & Read More Button) */}
+        {/* Reviews Grid Inspired by Image 2 Layout in Site Dark Theme */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
           {reviewsData.map((rev) => {
             const isExpanded = !!expandedIds[rev.id]
@@ -146,10 +146,10 @@ const ReviewsSection = () => {
             return (
               <div
                 key={rev.id}
-                className="bg-white rounded-[28px] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.5),0_0_30px_rgba(0,153,255,0.08)] flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 text-left transition-all duration-300 hover:shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_35px_rgba(0,153,255,0.18)]"
+                className="bg-[#0c1015] border border-white/10 hover:border-[#0099ff]/45 rounded-[28px] p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.7),0_0_25px_rgba(0,153,255,0.06)] flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 text-left transition-all duration-300 hover:shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_35px_rgba(0,153,255,0.15)]"
               >
-                {/* Circular Avatar on Left (Matching Image 2) */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0 shadow-md ring-4 ring-slate-100 bg-slate-100">
+                {/* Circular Avatar on Left (Matching Image 2 in Dark Theme) */}
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0 shadow-lg ring-2 ring-[#0099ff]/30 ring-offset-2 ring-offset-[#0c1015] bg-zinc-900">
                   <img
                     src={rev.avatar}
                     alt={rev.name}
@@ -166,7 +166,7 @@ const ReviewsSection = () => {
                   </h3>
 
                   {/* Subtitle / Role (from Image 2) */}
-                  <div className="text-xs sm:text-[13px] text-slate-500 font-medium italic mt-0.5 mb-2">
+                  <div className="text-xs sm:text-[13px] text-slate-400 font-medium italic mt-0.5 mb-2">
                     {rev.role}
                   </div>
 
@@ -175,8 +175,8 @@ const ReviewsSection = () => {
                     <StarRating count={rev.rating} />
                   </div>
 
-                  {/* Review Text */}
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mb-4">
+                  {/* Review Text in Light Slate for Dark Theme */}
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal mb-4">
                     {isExpanded ? rev.fullComment : rev.shortComment}
                   </p>
 
@@ -184,7 +184,7 @@ const ReviewsSection = () => {
                   <button
                     type="button"
                     onClick={() => toggleExpand(rev.id)}
-                    className="px-6 py-2 rounded-full bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] text-white text-xs sm:text-sm font-semibold shadow-md shadow-[#0099ff]/25 hover:shadow-lg hover:shadow-[#0099ff]/35 transition-all cursor-pointer"
+                    className="px-6 py-2 rounded-full bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] text-white text-xs sm:text-sm font-semibold shadow-md shadow-[#0099ff]/30 hover:shadow-lg hover:shadow-[#0099ff]/40 transition-all cursor-pointer"
                   >
                     {isExpanded ? 'read less' : 'read more'}
                   </button>
