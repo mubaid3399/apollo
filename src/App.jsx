@@ -7,6 +7,7 @@ import About from './pages/About'
 import Services from './pages/Services'
 import Pricing from './pages/Pricing'
 import Blog from './pages/Blog'
+import BlogDetails from './pages/BlogDetails'
 import Faqs from './pages/Faqs'
 import GetTrail from './pages/GetTrail'
 import Login from './pages/Login'
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogDetails />} />
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/get-trail" element={<GetTrail />} />
           <Route path="/login" element={<Login />} />

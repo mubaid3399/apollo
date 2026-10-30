@@ -1,103 +1,8 @@
 import React, { useState, useRef } from 'react'
-import apolloMovieDetailImg from '../assets/apollo-movie-detail.webp'
-import aboutMainImg from '../assets/about-main.webp'
-import aboutVideoImg from '../assets/about-video.webp'
-import whatIsApolloImg from '../assets/what is appolo.avif'
+import { Link } from 'react-router-dom'
+import { blogsData } from '../assets/data/blogsData'
 
 const categories = ['All', 'Featured', 'Live TV', 'Movies', 'Sports', 'TV Shows']
-
-const allArticles = [
-  {
-    id: 1,
-    title: 'Best Way to Stream IMDb Top Movies Using Apollo Group TV',
-    category: 'Movies',
-    excerpt:
-      'Certainly, there are some movies that go beyond popularity. Decades after being released, the people keep talking about them, remembering quotes, and watching them because they can always have a good movie evening by doing so. It is precisely why the IMDb top movies list is considered to be one of the most credible sources to consult for film fans all around the globe.',
-    date: 'October 28, 2026',
-    readTime: '5 min read',
-    image: apolloMovieDetailImg,
-  },
-  {
-    id: 2,
-    title: 'Apollo Group TV Guide to What to Watch This Week: and More!',
-    category: 'Featured',
-    excerpt:
-      'Often, one of the most difficult tasks related to streaming does not involve looking for something interesting to watch. Instead, it requires choosing what is worth your precious time. Discover our handpicked recommendations for movies, sports, and series.',
-    date: 'October 22, 2026',
-    readTime: '4 min read',
-    image: aboutMainImg,
-  },
-  {
-    id: 3,
-    title: "What Channel Is the Vikings Game On Today? Apollo's Smarter Way to Find Local Sports",
-    category: 'Sports',
-    excerpt:
-      'Never miss a kickoff or game-winning play. Learn how to quickly locate and stream your favorite local sports broadcasts with zero buffering, dedicated anti-freeze servers, and crystal-clear 60FPS feeds.',
-    date: 'October 15, 2026',
-    readTime: '6 min read',
-    image: aboutVideoImg,
-  },
-  {
-    id: 4,
-    title: 'How to Watch Every UFC Fight Night & Boxing PPV Without Cable',
-    category: 'Live TV',
-    excerpt:
-      'Tired of spending $89.99 for a single pay-per-view card? Learn how Apollo Group TV includes all numbered UFC fight cards, championship boxing, and WWE events directly in your subscription at zero extra cost.',
-    date: 'October 10, 2026',
-    readTime: '5 min read',
-    image: whatIsApolloImg,
-  },
-  {
-    id: 5,
-    title: 'Top 10 Binge-Worthy TV Series Streaming in 4K This Fall',
-    category: 'TV Shows',
-    excerpt:
-      'From mind-bending sci-fi thrillers to gripping historical dramas, here are ten critically acclaimed series with full multi-season box sets available on Apollo Group TV in Ultra HD with Dolby Atmos audio.',
-    date: 'October 05, 2026',
-    readTime: '7 min read',
-    image: apolloMovieDetailImg,
-  },
-  {
-    id: 6,
-    title: 'The Complete Firestick Setup Guide for Apollo Group TV',
-    category: 'Featured',
-    excerpt:
-      'Step-by-step walkthrough for configuring your Amazon Firestick 4K Max or Fire TV Cube with Apollo Group TV and TiviMate in under 2 minutes for zero-latency streaming.',
-    date: 'September 29, 2026',
-    readTime: '3 min read',
-    image: aboutMainImg,
-  },
-  {
-    id: 7,
-    title: 'Cord-Cutting 101: How to Save Over $1,200 Annually on TV Bills',
-    category: 'Featured',
-    excerpt:
-      'Traditional cable packages continue to increase prices while delivering less value. Discover how thousands of households eliminated hidden fees, broadcast surcharges, and equipment rentals with Apollo Group TV.',
-    date: 'September 20, 2026',
-    readTime: '6 min read',
-    image: aboutVideoImg,
-  },
-  {
-    id: 8,
-    title: 'Premier League & Champions League Football: Live Streaming Calendar',
-    category: 'Sports',
-    excerpt:
-      'Your complete guide to catching every 3 PM Saturday kickoff, European midweek matches, and domestic cup ties in true Full HD and 4K without regional geo-blocking or ISP throttling.',
-    date: 'September 14, 2026',
-    readTime: '5 min read',
-    image: whatIsApolloImg,
-  },
-  {
-    id: 9,
-    title: 'Customizing Your EPG and Electronic TV Guide for Maximum Efficiency',
-    category: 'Live TV',
-    excerpt:
-      'Unlock the full potential of Apollo Group TV real-time Electronic Program Guide (EPG). Learn how to set up channel favorites, reminders, and utilize 7-day cloud DVR catch-up TV.',
-    date: 'September 08, 2026',
-    readTime: '4 min read',
-    image: apolloMovieDetailImg,
-  },
-]
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All')
@@ -109,8 +14,8 @@ const Blog = () => {
   // Filter articles based on active category
   const filteredArticles =
     activeCategory === 'All'
-      ? allArticles
-      : allArticles.filter(
+      ? blogsData
+      : blogsData.filter(
           (article) =>
             article.category.toLowerCase() === activeCategory.toLowerCase()
         )
@@ -186,7 +91,10 @@ const Blog = () => {
                 {/* Left Column: Large Full-Bleed Featured Card */}
                 {featuredArticle && (
                   <div className="lg:col-span-7 flex">
-                    <div className="group relative flex flex-col justify-end w-full min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] rounded-2xl overflow-hidden border border-white/10 hover:border-[#0099ff]/50 transition-colors duration-300 p-6 sm:p-8 lg:p-10 text-left bg-[#0c1015]">
+                    <Link
+                      to={`/blog/${featuredArticle.slug}`}
+                      className="group relative flex flex-col justify-end w-full min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] rounded-2xl overflow-hidden border border-white/10 hover:border-[#0099ff]/50 transition-colors duration-300 p-6 sm:p-8 lg:p-10 text-left bg-[#0c1015]"
+                    >
                       {/* Full-Bleed Background Image */}
                       <img
                         src={featuredArticle.image}
@@ -218,15 +126,16 @@ const Blog = () => {
                           <span>{featuredArticle.readTime}</span>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 )}
 
                 {/* Right Column: Two Stacked Full-Bleed Cards */}
                 <div className="lg:col-span-5 flex flex-col gap-6">
                   {sideArticles.map((article) => (
-                    <div
+                    <Link
                       key={article.id}
+                      to={`/blog/${article.slug}`}
                       className="group relative flex flex-col justify-end flex-1 min-h-[260px] sm:min-h-[275px] rounded-2xl overflow-hidden border border-white/10 hover:border-[#0099ff]/50 transition-colors duration-300 p-6 sm:p-7 text-left bg-[#0c1015]"
                     >
                       {/* Full-Bleed Background Image */}
@@ -260,7 +169,7 @@ const Blog = () => {
                           <span>{article.readTime}</span>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -268,8 +177,9 @@ const Blog = () => {
               /* Flexible Grid When 1 or 2 Articles are in Filter */
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
                 {currentArticles.map((article) => (
-                  <div
+                  <Link
                     key={article.id}
+                    to={`/blog/${article.slug}`}
                     className="group relative flex flex-col justify-end min-h-[380px] sm:min-h-[440px] rounded-2xl overflow-hidden border border-white/10 hover:border-[#0099ff]/50 transition-colors duration-300 p-6 sm:p-8 text-left bg-[#0c1015]"
                   >
                     <img
@@ -295,7 +205,7 @@ const Blog = () => {
                         <span>{article.readTime}</span>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}
