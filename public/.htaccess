@@ -8,8 +8,8 @@
 
   # 1. Force HTTPS for Google Search SEO consolidation
   RewriteCond %{HTTPS} off
-  RewriteCond %{HTTP_HOST} ^(www\.)?apollogroup-tv\.xyz [NC]
-  RewriteRule ^(.*)$ https://apollogroup-tv.xyz/$1 [R=301,L]
+  RewriteCond %{HTTP_HOST} ^(www\.)?apollogroup\.click [NC]
+  RewriteRule ^(.*)$ https://apollogroup.click/$1 [R=301,L]
 
   # 2. Prevent rewrite loop for existing physical files, directories, and assets
   RewriteRule ^index\.html$ - [L]

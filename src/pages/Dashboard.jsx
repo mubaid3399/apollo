@@ -491,7 +491,7 @@ const Dashboard = () => {
                       {/* QR Code Container */}
                       <div className="p-4 bg-white rounded-2xl flex flex-col items-center justify-center text-center">
                         <img
-                          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup-tv.xyz/download/golden-smart.apk"
+                          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup.click/download/golden-smart.apk"
                           alt="Golden Smart QR code"
                           className="w-40 h-40 object-contain"
                         />
@@ -503,7 +503,7 @@ const Dashboard = () => {
                       {/* Actions */}
                       <div className="flex items-center gap-2">
                         <a
-                          href="https://apollogroup-tv.xyz/download/golden-smart.apk"
+                          href="https://apollogroup.click/download/golden-smart.apk"
                           className="flex-1 py-3 px-4 rounded-xl bg-[#0099ff] hover:bg-[#0088ee] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md transition-all"
                         >
                           <i className="ph-download-simple-bold text-base"></i>
@@ -511,7 +511,7 @@ const Dashboard = () => {
                         </a>
                         <button
                           type="button"
-                          onClick={() => copyToClipboard('https://apollogroup-tv.xyz/download/golden-smart.apk', 'Download Link')}
+                          onClick={() => copyToClipboard('https://apollogroup.click/download/golden-smart.apk', 'Download Link')}
                           className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
                           title="Copy Link"
                         >
@@ -548,7 +548,7 @@ const Dashboard = () => {
                       {/* QR Code Container */}
                       <div className="p-4 bg-white rounded-2xl flex flex-col items-center justify-center text-center">
                         <img
-                          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup-tv.xyz/download/zplayer.apk"
+                          src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup.click/download/zplayer.apk"
                           alt="Z Player QR code"
                           className="w-40 h-40 object-contain"
                         />
@@ -560,7 +560,7 @@ const Dashboard = () => {
                       {/* Actions */}
                       <div className="flex items-center gap-2">
                         <a
-                          href="https://apollogroup-tv.xyz/download/zplayer.apk"
+                          href="https://apollogroup.click/download/zplayer.apk"
                           className="flex-1 py-3 px-4 rounded-xl bg-[#0099ff] hover:bg-[#0088ee] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md transition-all"
                         >
                           <i className="ph-download-simple-bold text-base"></i>
@@ -568,7 +568,7 @@ const Dashboard = () => {
                         </a>
                         <button
                           type="button"
-                          onClick={() => copyToClipboard('https://apollogroup-tv.xyz/download/zplayer.apk', 'Download Link')}
+                          onClick={() => copyToClipboard('https://apollogroup.click/download/zplayer.apk', 'Download Link')}
                           className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
                           title="Copy Link"
                         >
@@ -787,7 +787,7 @@ const Dashboard = () => {
 
                     <div className="p-4 bg-white rounded-2xl flex flex-col items-center justify-center text-center">
                       <img
-                        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup-tv.xyz/download/golden-smart.apk"
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup.click/download/golden-smart.apk"
                         alt="Golden Smart QR code"
                         className="w-40 h-40 object-contain"
                       />
@@ -798,7 +798,7 @@ const Dashboard = () => {
 
                     <div className="flex items-center gap-2">
                       <a
-                        href="https://apollogroup-tv.xyz/download/golden-smart.apk"
+                        href="https://apollogroup.click/download/golden-smart.apk"
                         className="flex-1 py-3 px-4 rounded-xl bg-[#0099ff] hover:bg-[#0088ee] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md transition-all"
                       >
                         <i className="ph-download-simple-bold text-base"></i>
@@ -806,7 +806,7 @@ const Dashboard = () => {
                       </a>
                       <button
                         type="button"
-                        onClick={() => copyToClipboard('https://apollogroup-tv.xyz/download/golden-smart.apk', 'Download Link')}
+                        onClick={() => copyToClipboard('https://apollogroup.click/download/golden-smart.apk', 'Download Link')}
                         className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
                       >
                         <i className="ph-copy-bold text-base"></i>
@@ -840,7 +840,7 @@ const Dashboard = () => {
 
                     <div className="p-4 bg-white rounded-2xl flex flex-col items-center justify-center text-center">
                       <img
-                        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup-tv.xyz/download/zplayer.apk"
+                        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://apollogroup.click/download/zplayer.apk"
                         alt="Z Player QR code"
                         className="w-40 h-40 object-contain"
                       />
@@ -851,7 +851,7 @@ const Dashboard = () => {
 
                     <div className="flex items-center gap-2">
                       <a
-                        href="https://apollogroup-tv.xyz/download/zplayer.apk"
+                        href="https://apollogroup.click/download/zplayer.apk"
                         className="flex-1 py-3 px-4 rounded-xl bg-[#0099ff] hover:bg-[#0088ee] text-white font-semibold text-xs flex items-center justify-center gap-2 shadow-md transition-all"
                       >
                         <i className="ph-download-simple-bold text-base"></i>
@@ -859,7 +859,7 @@ const Dashboard = () => {
                       </a>
                       <button
                         type="button"
-                        onClick={() => copyToClipboard('https://apollogroup-tv.xyz/download/zplayer.apk', 'Download Link')}
+                        onClick={() => copyToClipboard('https://apollogroup.click/download/zplayer.apk', 'Download Link')}
                         className="p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 hover:text-white transition-colors"
                       >
                         <i className="ph-copy-bold text-base"></i>

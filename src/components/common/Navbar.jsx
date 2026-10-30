@@ -9,9 +9,7 @@ const navLinks = [
     { id: 'home', label: 'Home', mobileLabel: 'Home page', to: '/', end: true },
     { id: 'services', label: 'Services', to: '/services' },
     { id: 'pricing', label: 'Pricing & Packages', to: '/pricing' },
-    { id: 'blog', label: 'Blog', to: '/blog' },
     { id: 'about', label: 'About', to: '/about' },
-    { id: 'faqs', label: 'FAQs', to: '/faqs' },
 ]
 
 const ACCENT = '#0099ff'

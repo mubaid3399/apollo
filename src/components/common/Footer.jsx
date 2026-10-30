@@ -4,9 +4,9 @@ import logo from '../../assets/logo.png'
 
 const quickLinks = [
   { label: 'Home', to: '/' },
-  { label: 'About Us', to: '/about' },
   { label: 'Services', to: '/services' },
   { label: 'Pricing & Packages', to: '/pricing' },
+  { label: 'About Us', to: '/about' },
   { label: 'Blog & Guides', to: '/blog' },
   { label: 'FAQs', to: '/faqs' },
 ]
@@ -22,6 +22,7 @@ const planLinks = [
 const legalLinks = [
   { label: 'Privacy Policy', to: '/privacy-policy' },
   { label: 'Terms & Conditions', to: '/terms-conditions' },
+  { label: 'Cookie Policy', to: '/cookies' },
 ]
 
 const Footer = () => {

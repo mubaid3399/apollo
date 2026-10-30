@@ -22,6 +22,7 @@ const Login = lazy(() => import('./pages/Login'))
 const Register = lazy(() => import('./pages/Register'))
 const PrivicyPolicy = lazy(() => import('./pages/PrivicyPolicy'))
 const TermsConditon = lazy(() => import('./pages/TermsConditon'))
+const CookiePolicy = lazy(() => import('./pages/CookiePolicy'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 
 const App = () => {
@@ -83,6 +84,8 @@ const App = () => {
             <Route path="/signup" element={<Register />} />
             <Route path="/privacy-policy" element={<PrivicyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditon />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </Suspense>

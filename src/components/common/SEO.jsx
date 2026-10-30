@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-const BASE_URL = 'https://apollogroup-tv.xyz'
+const BASE_URL = 'https://apollogroup.click'
 const DEFAULT_TITLE = 'Apollo Group TV™ | Official IPTV Subscription & 10 Days Free Trial'
 const DEFAULT_DESCRIPTION =
   'Stream 20,000+ live HD/4K channels, 100,000+ VOD movies, and PPV sports on Apollo Group TV. Zero buffering with 99.9% anti-freeze servers. Claim your 10-day free trial today!'
