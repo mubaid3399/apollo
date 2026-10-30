@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/common/SEO'
 import aboutMainImg from '../assets/about-main.webp'
 import aboutVideoImg from '../assets/about-video.webp'
 
@@ -79,8 +80,26 @@ const aboutFaqs = [
 const About = () => {
   const [openFaq, setOpenFaq] = useState(0)
 
+  const aboutSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'Apollo Group TV',
+      url: 'https://apollogroup.click',
+      description:
+        'Apollo Group TV is a premier global entertainment network delivering 20,000+ live HD/4K channels, 100,000+ VOD movies, and PPV sports to over 150,000 active subscribers worldwide.',
+    },
+  }
+
   return (
     <div className="w-full bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white">
+      <SEO
+        title="About Apollo Group TV | Vision, Mission & Global IPTV Network"
+        description="Learn about Apollo Group TV, our 10Gbps dedicated server backbone, zero-logs privacy architecture, and mission to deliver contract-free 4K streaming worldwide."
+        canonical="/about"
+        schema={aboutSchema}
+      />
       {/* ------------------------------------------------------------- */}
       {/* 1. HERO HEADER WITH EXACT HERO H1 TYPOGRAPHY                  */}
       {/* ------------------------------------------------------------- */}

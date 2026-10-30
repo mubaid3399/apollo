@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/common/SEO'
 import { blogsData } from '../assets/data/blogsData'
 
 const categories = ['All', 'Featured', 'Live TV', 'Movies', 'Sports', 'TV Shows']
@@ -45,6 +46,11 @@ const Blog = () => {
 
   return (
     <div className="w-full min-h-screen bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white pt-8 pb-20 lg:pt-14 lg:pb-28">
+      <SEO
+        title="Streaming Guides & Insights | Apollo Group TV Blog"
+        description="Latest news, sports broadcasting tips, holiday movie streaming guides, and tutorials for Apollo Group TV on Firestick, Apple TV, and Android."
+        canonical="/blog"
+      />
       {/* 80% Container width matching Navbar & Hero */}
       <div className="w-[88%] lg:w-[80%] mx-auto" ref={blogListRef}>
         {/* Page Header (Matching Reference Screenshot & Hero H1 Typography) */}

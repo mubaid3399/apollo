@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import SEO from '../components/common/SEO'
 import { blogsData } from '../assets/data/blogsData'
 
 const BlogDetails = () => {
@@ -66,8 +67,41 @@ const BlogDetails = () => {
     )
   }
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.excerpt,
+    datePublished: '2026-07-28T08:00:00+00:00',
+    dateModified: '2026-10-30T12:00:00+00:00',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://apollogroup.click/blog/${article.slug}`,
+    },
+    author: {
+      '@type': 'Person',
+      name: article.author?.name || 'Marcus Vance',
+      jobTitle: article.author?.role || 'Entertainment Editor',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Apollo Group TV',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://apollogroup.click/favicon.png',
+      },
+    },
+  }
+
   return (
     <div className="w-full min-h-screen bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white">
+      <SEO
+        title={article.metaTitle || article.title}
+        description={article.excerpt}
+        canonical={`/blog/${article.slug}`}
+        ogType="article"
+        schema={articleSchema}
+      />
       {/* ------------------------------------------------------------- */}
       {/* 1. FULL-SCREEN HERO BANNER WITH BACKGROUND IMAGE & META TITLE  */}
       {/* ------------------------------------------------------------- */}

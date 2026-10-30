@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/common/SEO'
 import movieDetailImg from '../assets/apollo-movie-detail.webp'
 import whatIsApolloImg from '../assets/what is appolo.avif'
 import aboutMainImg from '../assets/about-main.webp'
@@ -281,8 +282,27 @@ const Services = () => {
       ? servicesList
       : servicesList.filter((s) => s.category === activeCategory)
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: servicesFaqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+
   return (
     <div className="w-full bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white">
+      <SEO
+        title="Apollo Group TV Services | 20,000+ Live Channels, Movies & Sports"
+        description="Explore Apollo Group TV services: 20,000+ live global channels, 100,000+ VOD movies, 4K sports PPVs, and anti-freeze servers on Firestick, Smart TVs, and mobile."
+        canonical="/services"
+        schema={faqSchema}
+      />
       {/* ------------------------------------------------------------- */}
       {/* 1. HERO BANNER SECTION                                        */}
       {/* ------------------------------------------------------------- */}

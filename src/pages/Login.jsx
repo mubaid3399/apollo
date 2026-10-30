@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import SEO from '../components/common/SEO'
 import bannerImg from '../assets/login_signup.jfif'
 import { loginUser } from '../services/googleSheetService'
 import { showNotification } from '../components/common/GsapNotification'
@@ -77,6 +78,11 @@ const Login = () => {
 
   return (
     <div className="w-full min-h-screen bg-[#000304] text-white flex flex-col lg:flex-row">
+      <SEO
+        title="Sign In | Customer Portal"
+        description="Sign in to your Apollo Group TV account to manage active devices, playlists, and subscription renewals."
+        canonical="/login"
+      />
       {/* Left Column: 50% Full-Bleed Clean Banner Image (No border, No text overwrite) */}
       <div className="w-full lg:w-1/2 min-h-[360px] sm:min-h-[480px] lg:min-h-screen relative overflow-hidden bg-black shrink-0">
         <img

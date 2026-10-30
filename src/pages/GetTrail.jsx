@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import SEO from '../components/common/SEO'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
 import { submitFreeTrial } from '../services/googleSheetService'
@@ -110,6 +111,11 @@ const GetTrail = () => {
 
   return (
     <div className="w-full min-h-screen bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white pt-10 pb-20 lg:pt-14 lg:pb-28">
+      <SEO
+        title="10 Days Free Trial | Apollo Group TV Official Access"
+        description="Claim your risk-free 10-day trial of Apollo Group TV. Test 20,000+ live 4K channels, live sports PPVs, and 100,000+ movies on Firestick, Smart TV, or mobile."
+        canonical="/get-trail"
+      />
       {/* 80% Container width matching Navbar & Hero */}
       <div className="w-[88%] lg:w-[80%] mx-auto">
 

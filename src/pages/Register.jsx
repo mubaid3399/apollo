@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import SEO from '../components/common/SEO'
 import bannerImg from '../assets/login_signup.jfif'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
@@ -106,6 +107,11 @@ const Register = () => {
 
   return (
     <div className="w-full min-h-screen bg-[#000304] text-white flex flex-col lg:flex-row">
+      <SEO
+        title="Create Account | Apollo Group TV"
+        description="Register for an Apollo Group TV account to unlock instant access to 20,000+ live 4K channels and 100,000+ VOD movies."
+        canonical="/register"
+      />
       {/* Left Column: 50% Full-Bleed Clean Banner Image (No border, No text overwrite) */}
       <div className="w-full lg:w-1/2 min-h-[360px] sm:min-h-[480px] lg:min-h-screen relative overflow-hidden bg-black shrink-0">
         <img

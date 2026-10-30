@@ -1,0 +1,24 @@
+# robots.txt for Apollo Group TV (https://apollogroup.click)
+# Conforms to Google Search Central specifications (Updated November 2026)
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /services
+Allow: /pricing
+Allow: /blog
+Allow: /blog/*
+Allow: /faqs
+Allow: /get-trail
+Allow: /privacy-policy
+Allow: /terms-conditions
+
+# Disallow private authentication and administrative query paths
+Disallow: /login
+Disallow: /register
+Disallow: /signup
+Disallow: /*?*search=*
+Disallow: /*?*sort=*
+
+# Sitemap Index
+Sitemap: https://apollogroup.click/sitemap.xml
