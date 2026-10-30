@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import ScrollToTop from './components/common/ScrollToTop'
+import GsapNotification from './components/common/GsapNotification'
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import Home from './pages/Home'
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-[#000304] text-white font-sans antialiased flex flex-col justify-between">
       <ScrollToTop />
+      <GsapNotification />
       <Navbar />
       <main className="w-full flex-1">
         <Routes>

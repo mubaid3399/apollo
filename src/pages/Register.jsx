@@ -5,6 +5,7 @@ import bannerImg from '../assets/login_signup.jfif'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
 import { registerUser } from '../services/googleSheetService'
+import { showNotification } from '../components/common/GsapNotification'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -66,14 +67,14 @@ const Register = () => {
     if (formData.password && formData.password !== formData.confirmPassword) {
       const err = 'Passwords do not match!'
       setErrorMessage(err)
-      toast.error(err)
+      showNotification(err, 'error')
       return
     }
 
     if (!formData.agreeTerms) {
       const err = 'Please accept the Terms of Service & Privacy Policy.'
       setErrorMessage(err)
-      toast.warning(err)
+      showNotification(err, 'error')
       return
     }
 
@@ -86,20 +87,20 @@ const Register = () => {
       if (res.success) {
         const success = res.message || 'Registration successful! Redirecting to login...'
         setSuccessMessage(success)
-        toast.success('🎉 ' + success)
+        showNotification(success, 'success')
         setTimeout(() => {
           navigate('/login')
         }, 1500)
       } else {
         const err = res.message || 'Registration failed. Please try again.'
         setErrorMessage(err)
-        toast.error(err)
+        showNotification(err, 'error')
       }
     } catch (err) {
       setIsSubmitting(false)
       const errText = 'An unexpected error occurred. Please try again.'
       setErrorMessage(errText)
-      toast.error(errText)
+      showNotification(errText, 'error')
     }
   }
 

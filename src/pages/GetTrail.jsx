@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
 import { submitFreeTrial } from '../services/googleSheetService'
+import { showNotification } from '../components/common/GsapNotification'
 
 const deviceOptions = [
   'Amazon Firestick / Fire TV',
@@ -80,7 +81,7 @@ const GetTrail = () => {
     if (!formData.email) {
       const msg = 'Please provide a valid email address to receive your trial credentials.'
       setErrorMessage(msg)
-      toast.error(msg)
+      showNotification(msg, 'error')
       return
     }
 
@@ -91,21 +92,19 @@ const GetTrail = () => {
       setIsSubmitting(false)
 
       if (res.success) {
-        const successText = `Success! Your 10-day free trial request has been submitted. Credentials are being dispatched to ${formData.email}.`
+        const successText = `10-day free trial requested! Credentials are being dispatched to ${formData.email}.`
         setSuccessMessage(successText)
-        toast.success('🎉 10-Day Free Trial request submitted! Check your email and WhatsApp.', {
-          autoClose: 5000,
-        })
+        showNotification(successText, 'success', 5000)
       } else {
         const msg = res.message || 'Failed to submit free trial request.'
         setErrorMessage(msg)
-        toast.error(msg)
+        showNotification(msg, 'error')
       }
     } catch (err) {
       setIsSubmitting(false)
       const errText = 'An error occurred while submitting. Please try again.'
       setErrorMessage(errText)
-      toast.error(errText)
+      showNotification(errText, 'error')
     }
   }
 

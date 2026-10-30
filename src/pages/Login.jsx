@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import bannerImg from '../assets/login_signup.jfif'
 import { loginUser } from '../services/googleSheetService'
+import { showNotification } from '../components/common/GsapNotification'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -33,14 +34,14 @@ const Login = () => {
     if (!formData.identifier) {
       const err = 'Please enter your username or email address.'
       setErrorMessage(err)
-      toast.error(err)
+      showNotification(err, 'error')
       return
     }
 
     if (!formData.password) {
       const err = 'Please enter your password.'
       setErrorMessage(err)
-      toast.error(err)
+      showNotification(err, 'error')
       return
     }
 
@@ -57,20 +58,20 @@ const Login = () => {
       if (res.success) {
         const welcome = res.message || 'Login successful! Redirecting...'
         setSuccessMessage(welcome)
-        toast.success(welcome)
+        showNotification(welcome, 'success')
         setTimeout(() => {
           navigate('/')
         }, 1200)
       } else {
         const err = res.message || 'Invalid username/email or password.'
         setErrorMessage(err)
-        toast.error(err)
+        showNotification(err, 'error')
       }
     } catch (err) {
       setIsSubmitting(false)
       const errText = 'An unexpected error occurred during login. Please try again.'
       setErrorMessage(errText)
-      toast.error(errText)
+      showNotification(errText, 'error')
     }
   }
 
