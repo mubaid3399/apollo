@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import ScrollToTop from './components/common/ScrollToTop'
 import GsapNotification from './components/common/GsapNotification'
 import Navbar from './components/common/Navbar'
+import { verifySession } from './services/googleSheetService'
 import Footer from './components/common/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -22,6 +23,11 @@ import TermsConditon from './pages/TermsConditon'
 const App = () => {
   const location = useLocation()
   const isAuthPage = ['/login', '/register', '/signup'].includes(location.pathname)
+
+  // Verify session on page load/refresh against Google Sheets
+  useEffect(() => {
+    verifySession()
+  }, [])
 
   return (
     <div className="min-h-screen bg-[#000304] text-white font-sans antialiased flex flex-col justify-between">

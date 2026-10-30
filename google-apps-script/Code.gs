@@ -178,6 +178,46 @@ function doPost(e) {
     }
 
     // ------------------------------------------------------------------------
+    // ACTION: VERIFY USER (Checks if user still exists in Google Sheet)
+    // ------------------------------------------------------------------------
+    if (action === "verify_user") {
+      var sheet = ss.getSheetByName("Users");
+      if (!sheet) {
+        return respondJSON({ success: false, userNotFound: true, message: "Users sheet not found." });
+      }
+
+      var identifier = (data.identifier || data.email || data.username || "").toLowerCase().trim();
+      var id = (data.id || "").trim();
+
+      if (!identifier && !id) {
+        return respondJSON({ success: false, userNotFound: true, message: "Identifier or ID required." });
+      }
+
+      var values = sheet.getDataRange().getValues();
+      var found = false;
+
+      for (var i = 1; i < values.length; i++) {
+        var rowId = String(values[i][0] || "").trim();
+        var rowUsername = String(values[i][4] || "").toLowerCase().trim();
+        var rowEmail = String(values[i][5] || "").toLowerCase().trim();
+
+        if (
+          (id && rowId === id) ||
+          (identifier && (rowUsername === identifier || rowEmail === identifier))
+        ) {
+          found = true;
+          break;
+        }
+      }
+
+      if (found) {
+        return respondJSON({ success: true, message: "User is active." });
+      } else {
+        return respondJSON({ success: false, userNotFound: true, message: "User has been removed from database." });
+      }
+    }
+
+    // ------------------------------------------------------------------------
     // 3. ACTION: FREE TRIAL
     // ------------------------------------------------------------------------
     if (action === "freetrial") {

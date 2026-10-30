@@ -41,6 +41,55 @@ export const logoutUser = () => {
 }
 
 /**
+ * Verifies if the currently logged in session still exists in the database.
+ * If user was deleted from Google Sheets, automatically logs them out and clears localStorage.
+ */
+export const verifySession = async () => {
+  const user = getCurrentUser()
+  if (!user) return null
+
+  if (isGoogleSheetConfigured()) {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify({
+          action: 'verify_user',
+          id: user.id || '',
+          email: user.email || '',
+          username: user.username || '',
+        }),
+      })
+
+      const result = await response.json()
+      if (result && result.userNotFound) {
+        console.warn('[GoogleSheetService] User was removed from Google Sheet. Ending session.')
+        logoutUser()
+        return null
+      }
+    } catch (err) {
+      console.warn('[GoogleSheetService] Session verification network error:', err)
+    }
+    return user
+  }
+
+  // Local fallback check
+  const existingUsers = JSON.parse(localStorage.getItem('apollo_mock_users') || '[]')
+  const stillExists = existingUsers.some(
+    (u) =>
+      u.email.toLowerCase() === (user.email || '').toLowerCase() ||
+      u.username.toLowerCase() === (user.username || '').toLowerCase()
+  )
+  if (!stillExists) {
+    logoutUser()
+    return null
+  }
+  return user
+}
+
+/**
  * Register a new user
  * @param {Object} userData 
  */
