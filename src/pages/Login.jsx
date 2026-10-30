@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import bannerImg from '../assets/login_signup.jfif'
-import { useCountryGeo } from '../hooks/useCountryGeo'
-import CountryPhoneField from '../components/common/CountryPhoneField'
 
 const Login = () => {
   const navigate = useNavigate()
-  const geo = useCountryGeo()
 
   const [formData, setFormData] = useState({
     identifier: '', // username or email
     password: '',
-    phoneNumber: '',
     rememberMe: false,
   })
 
@@ -32,8 +28,8 @@ const Login = () => {
     e.preventDefault()
     setErrorMessage('')
 
-    if (!formData.identifier && !formData.phoneNumber) {
-      setErrorMessage('Please enter your username, email, or phone number.')
+    if (!formData.identifier) {
+      setErrorMessage('Please enter your username or email address.')
       return
     }
 
@@ -114,6 +110,7 @@ const Login = () => {
               <input
                 type="text"
                 name="identifier"
+                required
                 value={formData.identifier}
                 onChange={handleChange}
                 placeholder="Enter your username or email"
@@ -157,25 +154,6 @@ const Login = () => {
                   )}
                 </button>
               </div>
-            </div>
-
-            {/* Input 3: Last Input - Phone Number Option with Flag and Country IP Tracking */}
-            <div>
-              <div className="flex items-center justify-between mb-1.5">
-                <label className="block text-xs sm:text-sm font-medium text-slate-300">
-                  Phone Number Option
-                </label>
-                <span className="text-[11px] text-zinc-500 font-normal">
-                  Optional / Fast verification
-                </span>
-              </div>
-              <CountryPhoneField
-                geo={geo}
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                name="phoneNumber"
-                placeholder={geo.selectedCountry.dial_code === '+92' ? '300 1234567' : '123 456 7890'}
-              />
             </div>
 
             {/* Remember Me & Forgot Password */}
