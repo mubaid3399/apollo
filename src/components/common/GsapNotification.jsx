@@ -128,14 +128,14 @@ const GsapNotification = () => {
 
   return (
     <div
-      className="fixed top-6 sm:top-8 left-1/2 -translate-x-1/2 z-[99999] pointer-events-auto px-4 max-w-[94vw] sm:max-w-xl"
+      className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-[99999] pointer-events-auto px-3 sm:px-4 w-full sm:w-auto max-w-[96vw] sm:max-w-xl flex justify-center"
       role="alert"
     >
       <div
         ref={pillRef}
-        className="bg-white text-slate-800 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full shadow-[0_12px_40px_-5px_rgba(0,0,0,0.35)] border border-slate-200/80 flex items-center gap-3 sm:gap-3.5 backdrop-blur-md"
+        className="w-full sm:w-auto min-w-[280px] max-w-full bg-white text-slate-800 px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-2xl sm:rounded-full shadow-[0_16px_50px_-5px_rgba(0,0,0,0.5)] border border-slate-200/90 flex items-center gap-3 sm:gap-3.5 backdrop-blur-md"
       >
-        {/* Left Icon Badge (Vibrant green checkmark for success, red for error) */}
+        {/* Left Icon Badge */}
         <div
           ref={iconRef}
           className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm ${
@@ -175,7 +175,7 @@ const GsapNotification = () => {
         </div>
 
         {/* Message Text */}
-        <span className="text-sm sm:text-[15px] font-semibold text-slate-800 tracking-tight leading-snug">
+        <span className="flex-1 min-w-0 text-xs sm:text-sm md:text-[14px] font-semibold text-slate-800 tracking-tight leading-snug">
           {current.message}
         </span>
 
@@ -183,7 +183,7 @@ const GsapNotification = () => {
         <button
           type="button"
           onClick={dismissNotification}
-          className="ml-2 text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-full focus:outline-none"
+          className="shrink-0 text-slate-400 hover:text-slate-700 transition-colors p-1 rounded-full focus:outline-none -mr-1"
           aria-label="Dismiss notification"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
