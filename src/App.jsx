@@ -1,6 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/common/Navbar'
+import Footer from './components/common/Footer'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
@@ -15,9 +16,9 @@ import TermsConditon from './pages/TermsConditon'
 
 const App = () => {
   return (
-    <div className="min-h-screen bg-[#000304] text-white font-sans antialiased">
+    <div className="min-h-screen bg-[#000304] text-white font-sans antialiased flex flex-col justify-between">
       <Navbar />
-      <main className="w-full">
+      <main className="w-full flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/terms-conditions" element={<TermsConditon />} />
         </Routes>
       </main>
+      <Footer />
     </div>
   )
 }
