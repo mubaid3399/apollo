@@ -89,11 +89,7 @@ const About = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#0099ff]/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
         <div className="w-[88%] lg:w-[80%] mx-auto text-center space-y-6">
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0099ff]/10 border border-[#0099ff]/30 text-[#0099ff] text-xs font-semibold uppercase tracking-wider shadow-sm shadow-[#0099ff]/15">
-            <i className="ph-sparkle-bold text-sm"></i>
-            <span>Pioneering The Future of Cord-Cutting</span>
-          </div>
+
 
           {/* Exact Hero H1 Typography */}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18] max-w-4xl mx-auto">
@@ -327,11 +323,10 @@ const About = () => {
               return (
                 <div
                   key={index}
-                  className={`rounded-xl border transition-all duration-200 overflow-hidden ${
-                    isOpen
+                  className={`rounded-xl border transition-all duration-200 overflow-hidden ${isOpen
                       ? 'bg-[#0c1015] border-[#0099ff]/50 shadow-lg shadow-[#0099ff]/5'
                       : 'bg-white/[0.02] border-white/10 hover:border-white/20'
-                  }`}
+                    }`}
                 >
                   <button
                     type="button"
@@ -340,18 +335,16 @@ const About = () => {
                     aria-expanded={isOpen}
                   >
                     <span
-                      className={`text-sm sm:text-base font-bold transition-colors ${
-                        isOpen ? 'text-[#0099ff]' : 'text-white'
-                      }`}
+                      className={`text-sm sm:text-base font-bold transition-colors ${isOpen ? 'text-[#0099ff]' : 'text-white'
+                        }`}
                     >
                       {faq.question}
                     </span>
                     <div
-                      className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 border transition-all duration-200 ${
-                        isOpen
+                      className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 border transition-all duration-200 ${isOpen
                           ? 'bg-[#0099ff] border-[#0099ff] text-white rotate-45'
                           : 'bg-white/[0.05] border-white/10 text-slate-300'
-                      }`}
+                        }`}
                     >
                       <i className="ph-plus-bold text-xs"></i>
                     </div>

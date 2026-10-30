@@ -96,12 +96,73 @@ const servicesList = [
 ]
 
 const supportedDevices = [
-  { name: 'Amazon Fire TV', desc: 'Firestick 4K, Cube & TVs', icon: 'ph-television-bold' },
-  { name: 'Android TV / Box', desc: 'Nvidia Shield, Xiaomi, Sony', icon: 'ph-robot-bold' },
-  { name: 'Apple iOS & TV', desc: 'iPhone, iPad, Apple TV 4K', icon: 'ph-apple-logo-bold' },
-  { name: 'Smart TVs', desc: 'Samsung Tizen, LG webOS', icon: 'ph-screencast-bold' },
-  { name: 'PC & Mac', desc: 'Windows, macOS, Linux browser', icon: 'ph-desktop-bold' },
-  { name: 'MAG & Formuler', desc: 'Dedicated IPTV set-top boxes', icon: 'ph-hard-drive-bold' },
+  {
+    name: 'Amazon Fire TV',
+    desc: 'Firestick 4K, Cube & TVs',
+    renderIcon: () => (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Android TV / Box',
+    desc: 'Nvidia Shield, Xiaomi, Sony',
+    renderIcon: () => (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path d="M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Apple iOS & TV',
+    desc: 'iPhone, iPad, Apple TV 4K',
+    renderIcon: () => (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" />
+      </svg>
+    ),
+  },
+  {
+    name: 'Smart TVs',
+    desc: 'Samsung Tizen, LG webOS',
+    renderIcon: () => (
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
+        <rect x="2" y="3.5" width="20" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M8.5 20.5h7M12 16.5v4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M5.5 13a2 2 0 0 1 2-2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M5.5 10a5 5 0 0 1 5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <circle cx="5.5" cy="13" r="0.8" fill="currentColor" />
+        <path d="M14.5 7.5h4M16.5 10h2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" opacity="0.6" />
+      </svg>
+    ),
+  },
+  {
+    name: 'PC & Mac',
+    desc: 'Windows, macOS, Linux browser',
+    renderIcon: () => (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+        <path d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623" />
+      </svg>
+    ),
+  },
+  {
+    name: 'MAG & Formuler',
+    desc: 'Dedicated IPTV set-top boxes',
+    renderIcon: () => (
+      <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6">
+        <path d="M6 8V3M18 8V3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <circle cx="6" cy="3" r="1.1" fill="currentColor" />
+        <circle cx="18" cy="3" r="1.1" fill="currentColor" />
+        <rect x="2" y="8" width="20" height="11" rx="2" stroke="currentColor" strokeWidth="1.6" />
+        <rect x="5" y="11" width="8" height="5" rx="1" stroke="currentColor" strokeWidth="1.2" opacity="0.85" />
+        <path d="M7 13.5h4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+        <circle cx="15.8" cy="13.5" r="0.85" fill="currentColor" />
+        <circle cx="18.2" cy="13.5" r="0.85" fill="currentColor" />
+        <path d="M5 19v1.5M19 19v1.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    ),
+  },
 ]
 
 const comparisonData = [
@@ -231,12 +292,6 @@ const Services = () => {
         <div className="absolute top-1/3 -left-32 w-80 h-80 bg-[#0099ff]/5 rounded-full blur-[120px] pointer-events-none -z-10" />
 
         <div className="w-[88%] lg:w-[80%] mx-auto text-center space-y-6">
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0099ff]/10 border border-[#0099ff]/30 text-[#0099ff] text-xs font-semibold uppercase tracking-wider shadow-sm shadow-[#0099ff]/15">
-            <i className="ph-sparkle-bold text-sm"></i>
-            <span>Premium IPTV & Cloud Streaming Services</span>
-          </div>
-
           {/* Main Title */}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18] max-w-4xl mx-auto">
             Next-Gen Entertainment Services Engineered for{' '}
@@ -318,8 +373,8 @@ const Services = () => {
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
                   className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-sm text-xs sm:text-sm font-semibold transition-all cursor-pointer ${isActive
-                      ? 'bg-[#0099ff] text-white shadow-md shadow-[#0099ff]/30'
-                      : 'bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/5'
+                    ? 'bg-[#0099ff] text-white shadow-md shadow-[#0099ff]/30'
+                    : 'bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/5'
                     }`}
                 >
                   {cat.label}
@@ -568,7 +623,7 @@ const Services = () => {
                 className="p-5 rounded-sm bg-[#0c1015] border border-white/10 hover:border-[#0099ff]/40 hover:bg-white/[0.04] transition-all flex flex-col items-center justify-center text-center group"
               >
                 <div className="w-12 h-12 rounded-sm bg-white/[0.03] border border-white/5 group-hover:bg-[#0099ff]/15 group-hover:border-[#0099ff]/30 flex items-center justify-center text-slate-300 group-hover:text-[#0099ff] transition-all mb-3 text-2xl">
-                  <i className={dev.icon}></i>
+                  {dev.renderIcon ? dev.renderIcon() : <i className={dev.icon}></i>}
                 </div>
                 <h3 className="text-xs sm:text-sm font-bold text-white tracking-tight mb-1">
                   {dev.name}
@@ -727,11 +782,10 @@ const Services = () => {
               return (
                 <div
                   key={index}
-                  className={`rounded-sm border transition-all duration-200 overflow-hidden ${
-                    isOpen
+                  className={`rounded-sm border transition-all duration-200 overflow-hidden ${isOpen
                       ? 'bg-[#0c1015] border-[#0099ff]/50 shadow-lg shadow-[#0099ff]/5'
                       : 'bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
-                  }`}
+                    }`}
                 >
                   <button
                     type="button"
@@ -740,18 +794,16 @@ const Services = () => {
                     aria-expanded={isOpen}
                   >
                     <span
-                      className={`text-sm sm:text-base font-bold transition-colors ${
-                        isOpen ? 'text-[#0099ff]' : 'text-white'
-                      }`}
+                      className={`text-sm sm:text-base font-bold transition-colors ${isOpen ? 'text-[#0099ff]' : 'text-white'
+                        }`}
                     >
                       {faq.question}
                     </span>
                     <div
-                      className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 border transition-all duration-200 ${
-                        isOpen
+                      className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 border transition-all duration-200 ${isOpen
                           ? 'bg-[#0099ff] border-[#0099ff] text-white rotate-45'
                           : 'bg-white/[0.05] border-white/10 text-slate-300'
-                      }`}
+                        }`}
                     >
                       <i className="ph-plus-bold text-xs"></i>
                     </div>

@@ -83,19 +83,6 @@ const BlogDetails = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#000304] via-[#000304]/80 via-55% to-black/35 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#000304]/80 via-transparent to-[#000304]/50 pointer-events-none" />
 
-        {/* Floating Apollo Group TV Badge Pill at top center */}
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-          <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs font-semibold text-white tracking-wide shadow-lg">
-            <svg
-              className="w-4 h-4 text-[#0099ff]"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
-              <path d="M12 2L2 19.5h20L12 2zm0 3.8L18.5 17H5.5L12 5.8z" />
-            </svg>
-            <span>Apollo Group TV</span>
-          </div>
-        </div>
 
         {/* Hero Content Container (Overlaid on Bottom Left) */}
         <div className="relative z-10 w-[88%] lg:w-[80%] mx-auto pb-12 sm:pb-16 text-left">
@@ -136,7 +123,7 @@ const BlogDetails = () => {
       <section className="relative z-10 w-full py-12 lg:py-20">
         <div className="w-[88%] lg:w-[80%] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-            
+
             {/* Left Column: Simple Clean Table of Contents (Matches Screenshots) */}
             <aside className="lg:col-span-4 lg:sticky lg:top-24 text-left">
               <div className="pr-2 lg:pr-6">
@@ -155,17 +142,15 @@ const BlogDetails = () => {
                           key={item.id}
                           type="button"
                           onClick={() => scrollToSection(item.id)}
-                          className={`w-full text-left transition-colors cursor-pointer block leading-snug ${
-                            isSubItem
-                              ? 'pl-4 text-xs sm:text-sm py-1'
-                              : 'text-sm sm:text-base font-medium py-1.5'
-                          } ${
-                            isActive
+                          className={`w-full text-left transition-colors cursor-pointer block leading-snug ${isSubItem
+                            ? 'pl-4 text-xs sm:text-sm py-1'
+                            : 'text-sm sm:text-base font-medium py-1.5'
+                            } ${isActive
                               ? 'text-[#0099ff] font-semibold'
                               : isSubItem
-                              ? 'text-slate-400 hover:text-[#0099ff]'
-                              : 'text-slate-200 hover:text-[#0099ff]'
-                          }`}
+                                ? 'text-slate-400 hover:text-[#0099ff]'
+                                : 'text-slate-200 hover:text-[#0099ff]'
+                            }`}
                         >
                           {item.title}
                         </button>
@@ -395,11 +380,10 @@ const BlogDetails = () => {
                       return (
                         <div
                           key={fIdx}
-                          className={`rounded-sm border transition-all duration-200 overflow-hidden ${
-                            isOpen
-                              ? 'bg-[#0c1015] border-[#0099ff]/50'
-                              : 'bg-white/[0.02] border-white/10 hover:border-white/20'
-                          }`}
+                          className={`rounded-sm border transition-all duration-200 overflow-hidden ${isOpen
+                            ? 'bg-[#0c1015] border-[#0099ff]/50'
+                            : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+                            }`}
                         >
                           <button
                             type="button"
@@ -408,18 +392,16 @@ const BlogDetails = () => {
                             aria-expanded={isOpen}
                           >
                             <span
-                              className={`text-sm sm:text-base font-bold transition-colors ${
-                                isOpen ? 'text-[#0099ff]' : 'text-white'
-                              }`}
+                              className={`text-sm sm:text-base font-bold transition-colors ${isOpen ? 'text-[#0099ff]' : 'text-white'
+                                }`}
                             >
                               {faq.question}
                             </span>
                             <div
-                              className={`w-6 h-6 rounded-sm flex items-center justify-center shrink-0 border transition-all ${
-                                isOpen
-                                  ? 'bg-[#0099ff] border-[#0099ff] text-white rotate-45'
-                                  : 'bg-white/[0.05] border-white/10 text-slate-300'
-                              }`}
+                              className={`w-6 h-6 rounded-sm flex items-center justify-center shrink-0 border transition-all ${isOpen
+                                ? 'bg-[#0099ff] border-[#0099ff] text-white rotate-45'
+                                : 'bg-white/[0.05] border-white/10 text-slate-300'
+                                }`}
                             >
                               <i className="ph-plus-bold text-xs"></i>
                             </div>

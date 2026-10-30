@@ -216,3 +216,4 @@ const PricingFaqs = () => {
 }
 
 export default PricingFaqs
+
