@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
 
@@ -76,7 +77,9 @@ const GetTrail = () => {
     setErrorMessage('')
 
     if (!formData.email) {
-      setErrorMessage('Please provide a valid email address to receive your trial credentials.')
+      const msg = 'Please provide a valid email address to receive your trial credentials.'
+      setErrorMessage(msg)
+      toast.error(msg)
       return
     }
 
@@ -85,9 +88,11 @@ const GetTrail = () => {
     // Simulate instant trial provisioning
     setTimeout(() => {
       setIsSubmitting(false)
-      setSuccessMessage(
-        `Success! Your 10-day free trial credentials have been dispatched to ${formData.email}. Please check your inbox and WhatsApp.`
-      )
+      const successText = `Success! Your 10-day free trial credentials have been dispatched to ${formData.email}. Please check your inbox and WhatsApp.`
+      setSuccessMessage(successText)
+      toast.success('🎉 10-Day Free Trial credentials dispatched to your email & WhatsApp!', {
+        autoClose: 5000,
+      })
     }, 1200)
   }
 

@@ -1,5 +1,8 @@
 import React from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import ScrollToTop from './components/common/ScrollToTop'
 import Navbar from './components/common/Navbar'
 import Footer from './components/common/Footer'
 import Home from './pages/Home'
@@ -21,6 +24,7 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-[#000304] text-white font-sans antialiased flex flex-col justify-between">
+      <ScrollToTop />
       <Navbar />
       <main className="w-full flex-1">
         <Routes>
@@ -40,6 +44,19 @@ const App = () => {
         </Routes>
       </main>
       {!isAuthPage && <Footer />}
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        toastClassName="!bg-[#0c1015] !text-white !border !border-white/10 !shadow-2xl !rounded-xl text-xs sm:text-sm font-sans"
+      />
     </div>
   )
 }

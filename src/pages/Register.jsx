@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import bannerImg from '../assets/login_signup.jfif'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
@@ -62,12 +63,16 @@ const Register = () => {
     setErrorMessage('')
 
     if (formData.password && formData.password !== formData.confirmPassword) {
-      setErrorMessage('Passwords do not match!')
+      const err = 'Passwords do not match!'
+      setErrorMessage(err)
+      toast.error(err)
       return
     }
 
     if (!formData.agreeTerms) {
-      setErrorMessage('Please accept the Terms of Service & Privacy Policy.')
+      const err = 'Please accept the Terms of Service & Privacy Policy.'
+      setErrorMessage(err)
+      toast.warning(err)
       return
     }
 
@@ -76,7 +81,9 @@ const Register = () => {
     // Simulate registration
     setTimeout(() => {
       setIsSubmitting(false)
-      setSuccessMessage('Registration successful! Redirecting to login...')
+      const success = 'Registration successful! Redirecting to login...'
+      setSuccessMessage(success)
+      toast.success('🎉 Account registered successfully!')
       setTimeout(() => {
         navigate('/login')
       }, 1500)

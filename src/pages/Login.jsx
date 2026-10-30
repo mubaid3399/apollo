@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import bannerImg from '../assets/login_signup.jfif'
 
 const Login = () => {
@@ -29,12 +30,16 @@ const Login = () => {
     setErrorMessage('')
 
     if (!formData.identifier) {
-      setErrorMessage('Please enter your username or email address.')
+      const err = 'Please enter your username or email address.'
+      setErrorMessage(err)
+      toast.error(err)
       return
     }
 
     if (!formData.password) {
-      setErrorMessage('Please enter your password.')
+      const err = 'Please enter your password.'
+      setErrorMessage(err)
+      toast.error(err)
       return
     }
 
@@ -43,7 +48,9 @@ const Login = () => {
     // Simulate login
     setTimeout(() => {
       setIsSubmitting(false)
-      setSuccessMessage('Login successful! Redirecting to dashboard...')
+      const success = 'Login successful! Redirecting to dashboard...'
+      setSuccessMessage(success)
+      toast.success('Welcome back to Apollo Group TV!')
       setTimeout(() => {
         navigate('/')
       }, 1200)
