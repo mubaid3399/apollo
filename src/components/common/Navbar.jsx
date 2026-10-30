@@ -180,7 +180,7 @@ const Navbar = () => {
                             <>
                                 <Link
                                     to="/login"
-                                    className="px-6 py-3 text-base font-medium rounded-sm text-slate-200 hover:text-white hover:bg-white/[0.08] transition-all"
+                                    className="px-6 py-3 text-base rounded-sm font-semibold bg-white hover:bg-slate-100 active:bg-slate-200 text-[#0099ff] shadow-md shadow-white/10 hover:shadow-lg transition-all flex items-center justify-center"
                                 >
                                     Log In
                                 </Link>
@@ -367,7 +367,7 @@ const Navbar = () => {
                             <Link
                                 to="/login"
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="w-full py-3.5 rounded-xl bg-white text-[#0099ff] font-bold text-base flex items-center justify-center hover:bg-slate-100 transition-all shadow-md active:scale-[0.99]"
+                                className="w-full py-3.5 rounded-xl bg-white hover:bg-slate-100 active:bg-slate-200 text-[#0099ff] font-bold text-base flex items-center justify-center transition-all shadow-md active:scale-[0.99]"
                             >
                                 Login
                             </Link>
@@ -375,7 +375,7 @@ const Navbar = () => {
                             <Link
                                 to="/register"
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="w-full py-3.5 rounded-xl bg-[#0099ff] text-white font-bold text-base flex items-center justify-center hover:bg-[#0088ee] transition-all shadow-md active:scale-[0.99]"
+                                className="w-full py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-bold text-base flex items-center justify-center transition-all shadow-md active:scale-[0.99]"
                             >
                                 Create Account
                             </Link>
