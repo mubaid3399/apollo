@@ -55,9 +55,9 @@ const PricingSection = () => {
       <div className="w-[90%] xl:w-[84%] 2xl:w-[80%] mx-auto">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 lg:mb-18 space-y-3">
-          <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18]">
             Pricing and Packages
-          </h2>
+          </h1>
           <p className="text-sm sm:text-base text-zinc-400 max-w-2xl mx-auto leading-relaxed font-normal">
             Ready to subscribe or renew your services? Please select from one of our packages
           </p>
