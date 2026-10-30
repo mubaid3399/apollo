@@ -57,12 +57,12 @@ const Login = () => {
       setIsSubmitting(false)
 
       if (res.success) {
-        const welcome = res.message || 'Login successful! Redirecting...'
+        const welcome = res.message || 'Login successful! Redirecting to dashboard...'
         setSuccessMessage(welcome)
         showNotification(welcome, 'success')
         setTimeout(() => {
-          navigate('/')
-        }, 1200)
+          navigate('/dashboard')
+        }, 1000)
       } else {
         const err = res.message || 'Invalid username/email or password.'
         setErrorMessage(err)

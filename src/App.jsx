@@ -19,6 +19,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import PrivicyPolicy from './pages/PrivicyPolicy'
 import TermsConditon from './pages/TermsConditon'
+import Dashboard from './pages/Dashboard'
 
 const App = () => {
   const location = useLocation()
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/signup" element={<Register />} />
           <Route path="/privacy-policy" element={<PrivicyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditon />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </main>
       {!isAuthPage && <Footer />}
