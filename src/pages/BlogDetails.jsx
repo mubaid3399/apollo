@@ -1,16 +1,54 @@
-import React, { useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import { blogsData } from '../assets/data/blogsData'
 
 const BlogDetails = () => {
   const { slug } = useParams()
-  const navigate = useNavigate()
+  const [openFaq, setOpenFaq] = useState(0)
+  const [activeSection, setActiveSection] = useState('')
 
-  const article = blogsData.find((b) => b.slug === slug || String(b.id) === slug)
+  const article = blogsData.find(
+    (b) => b.slug === slug || String(b.id) === slug
+  ) || blogsData[0]
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [slug])
+
+  // Track active section for Table of Contents
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!article?.toc) return
+      const scrollY = window.scrollY + 120
+
+      for (let i = article.toc.length - 1; i >= 0; i--) {
+        const item = article.toc[i]
+        const element = document.getElementById(item.id)
+        if (element && element.offsetTop <= scrollY) {
+          setActiveSection(item.id)
+          break
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [article?.toc])
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
+    if (element) {
+      const topOffset = 90
+      const elementPosition = element.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - topOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      })
+      setActiveSection(id)
+    }
+  }
 
   if (!article) {
     return (
@@ -18,9 +56,6 @@ const BlogDetails = () => {
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18] mb-4">
           Article Not Found
         </h1>
-        <p className="text-sm text-slate-400 mb-8 max-w-md">
-          The article you are looking for might have been moved or is currently unavailable.
-        </p>
         <Link
           to="/blog"
           className="px-6 py-3 rounded-xl font-bold text-sm text-white bg-[#0099ff] hover:bg-[#0088ee] transition-all"
@@ -31,235 +66,406 @@ const BlogDetails = () => {
     )
   }
 
-  // Related articles (excluding current)
-  const relatedArticles = blogsData
-    .filter((b) => b.id !== article.id)
-    .slice(0, 3)
-
   return (
-    <div className="w-full min-h-screen bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white pt-6 pb-20 lg:pt-10 lg:pb-28">
-      {/* Container */}
-      <div className="w-[88%] lg:w-[80%] mx-auto">
-        {/* Navigation Breadcrumb */}
-        <div className="mb-8">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-400 hover:text-[#0099ff] transition-colors"
-          >
+    <div className="w-full min-h-screen bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white">
+      {/* ------------------------------------------------------------- */}
+      {/* 1. FULL-SCREEN HERO BANNER WITH BACKGROUND IMAGE & META TITLE  */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative w-full min-h-[480px] sm:min-h-[540px] lg:min-h-[600px] flex flex-col justify-end overflow-hidden border-b border-white/10">
+        {/* Full-Bleed Background Image */}
+        <img
+          src={article.image}
+          alt={article.title}
+          className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+        />
+
+        {/* Ambient Dark Gradient Overlays (Matches Screenshot) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000304] via-[#000304]/80 via-55% to-black/35 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#000304]/80 via-transparent to-[#000304]/50 pointer-events-none" />
+
+        {/* Floating Apollo Group TV Badge Pill at top center */}
+        <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+          <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs font-semibold text-white tracking-wide shadow-lg">
             <svg
-              className="w-4 h-4"
-              fill="none"
+              className="w-4 h-4 text-[#0099ff]"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
+              fill="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              <path d="M12 2L2 19.5h20L12 2zm0 3.8L18.5 17H5.5L12 5.8z" />
             </svg>
-            <span>Back to All Articles</span>
-          </Link>
-        </div>
-
-        {/* Article Header */}
-        <div className="max-w-4xl mx-auto space-y-4 mb-8 sm:mb-10 text-left">
-          {/* Category Badge */}
-          <div className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-[#0099ff]/15 text-[#0099ff] border border-[#0099ff]/30">
-            {article.category}
-          </div>
-
-          {/* Unified H1 Typography matching Hero */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18]">
-            {article.title}
-          </h1>
-
-          {/* Author & Publish Metadata Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-2 pb-6 border-b border-white/10 text-xs sm:text-sm text-slate-400">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#0099ff]/20 border border-[#0099ff]/40 text-[#0099ff] font-bold flex items-center justify-center shrink-0">
-                {article.author?.name ? article.author.name.charAt(0) : 'A'}
-              </div>
-              <div>
-                <div className="font-semibold text-white">{article.author?.name || 'Apollo Editorial Team'}</div>
-                <div className="text-[11px] text-zinc-400">{article.author?.role || 'Streaming Contributor'}</div>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 text-xs font-medium">
-              <span>{article.date}</span>
-              <span>•</span>
-              <span>{article.readTime}</span>
-            </div>
+            <span>Apollo Group TV</span>
           </div>
         </div>
 
-        {/* Featured Hero Image */}
-        <div className="max-w-4xl mx-auto mb-10 sm:mb-14">
-          <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0c1015] aspect-[16/9] shadow-2xl">
-            <img
-              src={article.image}
-              alt={article.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Main Content Layout with Content & Sticky Sidebar */}
-        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-          {/* Main Article Body (8 cols) */}
-          <div className="lg:col-span-8 space-y-6 text-left">
-            {article.content &&
-              article.content.map((block, idx) => {
-                if (block.type === 'heading') {
-                  return (
-                    <h2
-                      key={idx}
-                      className="text-xl sm:text-2xl font-bold text-white tracking-tight pt-4 mb-2 text-[#0099ff]"
-                    >
-                      {block.text}
-                    </h2>
-                  )
-                }
-
-                if (block.type === 'quote') {
-                  return (
-                    <blockquote
-                      key={idx}
-                      className="my-6 p-4 sm:p-5 rounded-r-xl border-l-4 border-[#0099ff] bg-[#0099ff]/10 text-sm sm:text-base italic text-slate-200 leading-relaxed"
-                    >
-                      "{block.text}"
-                    </blockquote>
-                  )
-                }
-
-                if (block.type === 'list') {
-                  return (
-                    <ul key={idx} className="space-y-2.5 my-4">
-                      {block.items.map((item, itemIdx) => (
-                        <li key={itemIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                          <i className="ph-check-circle-bold text-[#0099ff] text-base shrink-0 mt-0.5"></i>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )
-                }
-
-                return (
-                  <p key={idx} className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-normal">
-                    {block.text}
-                  </p>
-                )
-              })}
-
-            {/* Tags */}
-            {article.tags && (
-              <div className="pt-8 border-t border-white/10">
-                <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-                  Related Topics:
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {article.tags.map((tag, tagIdx) => (
-                    <span
-                      key={tagIdx}
-                      className="px-3 py-1 rounded-lg text-xs bg-white/[0.04] border border-white/10 text-slate-300"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Sticky Sidebar (4 cols) */}
-          <div className="lg:col-span-4 space-y-6">
-            {/* CTA Card */}
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-[#0c1015] to-[#040c14] border border-[#0099ff]/30 text-left relative overflow-hidden shadow-xl">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#0099ff]/15 rounded-full blur-2xl pointer-events-none" />
-              <div className="text-xs font-bold text-[#0099ff] uppercase tracking-wider mb-2">
-                Apollo Group TV
-              </div>
-              <h3 className="text-lg font-bold text-white mb-2 leading-snug">
-                Stream 20,000+ Channels with Zero Buffering
-              </h3>
-              <p className="text-xs text-slate-300 mb-5 leading-relaxed">
-                Enjoy 4K sports, all PPV events included, and 100,000+ movies on any device.
-              </p>
-              <Link
-                to="/get-trail"
-                className="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-white bg-[#0099ff] hover:bg-[#0088ee] transition-all text-center block shadow-lg shadow-[#0099ff]/30"
+        {/* Hero Content Container (Overlaid on Bottom Left) */}
+        <div className="relative z-10 w-[88%] lg:w-[80%] mx-auto pb-12 sm:pb-16 text-left">
+          {/* Breadcrumb Back Link */}
+          <div className="mb-4">
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm text-slate-300 hover:text-[#0099ff] transition-colors"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
               >
-                Claim 10 Days Free Trial
-              </Link>
-            </div>
-
-            {/* Quick Share Widget */}
-            <div className="p-5 rounded-2xl bg-[#0c1015] border border-white/10 text-left">
-              <div className="text-xs font-semibold text-white mb-3">
-                Share this Article
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    navigator.clipboard?.writeText(window.location.href)
-                    alert('Article link copied to clipboard!')
-                  }}
-                  className="flex-1 py-2 px-3 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs text-slate-300 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
-                >
-                  <i className="ph-link-bold text-sm"></i>
-                  <span>Copy Link</span>
-                </button>
-              </div>
-            </div>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              <span>Back to all articles</span>
+            </Link>
           </div>
+
+          {/* Date Label */}
+          <div className="text-xs sm:text-sm font-medium text-slate-300 mb-2">
+            {article.date}
+          </div>
+
+          {/* Meta Title with Hero H1 Typography */}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18] max-w-4xl">
+            {article.metaTitle || article.title}
+          </h1>
         </div>
+      </section>
 
-        {/* Related Articles Section */}
-        {relatedArticles.length > 0 && (
-          <div className="mt-16 sm:mt-24 pt-12 border-t border-white/10 text-left">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-8 tracking-tight">
-              More from Our Blog
-            </h2>
+      {/* ------------------------------------------------------------- */}
+      {/* 2. MAIN BODY: STICKY TABLE OF CONTENTS + ARTICLE CONTENT      */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative z-10 w-full py-12 lg:py-20">
+        <div className="w-[88%] lg:w-[80%] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            
+            {/* Left Column: Simple Clean Table of Contents (Matches Screenshots) */}
+            <aside className="lg:col-span-4 lg:sticky lg:top-24 text-left">
+              <div className="pr-2 lg:pr-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-white mb-5 tracking-tight">
+                  Table of Contents
+                </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedArticles.map((rel) => (
-                <Link
-                  key={rel.id}
-                  to={`/blog/${rel.slug}`}
-                  className="group rounded-2xl overflow-hidden border border-white/10 bg-[#0c1015] hover:border-[#0099ff]/50 transition-all flex flex-col"
-                >
-                  <div className="aspect-[16/10] overflow-hidden relative">
-                    <img
-                      src={rel.image}
-                      alt={rel.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-black/70 text-white backdrop-blur-md border border-white/20">
-                      {rel.category}
-                    </div>
+                <nav className="space-y-1.5" aria-label="Table of contents">
+                  {article.toc &&
+                    article.toc.map((item) => {
+                      const isActive = activeSection === item.id
+                      const isSubItem = item.level === 2
+
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => scrollToSection(item.id)}
+                          className={`w-full text-left transition-colors cursor-pointer block leading-snug ${
+                            isSubItem
+                              ? 'pl-4 text-xs sm:text-sm py-1'
+                              : 'text-sm sm:text-base font-medium py-1.5'
+                          } ${
+                            isActive
+                              ? 'text-[#0099ff] font-semibold'
+                              : isSubItem
+                              ? 'text-slate-400 hover:text-[#0099ff]'
+                              : 'text-slate-200 hover:text-[#0099ff]'
+                          }`}
+                        >
+                          {item.title}
+                        </button>
+                      )
+                    })}
+                </nav>
+
+                {/* Free Trial Mini Widget under TOC */}
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <div className="text-xs text-slate-400 mb-2">Ready to stream?</div>
+                  <Link
+                    to="/get-trail"
+                    className="inline-block px-4 py-2.5 rounded-sm font-bold text-xs text-white bg-[#0099ff] hover:bg-[#0088ee] transition-all"
+                  >
+                    Get 10 Days Free Trial →
+                  </Link>
+                </div>
+              </div>
+            </aside>
+
+            {/* Right Column: Complete Article Content */}
+            <main className="lg:col-span-8 space-y-10 text-left">
+              {/* Introduction Section */}
+              <div id="intro" className="space-y-4">
+                {article.introParagraphs &&
+                  article.introParagraphs.map((para, idx) => (
+                    <p
+                      key={idx}
+                      className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal"
+                    >
+                      {para}
+                    </p>
+                  ))}
+              </div>
+
+              {/* Section: IMDb Top Movies at a Glance */}
+              {article.glanceTable && (
+                <div id="imdb-glance" className="space-y-4 pt-4">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    IMDb Top Movies at a Glance
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-400">
+                    Here is a quick overview of the most celebrated titles available to stream on demand:
+                  </p>
+
+                  {/* Clean Styled Table */}
+                  <div className="overflow-x-auto rounded-sm border border-white/10 bg-[#0c1015]/90 shadow-xl">
+                    <table className="w-full text-left border-collapse min-w-[500px]">
+                      <thead>
+                        <tr className="border-b border-white/10 bg-white/[0.03]">
+                          {article.glanceTable.headers.map((h, i) => (
+                            <th
+                              key={i}
+                              className="py-3.5 px-4 text-xs font-bold text-slate-300 uppercase tracking-wider"
+                            >
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5 text-xs sm:text-sm">
+                        {article.glanceTable.rows.map((row, rIdx) => (
+                          <tr
+                            key={rIdx}
+                            className="hover:bg-white/[0.02] transition-colors"
+                          >
+                            <td className="py-3.5 px-4 font-semibold text-white">
+                              {row[0]}
+                            </td>
+                            <td className="py-3.5 px-4 text-slate-300">
+                              {row[1]}
+                            </td>
+                            <td className="py-3.5 px-4 text-slate-300">
+                              {row[2]}
+                            </td>
+                            <td className="py-3.5 px-4 font-bold text-[#0099ff]">
+                              {row[3]}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
+                </div>
+              )}
 
-                  <div className="p-5 flex flex-col flex-1 justify-between">
-                    <div>
-                      <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-[#0099ff] transition-colors line-clamp-2 mb-2">
-                        {rel.title}
+              {/* Section: Why These Movies Continue to Dominate IMDb Rankings */}
+              <div id="why-dominate" className="space-y-4 pt-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  Why These Movies Continue to Dominate IMDb Rankings?
+                </h2>
+                <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                  {article.whyDominateText}
+                </p>
+              </div>
+
+              {/* Numbered Movie Details Breakdown (Shawshank, Godfather, Seven, etc.) */}
+              {article.movieDetails &&
+                article.movieDetails.map((movie) => (
+                  <div
+                    key={movie.id}
+                    id={movie.id}
+                    className="p-6 sm:p-7 rounded-sm bg-[#0c1015] border border-white/10 space-y-4 pt-6"
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="w-8 h-8 rounded-full bg-[#0099ff] text-white font-extrabold text-sm flex items-center justify-center shrink-0">
+                        {movie.number}
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                        {movie.title}
                       </h3>
-                      <p className="text-xs text-slate-400 line-clamp-2 mb-4 leading-relaxed">
-                        {rel.excerpt}
+                    </div>
+
+                    {/* Metadata Grid */}
+                    <div
+                      id={`${movie.id}-details`}
+                      className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm bg-white/[0.02] p-4 rounded-sm border border-white/5"
+                    >
+                      <div>
+                        <span className="text-slate-400 font-medium">Release Date: </span>
+                        <span className="text-white font-semibold">{movie.releaseDate}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 font-medium">Genre: </span>
+                        <span className="text-white font-semibold">{movie.genre}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400 font-medium">IMDb Rating: </span>
+                        <span className="text-[#0099ff] font-bold">{movie.imdbRating}</span>
+                      </div>
+                      <div className="sm:col-span-2">
+                        <span className="text-slate-400 font-medium">Main Cast: </span>
+                        <span className="text-slate-200">{movie.mainCast}</span>
+                      </div>
+                    </div>
+
+                    {/* Storyline */}
+                    <div>
+                      <h4 className="text-sm font-bold text-white mb-1">Storyline</h4>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        {movie.storyline}
                       </p>
                     </div>
 
-                    <div className="text-[11px] text-slate-500">
-                      {rel.date} • {rel.readTime}
+                    {/* Plot Breakdown */}
+                    <div id={`${movie.id}-plot`}>
+                      <h4 className="text-sm font-bold text-white mb-1">Plot Breakdown</h4>
+                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                        {movie.plot}
+                      </p>
+                    </div>
+
+                    {/* Who Will Enjoy It */}
+                    <div
+                      id={`${movie.id}-audience`}
+                      className="p-3.5 bg-[#0099ff]/10 border-l-2 border-[#0099ff] text-xs sm:text-sm text-slate-300"
+                    >
+                      <strong className="text-white">Who Will Enjoy It? </strong>
+                      {movie.whoWillEnjoy}
                     </div>
                   </div>
-                </Link>
-              ))}
-            </div>
+                ))}
+
+              {/* Section: Feature Comparison Table */}
+              {article.comparisonTable && (
+                <div id="comparison-table" className="space-y-4 pt-6">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    Feature Comparison Table
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-400">
+                    How Apollo Group TV delivers superior value compared to traditional cable and standalone streaming platforms:
+                  </p>
+
+                  <div className="overflow-x-auto rounded-sm border border-white/10 bg-[#0c1015]/90 shadow-xl">
+                    <table className="w-full text-left border-collapse min-w-[500px]">
+                      <thead>
+                        <tr className="border-b border-white/10 bg-white/[0.03]">
+                          {article.comparisonTable.headers.map((h, i) => (
+                            <th
+                              key={i}
+                              className="py-3.5 px-4 text-xs font-bold text-slate-300 uppercase tracking-wider"
+                            >
+                              {h}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5 text-xs sm:text-sm">
+                        {article.comparisonTable.rows.map((row, rIdx) => (
+                          <tr
+                            key={rIdx}
+                            className="hover:bg-white/[0.02] transition-colors"
+                          >
+                            <td className="py-3.5 px-4 font-semibold text-white">
+                              {row[0]}
+                            </td>
+                            <td className="py-3.5 px-4 font-bold text-emerald-400 bg-[#0099ff]/5">
+                              {row[1]}
+                            </td>
+                            <td className="py-3.5 px-4 text-slate-400">
+                              {row[2]}
+                            </td>
+                            <td className="py-3.5 px-4 text-slate-400">
+                              {row[3]}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {/* Section: Article-Specific FAQs */}
+              {article.faqs && article.faqs.length > 0 && (
+                <div id="faqs" className="space-y-4 pt-6">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    Frequently Asked Questions (FAQs)
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-400">
+                    Common questions regarding streaming classic movies, live sports, and VOD on Apollo Group TV:
+                  </p>
+
+                  <div className="space-y-3">
+                    {article.faqs.map((faq, fIdx) => {
+                      const isOpen = openFaq === fIdx
+                      return (
+                        <div
+                          key={fIdx}
+                          className={`rounded-sm border transition-all duration-200 overflow-hidden ${
+                            isOpen
+                              ? 'bg-[#0c1015] border-[#0099ff]/50'
+                              : 'bg-white/[0.02] border-white/10 hover:border-white/20'
+                          }`}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => setOpenFaq(isOpen ? null : fIdx)}
+                            className="w-full py-4 px-5 flex items-center justify-between text-left gap-4 cursor-pointer select-none"
+                            aria-expanded={isOpen}
+                          >
+                            <span
+                              className={`text-sm sm:text-base font-bold transition-colors ${
+                                isOpen ? 'text-[#0099ff]' : 'text-white'
+                              }`}
+                            >
+                              {faq.question}
+                            </span>
+                            <div
+                              className={`w-6 h-6 rounded-sm flex items-center justify-center shrink-0 border transition-all ${
+                                isOpen
+                                  ? 'bg-[#0099ff] border-[#0099ff] text-white rotate-45'
+                                  : 'bg-white/[0.05] border-white/10 text-slate-300'
+                              }`}
+                            >
+                              <i className="ph-plus-bold text-xs"></i>
+                            </div>
+                          </button>
+
+                          {isOpen && (
+                            <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 animate-in fade-in duration-150">
+                              {faq.answer}
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Section: Conclusion & CTA */}
+              <div id="conclusion" className="p-8 rounded-sm bg-gradient-to-br from-[#0c1015] to-[#040c14] border border-[#0099ff]/30 text-left space-y-4 pt-6">
+                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  Conclusion
+                </h2>
+                <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed">
+                  Watching IMDb top-rated movies, live TV channels, and PPV sports events does not have to mean paying five separate monthly subscriptions or dealing with regional blackouts. Apollo Group TV provides a reliable, all-in-one entertainment hub tuned for 4K picture quality, zero buffering, and multi-device freedom.
+                </p>
+
+                <div className="pt-2 flex flex-wrap items-center gap-4">
+                  <Link
+                    to="/get-trail"
+                    className="px-6 py-3 rounded-sm font-bold text-sm text-white bg-[#0099ff] hover:bg-[#0088ee] transition-all shadow-md shadow-[#0099ff]/30"
+                  >
+                    Start 10 Days Free Trial
+                  </Link>
+                  <Link
+                    to="/pricing"
+                    className="px-6 py-3 rounded-sm font-semibold text-sm text-slate-200 bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 transition-all"
+                  >
+                    View All Packages
+                  </Link>
+                </div>
+              </div>
+            </main>
+
           </div>
-        )}
-      </div>
+        </div>
+      </section>
     </div>
   )
 }
