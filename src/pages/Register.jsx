@@ -99,7 +99,7 @@ const Register = () => {
         <div className="w-full max-w-xl mx-auto py-6">
           {/* Header */}
           <div className="mb-8 text-left">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18]">
               Registration
             </h1>
             <p className="text-xs sm:text-sm text-slate-400 mt-1.5 font-normal">

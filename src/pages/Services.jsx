@@ -169,7 +169,7 @@ const Services = () => {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.15] max-w-4xl mx-auto">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18] max-w-4xl mx-auto">
             Next-Gen Entertainment Services Engineered for{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0099ff] via-[#4db8ff] to-[#80ccff]">
               Zero Compromise
@@ -248,11 +248,10 @@ const Services = () => {
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-sm text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
-                    isActive
+                  className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-sm text-xs sm:text-sm font-semibold transition-all cursor-pointer ${isActive
                       ? 'bg-[#0099ff] text-white shadow-md shadow-[#0099ff]/30'
                       : 'bg-white/[0.04] text-slate-300 hover:bg-white/[0.08] hover:text-white border border-white/5'
-                  }`}
+                    }`}
                 >
                   {cat.label}
                 </button>
