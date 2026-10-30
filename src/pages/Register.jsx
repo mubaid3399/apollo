@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import bannerImg from '../assets/login_signup.jfif'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
+import { registerUser } from '../services/googleSheetService'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -58,7 +59,7 @@ const Register = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setErrorMessage('')
 
@@ -78,16 +79,28 @@ const Register = () => {
 
     setIsSubmitting(true)
 
-    // Simulate registration
-    setTimeout(() => {
+    try {
+      const res = await registerUser(formData)
       setIsSubmitting(false)
-      const success = 'Registration successful! Redirecting to login...'
-      setSuccessMessage(success)
-      toast.success('🎉 Account registered successfully!')
-      setTimeout(() => {
-        navigate('/login')
-      }, 1500)
-    }, 1000)
+
+      if (res.success) {
+        const success = res.message || 'Registration successful! Redirecting to login...'
+        setSuccessMessage(success)
+        toast.success('🎉 ' + success)
+        setTimeout(() => {
+          navigate('/login')
+        }, 1500)
+      } else {
+        const err = res.message || 'Registration failed. Please try again.'
+        setErrorMessage(err)
+        toast.error(err)
+      }
+    } catch (err) {
+      setIsSubmitting(false)
+      const errText = 'An unexpected error occurred. Please try again.'
+      setErrorMessage(errText)
+      toast.error(errText)
+    }
   }
 
   return (

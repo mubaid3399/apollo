@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, useLocation, useMatch, useResolvedPath } from 'react-router-dom'
 import gsap from 'gsap'
 import logo from '../../assets/logo.png'
+import { getCurrentUser, logoutUser } from '../../services/googleSheetService'
 
 const navLinks = [
     { id: 'home', label: 'Home', mobileLabel: 'Home page', to: '/', end: true },
@@ -112,7 +113,25 @@ const DesktopNavItem = ({ label, to, end }) => {
 /* ------------------------------------------------------------------ */
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const [currentUser, setCurrentUser] = useState(getCurrentUser())
     const location = useLocation()
+
+    // Listen to login/logout events across tabs and within app
+    useEffect(() => {
+        const handleAuthChange = () => {
+            setCurrentUser(getCurrentUser())
+        }
+        window.addEventListener('apollo_auth_change', handleAuthChange)
+        window.addEventListener('storage', handleAuthChange)
+        return () => {
+            window.removeEventListener('apollo_auth_change', handleAuthChange)
+            window.removeEventListener('storage', handleAuthChange)
+        }
+    }, [])
+
+    const handleLogout = () => {
+        logoutUser()
+    }
 
     // Close mobile drawer on route change
     useEffect(() => {
@@ -156,19 +175,40 @@ const Navbar = () => {
 
                     {/* Desktop Action Buttons (Visible only on xl desktop alongside nav links) */}
                     <div className="hidden xl:flex items-center gap-3 shrink-0">
-                        <Link
-                            to="/login"
-                            className="px-6 py-3 text-base font-medium rounded-sm text-slate-200 hover:text-white hover:bg-white/[0.08] transition-all"
-                        >
-                            Log In
-                        </Link>
+                        {currentUser ? (
+                            <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-sm bg-white/[0.05] border border-white/10">
+                                    <div className="w-7 h-7 rounded-full bg-[#0099ff] text-white flex items-center justify-center font-bold text-xs uppercase">
+                                        {(currentUser.firstName?.[0] || currentUser.username?.[0] || 'U')}
+                                    </div>
+                                    <span className="text-sm font-medium text-white max-w-[120px] truncate">
+                                        {currentUser.firstName || currentUser.username}
+                                    </span>
+                                </div>
+                                <button
+                                    onClick={handleLogout}
+                                    className="px-4 py-2.5 text-sm font-medium rounded-sm text-slate-300 hover:text-white hover:bg-white/[0.08] transition-all"
+                                >
+                                    Sign Out
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <Link
+                                    to="/login"
+                                    className="px-6 py-3 text-base font-medium rounded-sm text-slate-200 hover:text-white hover:bg-white/[0.08] transition-all"
+                                >
+                                    Log In
+                                </Link>
 
-                        <Link
-                            to="/register"
-                            className="px-6 py-3 text-base rounded-sm font-medium text-white hover:text-[#0099ff] bg-white/[0.06] hover:bg-white/[0.12] transition-all border border-white/10"
-                        >
-                            Sign Up
-                        </Link>
+                                <Link
+                                    to="/register"
+                                    className="px-6 py-3 text-base rounded-sm font-medium text-white hover:text-[#0099ff] bg-white/[0.06] hover:bg-white/[0.12] transition-all border border-white/10"
+                                >
+                                    Sign Up
+                                </Link>
+                            </>
+                        )}
 
                         <Link
                             to="/get-trail"
@@ -289,23 +329,44 @@ const Navbar = () => {
                     ))}
                 </div>
 
-                {/* Bottom Buttons: Stacked (Login, Create Account, 10 Days Free Trial) */}
+                {/* Bottom Buttons: Stacked */}
                 <div className="w-full max-w-sm mx-auto space-y-3 pt-4">
-                    <Link
-                        to="/login"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="w-full py-3.5 rounded-xl bg-white text-[#0099ff] font-bold text-base flex items-center justify-center hover:bg-slate-100 transition-all shadow-md active:scale-[0.99]"
-                    >
-                        Login
-                    </Link>
+                    {currentUser ? (
+                        <>
+                            <div className="p-3 rounded-xl bg-white/[0.05] border border-white/10 text-center">
+                                <p className="text-xs text-slate-400">Signed in as</p>
+                                <p className="text-base font-bold text-white">{currentUser.firstName || currentUser.username}</p>
+                                <p className="text-xs text-[#0099ff]">{currentUser.email}</p>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    handleLogout()
+                                    setIsMobileMenuOpen(false)
+                                }}
+                                className="w-full py-3.5 rounded-xl bg-white/10 text-white font-bold text-base flex items-center justify-center hover:bg-white/20 transition-all shadow-md active:scale-[0.99]"
+                            >
+                                Sign Out
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                to="/login"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="w-full py-3.5 rounded-xl bg-white text-[#0099ff] font-bold text-base flex items-center justify-center hover:bg-slate-100 transition-all shadow-md active:scale-[0.99]"
+                            >
+                                Login
+                            </Link>
 
-                    <Link
-                        to="/register"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="w-full py-3.5 rounded-xl bg-[#0099ff] text-white font-bold text-base flex items-center justify-center hover:bg-[#0088ee] transition-all shadow-md active:scale-[0.99]"
-                    >
-                        Create Account
-                    </Link>
+                            <Link
+                                to="/register"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="w-full py-3.5 rounded-xl bg-[#0099ff] text-white font-bold text-base flex items-center justify-center hover:bg-[#0088ee] transition-all shadow-md active:scale-[0.99]"
+                            >
+                                Create Account
+                            </Link>
+                        </>
+                    )}
 
                     <Link
                         to="/get-trail"

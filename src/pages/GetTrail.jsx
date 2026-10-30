@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
+import { submitFreeTrial } from '../services/googleSheetService'
 
 const deviceOptions = [
   'Amazon Firestick / Fire TV',
@@ -72,7 +73,7 @@ const GetTrail = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setErrorMessage('')
 
@@ -85,15 +86,27 @@ const GetTrail = () => {
 
     setIsSubmitting(true)
 
-    // Simulate instant trial provisioning
-    setTimeout(() => {
+    try {
+      const res = await submitFreeTrial(formData)
       setIsSubmitting(false)
-      const successText = `Success! Your 10-day free trial credentials have been dispatched to ${formData.email}. Please check your inbox and WhatsApp.`
-      setSuccessMessage(successText)
-      toast.success('🎉 10-Day Free Trial credentials dispatched to your email & WhatsApp!', {
-        autoClose: 5000,
-      })
-    }, 1200)
+
+      if (res.success) {
+        const successText = `Success! Your 10-day free trial request has been submitted. Credentials are being dispatched to ${formData.email}.`
+        setSuccessMessage(successText)
+        toast.success('🎉 10-Day Free Trial request submitted! Check your email and WhatsApp.', {
+          autoClose: 5000,
+        })
+      } else {
+        const msg = res.message || 'Failed to submit free trial request.'
+        setErrorMessage(msg)
+        toast.error(msg)
+      }
+    } catch (err) {
+      setIsSubmitting(false)
+      const errText = 'An error occurred while submitting. Please try again.'
+      setErrorMessage(errText)
+      toast.error(errText)
+    }
   }
 
   return (

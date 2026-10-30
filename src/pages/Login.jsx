@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import bannerImg from '../assets/login_signup.jfif'
+import { loginUser } from '../services/googleSheetService'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -25,7 +26,7 @@ const Login = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setErrorMessage('')
 
@@ -45,16 +46,32 @@ const Login = () => {
 
     setIsSubmitting(true)
 
-    // Simulate login
-    setTimeout(() => {
+    try {
+      const res = await loginUser({
+        identifier: formData.identifier,
+        password: formData.password,
+      })
+
       setIsSubmitting(false)
-      const success = 'Login successful! Redirecting to dashboard...'
-      setSuccessMessage(success)
-      toast.success('Welcome back to Apollo Group TV!')
-      setTimeout(() => {
-        navigate('/')
-      }, 1200)
-    }, 1000)
+
+      if (res.success) {
+        const welcome = res.message || 'Login successful! Redirecting...'
+        setSuccessMessage(welcome)
+        toast.success(welcome)
+        setTimeout(() => {
+          navigate('/')
+        }, 1200)
+      } else {
+        const err = res.message || 'Invalid username/email or password.'
+        setErrorMessage(err)
+        toast.error(err)
+      }
+    } catch (err) {
+      setIsSubmitting(false)
+      const errText = 'An unexpected error occurred during login. Please try again.'
+      setErrorMessage(errText)
+      toast.error(errText)
+    }
   }
 
   return (
