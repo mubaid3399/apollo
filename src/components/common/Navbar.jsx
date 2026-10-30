@@ -3,6 +3,7 @@ import { NavLink, Link, useLocation, useMatch, useResolvedPath } from 'react-rou
 import gsap from 'gsap'
 import logo from '../../assets/logo.png'
 import { getCurrentUser, logoutUser } from '../../services/googleSheetService'
+import UserProfileDropdown from './UserProfileDropdown'
 
 const navLinks = [
     { id: 'home', label: 'Home', mobileLabel: 'Home page', to: '/', end: true },
@@ -176,22 +177,7 @@ const Navbar = () => {
                     {/* Desktop Action Buttons (Visible only on xl desktop alongside nav links) */}
                     <div className="hidden xl:flex items-center gap-3 shrink-0">
                         {currentUser ? (
-                            <div className="flex items-center gap-3">
-                                <div className="flex items-center gap-2 px-3 py-1.5 rounded-sm bg-white/[0.05] border border-white/10">
-                                    <div className="w-7 h-7 rounded-full bg-[#0099ff] text-white flex items-center justify-center font-bold text-xs uppercase">
-                                        {(currentUser.firstName?.[0] || currentUser.username?.[0] || 'U')}
-                                    </div>
-                                    <span className="text-sm font-medium text-white max-w-[120px] truncate">
-                                        {currentUser.firstName || currentUser.username}
-                                    </span>
-                                </div>
-                                <button
-                                    onClick={handleLogout}
-                                    className="px-4 py-2.5 text-sm font-medium rounded-sm text-slate-300 hover:text-white hover:bg-white/[0.08] transition-all"
-                                >
-                                    Sign Out
-                                </button>
-                            </div>
+                            <UserProfileDropdown currentUser={currentUser} />
                         ) : (
                             <>
                                 <Link
@@ -333,19 +319,39 @@ const Navbar = () => {
                 <div className="w-full max-w-sm mx-auto space-y-3 pt-4">
                     {currentUser ? (
                         <>
-                            <div className="p-3 rounded-xl bg-white/[0.05] border border-white/10 text-center">
-                                <p className="text-xs text-slate-400">Signed in as</p>
-                                <p className="text-base font-bold text-white">{currentUser.firstName || currentUser.username}</p>
-                                <p className="text-xs text-[#0099ff]">{currentUser.email}</p>
+                            <div className="p-4 rounded-2xl bg-white/[0.05] border border-white/10 flex items-center gap-3.5 text-left">
+                                <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#0066cc] via-[#0099ff] to-[#38bdf8] text-white flex items-center justify-center font-bold text-base shadow-md shadow-[#0099ff]/30 shrink-0">
+                                    {(
+                                        (currentUser.firstName?.[0] || '') +
+                                        (currentUser.lastName?.[0] || currentUser.username?.[0] || 'U')
+                                    ).toUpperCase()}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-bold text-white truncate">
+                                        {currentUser.firstName
+                                            ? `${currentUser.firstName} ${currentUser.lastName || ''}`.trim()
+                                            : currentUser.username}
+                                    </p>
+                                    <p className="text-xs text-slate-400 truncate mb-1">
+                                        {currentUser.email}
+                                    </p>
+                                    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#0099ff]/15 text-[#0099ff] border border-[#0099ff]/30">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-[#0099ff] animate-pulse"></span>
+                                        Active Customer
+                                    </span>
+                                </div>
                             </div>
                             <button
                                 onClick={() => {
                                     handleLogout()
                                     setIsMobileMenuOpen(false)
                                 }}
-                                className="w-full py-3.5 rounded-xl bg-white/10 text-white font-bold text-base flex items-center justify-center hover:bg-white/20 transition-all shadow-md active:scale-[0.99]"
+                                className="w-full py-3.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold text-base flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99] border border-rose-500/20"
                             >
-                                Sign Out
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                <span>Sign Out</span>
                             </button>
                         </>
                     ) : (
