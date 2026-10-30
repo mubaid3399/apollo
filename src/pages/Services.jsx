@@ -143,8 +143,77 @@ const comparisonData = [
   },
 ]
 
+const servicesFaqs = [
+  {
+    question: 'What services does apollogrouptv provide to subscribers?',
+    answer:
+      'apollogrouptv provides a comprehensive premium IPTV streaming service featuring over 20,000 live international HD and 4K TV channels, 100,000+ on-demand movies and television series, 24/7 sports coverage with all PPV events included, an interactive 7-day electronic program guide (EPG), and multi-screen cloud connectivity across Firestick, Smart TVs, Android, iOS, and PC.',
+  },
+  {
+    question: 'How does apollogrouptv prevent lag and buffering during live sports?',
+    answer:
+      'apollogrouptv is engineered with dedicated 10Gbps load-balanced server clusters across North America, Europe, and Asia. Powered by proprietary Anti-Freeze™ technology and automated network routing, apollogrouptv redistributes server load dynamically during high-traffic UFC, Champions League, and NFL finals to ensure buttery-smooth 60FPS playback with zero freezing.',
+  },
+  {
+    question: 'Are all major sports PPV events included in apollogrouptv services?',
+    answer:
+      'Yes. Every subscription to apollogrouptv includes 100% unrestricted access to all major Pay-Per-View sporting events at no extra cost. Subscribers can watch UFC PPV fight nights, championship boxing, WWE, AEW, and high-octane Formula 1 race weekends without paying expensive one-off pay-per-view fees.',
+  },
+  {
+    question: 'What live TV channels are included with apollogrouptv?',
+    answer:
+      'apollogrouptv delivers an extensive lineup of 20,000+ channels from the United States, United Kingdom, Canada, Australia, Europe, Latin America, and the Middle East. It spans premium live sports, breaking news, 24/7 reality TV, documentaries, movie networks, kids entertainment, and regional local affiliate stations.',
+  },
+  {
+    question: 'Does apollogrouptv offer an Electronic Program Guide (EPG) and Catch-Up TV?',
+    answer:
+      'Yes, apollogrouptv includes an accurate, real-time Electronic Program Guide (EPG) with intuitive scheduling across all channels. Additionally, apollogrouptv features a 7-day cloud DVR Catch-Up TV service on top channels, allowing you to rewind, replay, or watch any broadcast you missed over the past week.',
+  },
+  {
+    question: 'How often does apollogrouptv update its on-demand (VOD) cinema catalog?',
+    answer:
+      'The apollogrouptv Video On Demand (VOD) library is updated daily with the newest Hollywood theatrical releases, box-office movies, and complete multi-season series. Content is available in crystal-clear 4K HDR and Full HD with multi-language subtitle tracks and Dolby audio options.',
+  },
+  {
+    question: 'How many screens can stream apollogrouptv at the same time?',
+    answer:
+      'Depending on your chosen subscription package, apollogrouptv supports up to 5 concurrent streams. This enables your family to stream live sports in the living room, watch a cinema release in the bedroom, and catch up on shows on tablets or phones simultaneously from one single apollogrouptv account.',
+  },
+  {
+    question: 'Is apollogrouptv compatible with TiviMate and IPTV Smarters on Firestick?',
+    answer:
+      'Yes! apollogrouptv provides standard M3U playlists and Xtream Codes API login credentials, guaranteeing plug-and-play compatibility with popular IPTV apps like TiviMate, IPTV Smarters Pro, XCIPTV, and the dedicated Apollo Group TV app on Amazon Firestick 4K, Android TV boxes, Smart TVs, and mobile devices.',
+  },
+  {
+    question: 'Do I need a VPN to stream apollogrouptv services?',
+    answer:
+      'A VPN is not mandatory because all apollogrouptv streaming links operate over 256-bit encrypted SSL connections that bypass standard ISP bandwidth throttling. However, apollogrouptv is completely VPN-friendly with no IP location restrictions, so you can freely stream with Surfshark, ExpressVPN, NordVPN, or any provider of your choice.',
+  },
+  {
+    question: 'What internet speed is recommended for apollogrouptv 4K streaming?',
+    answer:
+      'For smooth Full HD (1080p) streaming on apollogrouptv, an internet speed of 15 Mbps is recommended. For Ultra HD 4K and 60FPS sports streaming without buffering, a broadband speed of 25–30 Mbps or higher delivers the best possible experience.',
+  },
+  {
+    question: 'How fast is service activation after ordering apollogrouptv?',
+    answer:
+      'Activation of your apollogrouptv service is instant and automated. Immediately following checkout, your Xtream Codes credentials, M3U playlist URL, and step-by-step device setup tutorials are delivered to your email inbox and WhatsApp support within 60 seconds.',
+  },
+  {
+    question: 'Can I test apollogrouptv services with a free trial before purchasing?',
+    answer:
+      'Yes, apollogrouptv offers a risk-free 10-day trial option so you can test our 4K video quality, server responsiveness, channel variety, and EPG functionality on your own devices before choosing a subscription package.',
+  },
+  {
+    question: 'What customer support services does apollogrouptv provide?',
+    answer:
+      'apollogrouptv offers 24/7 dedicated customer assistance via live WhatsApp chat, Telegram, and ticket support. Whether you need assistance configuring TiviMate on your Firestick, setting up your Smart TV, or updating your account, our specialists respond within minutes.',
+  },
+]
+
 const Services = () => {
   const [activeCategory, setActiveCategory] = useState('all')
+  const [openFaq, setOpenFaq] = useState(0)
 
   const filteredServices =
     activeCategory === 'all'
@@ -635,7 +704,73 @@ const Services = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 8. FINAL HIGH-CONVERTING CTA BANNER                           */}
+      {/* 8. SERVICES FAQS TARGETING APOLOGROUPTV                       */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304]">
+        <div className="w-[88%] lg:w-[80%] mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
+            <div className="inline-block text-xs font-semibold tracking-wider text-[#0099ff] uppercase">
+              Got Questions? We Have Answers
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+              Frequently Asked Questions About apollogrouptv Services
+            </h2>
+            <p className="text-xs sm:text-sm md:text-base text-slate-400 max-w-xl mx-auto">
+              Everything you need to know about apollogrouptv streaming services, device setup, 4K sports channels, and account activation.
+            </p>
+          </div>
+
+          {/* FAQ Accordion List */}
+          <div className="max-w-4xl mx-auto space-y-3.5">
+            {servicesFaqs.map((faq, index) => {
+              const isOpen = openFaq === index
+              return (
+                <div
+                  key={index}
+                  className={`rounded-sm border transition-all duration-200 overflow-hidden ${
+                    isOpen
+                      ? 'bg-[#0c1015] border-[#0099ff]/50 shadow-lg shadow-[#0099ff]/5'
+                      : 'bg-white/[0.02] border-white/10 hover:border-white/20 hover:bg-white/[0.04]'
+                  }`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(isOpen ? null : index)}
+                    className="w-full py-4 sm:py-5 px-5 sm:px-6 flex items-center justify-between text-left gap-4 cursor-pointer select-none"
+                    aria-expanded={isOpen}
+                  >
+                    <span
+                      className={`text-sm sm:text-base font-bold transition-colors ${
+                        isOpen ? 'text-[#0099ff]' : 'text-white'
+                      }`}
+                    >
+                      {faq.question}
+                    </span>
+                    <div
+                      className={`w-7 h-7 rounded-sm flex items-center justify-center shrink-0 border transition-all duration-200 ${
+                        isOpen
+                          ? 'bg-[#0099ff] border-[#0099ff] text-white rotate-45'
+                          : 'bg-white/[0.05] border-white/10 text-slate-300'
+                      }`}
+                    >
+                      <i className="ph-plus-bold text-xs"></i>
+                    </div>
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/5 animate-in fade-in duration-200">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 9. FINAL HIGH-CONVERTING CTA BANNER                           */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-16 lg:py-20 bg-gradient-to-b from-[#000304] to-[#040c14] overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] bg-[#0099ff]/15 rounded-full blur-[140px] pointer-events-none -z-10" />
