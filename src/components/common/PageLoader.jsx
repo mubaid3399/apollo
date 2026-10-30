@@ -1,85 +1,120 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import gsap from 'gsap'
 import logo from '../../assets/logo.png'
 
-const PageLoader = () => {
-  const location = useLocation()
+const PageLoader = ({ isLoading }) => {
   const [visible, setVisible] = useState(true)
   const containerRef = useRef(null)
   const progressBarRef = useRef(null)
   const contentRef = useRef(null)
-  const isFirstRender = useRef(true)
+  const initialMounted = useRef(false)
 
+  // Handle Initial App Load
   useEffect(() => {
-    // Show loader on route change or initial load
-    setVisible(true)
+    if (!initialMounted.current) {
+      initialMounted.current = true
+      setVisible(true)
 
-    const ctx = gsap.context(() => {
-      // Progress bar animation across the top
-      gsap.killTweensOf(progressBarRef.current)
-      gsap.fromTo(
-        progressBarRef.current,
-        { width: '0%', opacity: 1 },
-        {
-          width: '75%',
-          duration: 0.35,
-          ease: 'power2.out',
-        }
-      )
-
-      // Content fade in
-      if (contentRef.current) {
-        gsap.fromTo(
-          contentRef.current,
-          { opacity: 0, scale: 0.95 },
-          { opacity: 1, scale: 1, duration: 0.25, ease: 'power2.out' }
-        )
-      }
-
-      // Smooth finish & fade out after 450ms
-      const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
         if (progressBarRef.current) {
-          gsap.to(progressBarRef.current, {
-            width: '100%',
-            duration: 0.2,
-            ease: 'power1.inOut',
-            onComplete: () => {
-              if (containerRef.current) {
+          gsap.fromTo(
+            progressBarRef.current,
+            { width: '0%', opacity: 1 },
+            { width: '85%', duration: 0.4, ease: 'power2.out' }
+          )
+        }
+
+        const timer = setTimeout(() => {
+          if (progressBarRef.current && containerRef.current) {
+            gsap.to(progressBarRef.current, {
+              width: '100%',
+              duration: 0.2,
+              ease: 'power1.inOut',
+              onComplete: () => {
                 gsap.to(containerRef.current, {
                   opacity: 0,
                   duration: 0.25,
                   ease: 'power2.out',
-                  onComplete: () => {
-                    setVisible(false)
-                  },
+                  onComplete: () => setVisible(false),
                 })
-              } else {
-                setVisible(false)
-              }
+              },
+            })
+          } else {
+            setVisible(false)
+          }
+        }, 500)
+
+        return () => clearTimeout(timer)
+      }, containerRef)
+
+      return () => ctx.revert()
+    }
+  }, [])
+
+  // Handle Controlled Route Transition Loading
+  useEffect(() => {
+    if (!initialMounted.current) return
+
+    if (isLoading) {
+      setVisible(true)
+      const ctx = gsap.context(() => {
+        if (containerRef.current) {
+          gsap.killTweensOf(containerRef.current)
+          gsap.set(containerRef.current, { opacity: 1, display: 'flex' })
+        }
+        if (progressBarRef.current) {
+          gsap.killTweensOf(progressBarRef.current)
+          gsap.fromTo(
+            progressBarRef.current,
+            { width: '0%', opacity: 1 },
+            { width: '80%', duration: 0.35, ease: 'power2.out' }
+          )
+        }
+        if (contentRef.current) {
+          gsap.fromTo(
+            contentRef.current,
+            { opacity: 0, scale: 0.96 },
+            { opacity: 1, scale: 1, duration: 0.2, ease: 'power2.out' }
+          )
+        }
+      }, containerRef)
+
+      return () => ctx.revert()
+    } else {
+      // Fade out and reveal the new page
+      if (containerRef.current) {
+        const ctx = gsap.context(() => {
+          if (progressBarRef.current) {
+            gsap.to(progressBarRef.current, {
+              width: '100%',
+              duration: 0.15,
+              ease: 'power1.inOut',
+            })
+          }
+          gsap.to(containerRef.current, {
+            opacity: 0,
+            duration: 0.25,
+            delay: 0.1,
+            ease: 'power2.out',
+            onComplete: () => {
+              setVisible(false)
             },
           })
-        } else {
-          setVisible(false)
-        }
-      }, isFirstRender.current ? 600 : 420)
+        }, containerRef)
 
-      isFirstRender.current = false
-
-      return () => clearTimeout(timer)
-    }, containerRef)
-
-    return () => {
-      ctx.revert()
+        return () => ctx.revert()
+      } else {
+        setVisible(false)
+      }
     }
-  }, [location.pathname, location.search])
+  }, [isLoading])
 
   if (!visible) return null
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#000304]/90 backdrop-blur-md transition-opacity select-none pointer-events-auto"
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#000304] transition-opacity select-none pointer-events-auto"
       style={{ opacity: 1 }}
       aria-label="Loading page..."
     >
@@ -132,7 +167,7 @@ const PageLoader = () => {
 
 export const PageFallbackLoader = () => {
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#000304]/90 backdrop-blur-md select-none">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#000304] select-none">
       <div className="fixed top-0 left-0 right-0 h-1 bg-white/[0.05] z-[10000] overflow-hidden">
         <div className="h-full w-full bg-gradient-to-r from-[#0066cc] via-[#0099ff] to-[#38bdf8] shadow-[0_0_12px_#0099ff] animate-pulse" />
       </div>

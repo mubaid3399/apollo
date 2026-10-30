@@ -26,22 +26,49 @@ const Dashboard = lazy(() => import('./pages/Dashboard'))
 
 const App = () => {
   const location = useLocation()
-  const isAuthPage = ['/login', '/register', '/signup'].includes(location.pathname)
+  const [displayLocation, setDisplayLocation] = useState(location)
+  const [isPageLoading, setIsPageLoading] = useState(false)
+  const isAuthPage = ['/login', '/register', '/signup'].includes(displayLocation.pathname)
 
   // Verify session on page load/refresh against Google Sheets
   useEffect(() => {
     verifySession()
   }, [])
 
+  // Controlled deferred route transition:
+  // Loader shows FIRST, covers the screen, swaps route BEHIND the loader, then reveals new page.
+  useEffect(() => {
+    if (location.pathname !== displayLocation.pathname || location.search !== displayLocation.search) {
+      // 1. Immediately activate loader BEFORE new page is allowed to render
+      setIsPageLoading(true)
+
+      // 2. Hold loader on screen to cover previous content
+      const swapTimer = setTimeout(() => {
+        // 3. Swap route to the new page while loader is 100% covering screen
+        setDisplayLocation(location)
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        document.documentElement.scrollTop = 0
+        document.body.scrollTop = 0
+
+        // 4. Reveal the new page cleanly
+        setTimeout(() => {
+          setIsPageLoading(false)
+        }, 120)
+      }, 320)
+
+      return () => clearTimeout(swapTimer)
+    }
+  }, [location, displayLocation])
+
   return (
     <div className="min-h-screen bg-[#000304] text-white font-sans antialiased flex flex-col justify-between">
       <ScrollToTop />
-      <PageLoader />
+      <PageLoader isLoading={isPageLoading} />
       <GsapNotification />
       <Navbar />
       <main className="w-full flex-1">
         <Suspense fallback={<PageFallbackLoader />}>
-          <Routes>
+          <Routes location={displayLocation}>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
