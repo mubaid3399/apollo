@@ -16,11 +16,63 @@ export const isGoogleSheetConfigured = () => {
   return typeof API_URL === 'string' && API_URL.trim().startsWith('https://script.google.com/macros/s/')
 }
 
-// Current logged in user helpers
+// Subdomain & Domain Navigation Helpers
+export const isProdDomain = () =>
+  typeof window !== 'undefined' && window.location.hostname.includes('apollogroup.click')
+
+export const getPortalLoginUrl = () =>
+  isProdDomain() ? 'https://portal.apollogroup.click/login' : '/login'
+
+export const getDashboardUrl = () =>
+  isProdDomain() ? 'https://dashboard.apollogroup.click/dashboard' : '/dashboard'
+
+export const getMainHomeUrl = () =>
+  isProdDomain() ? 'https://apollogroup.click/' : '/'
+
+// Helper to set cookie accessible across main domain and all subdomains (*.apollogroup.click)
+export const setSubdomainCookie = (name, value, days = 30) => {
+  if (typeof document === 'undefined') return
+  const isProd = isProdDomain()
+  const domainPart = isProd ? '; domain=.apollogroup.click' : ''
+  const expires = new Date(Date.now() + days * 864e5).toUTCString()
+  const securePart = window.location.protocol === 'https:' ? '; Secure' : ''
+  document.cookie = `${name}=${encodeURIComponent(value)}; path=/; expires=${expires}${domainPart}; SameSite=Lax${securePart}`
+}
+
+export const getSubdomainCookie = (name) => {
+  if (typeof document === 'undefined') return null
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'))
+  return match ? decodeURIComponent(match[2]) : null
+}
+
+export const clearSubdomainCookie = (name) => {
+  if (typeof document === 'undefined') return
+  const isProd = isProdDomain()
+  const domainPart = isProd ? '; domain=.apollogroup.click' : ''
+  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT${domainPart}`
+  document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`
+}
+
+// Current logged in user helpers with cross-subdomain synchronization
 export const getCurrentUser = () => {
   try {
-    const raw = localStorage.getItem('apollo_user')
-    return raw ? JSON.parse(raw) : null
+    // 1. Try reading from cookie first (works across portal & dashboard subdomains)
+    const cookieRaw = getSubdomainCookie('apollo_user')
+    if (cookieRaw) {
+      const parsed = JSON.parse(cookieRaw)
+      try {
+        localStorage.setItem('apollo_user', cookieRaw)
+      } catch {}
+      return parsed
+    }
+    // 2. Fallback to localStorage
+    const localRaw = localStorage.getItem('apollo_user')
+    if (localRaw) {
+      const parsed = JSON.parse(localRaw)
+      setSubdomainCookie('apollo_user', localRaw)
+      return parsed
+    }
+    return null
   } catch {
     return null
   }
@@ -28,12 +80,21 @@ export const getCurrentUser = () => {
 
 export const setCurrentUser = (user) => {
   if (user) {
-    localStorage.setItem('apollo_user', JSON.stringify(user))
+    const json = JSON.stringify(user)
+    try {
+      localStorage.setItem('apollo_user', json)
+    } catch {}
+    setSubdomainCookie('apollo_user', json, 30)
   } else {
-    localStorage.removeItem('apollo_user')
+    try {
+      localStorage.removeItem('apollo_user')
+    } catch {}
+    clearSubdomainCookie('apollo_user')
   }
   // Dispatch custom event so Navbar and other components update reactively
-  window.dispatchEvent(new Event('apollo_auth_change'))
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('apollo_auth_change'))
+  }
 }
 
 export const logoutUser = () => {

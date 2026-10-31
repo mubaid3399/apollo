@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, useLocation, useMatch, useResolvedPath } from 'react-router-dom'
 import gsap from 'gsap'
 import logo from '../../assets/logo.png'
-import { getCurrentUser, logoutUser } from '../../services/googleSheetService'
+import { getCurrentUser, logoutUser, getPortalLoginUrl, getDashboardUrl, isProdDomain } from '../../services/googleSheetService'
 import UserProfileDropdown from './UserProfileDropdown'
 
 const navLinks = [
@@ -178,12 +178,12 @@ const Navbar = () => {
                             <UserProfileDropdown currentUser={currentUser} />
                         ) : (
                             <>
-                                <Link
-                                    to="/login"
-                                    className="px-6 py-3 text-base rounded-sm font-semibold bg-white hover:bg-slate-100 active:bg-slate-200 text-[#0099ff] shadow-md shadow-white/10 hover:shadow-lg transition-all flex items-center justify-center"
+                                <a
+                                    href={getPortalLoginUrl()}
+                                    className="px-6 py-3 text-base rounded-sm font-semibold bg-white hover:bg-slate-100 active:bg-slate-200 text-[#0099ff] shadow-md shadow-white/10 hover:shadow-lg transition-all flex items-center justify-center cursor-pointer"
                                 >
                                     Log In
-                                </Link>
+                                </a>
 
                                 <Link
                                     to="/register"
@@ -339,8 +339,8 @@ const Navbar = () => {
                                     </span>
                                 </div>
                             </div>
-                            <Link
-                                to="/dashboard"
+                            <a
+                                href={getDashboardUrl()}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="w-full py-3.5 rounded-xl bg-[#0099ff] hover:bg-[#0088ee] text-white font-bold text-base flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99]"
                             >
@@ -348,10 +348,13 @@ const Navbar = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                                 </svg>
                                 <span>Go to Dashboard</span>
-                            </Link>
+                            </a>
                             <button
                                 onClick={() => {
-                                    handleLogout()
+                                    logoutUser()
+                                    if (isProdDomain()) {
+                                        window.location.href = 'https://apollogroup.click/'
+                                    }
                                     setIsMobileMenuOpen(false)
                                 }}
                                 className="w-full py-3.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 font-bold text-base flex items-center justify-center gap-2 transition-all shadow-md active:scale-[0.99] border border-rose-500/20"
@@ -364,13 +367,13 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            <Link
-                                to="/login"
+                            <a
+                                href={getPortalLoginUrl()}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="w-full py-3.5 rounded-xl bg-white hover:bg-slate-100 active:bg-slate-200 text-[#0099ff] font-bold text-base flex items-center justify-center transition-all shadow-md active:scale-[0.99]"
                             >
                                 Login
-                            </Link>
+                            </a>
 
                             <Link
                                 to="/register"

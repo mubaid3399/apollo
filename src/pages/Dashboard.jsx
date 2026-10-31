@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { getCurrentUser, logoutUser } from '../services/googleSheetService'
+import { getCurrentUser, logoutUser, isProdDomain, getPortalLoginUrl } from '../services/googleSheetService'
 import { showNotification } from '../components/common/GsapNotification'
 import SEO from '../components/common/SEO'
 
@@ -22,15 +22,26 @@ const Dashboard = () => {
   useEffect(() => {
     const user = getCurrentUser()
     if (!user) {
-      navigate('/login')
+      if (isProdDomain()) {
+        window.location.href = 'https://portal.apollogroup.click/login'
+      } else {
+        navigate('/login')
+      }
     } else {
       setCurrentUser(user)
     }
 
     const handleAuth = () => {
       const u = getCurrentUser()
-      if (!u) navigate('/login')
-      else setCurrentUser(u)
+      if (!u) {
+        if (isProdDomain()) {
+          window.location.href = 'https://portal.apollogroup.click/login'
+        } else {
+          navigate('/login')
+        }
+      } else {
+        setCurrentUser(u)
+      }
     }
 
     window.addEventListener('apollo_auth_change', handleAuth)
@@ -40,7 +51,11 @@ const Dashboard = () => {
   const handleLogout = () => {
     logoutUser()
     showNotification('You have logged out successfully.', 'info')
-    navigate('/login')
+    if (isProdDomain()) {
+      window.location.href = 'https://apollogroup.click/'
+    } else {
+      navigate('/login')
+    }
   }
 
   // Copy helper with feedback

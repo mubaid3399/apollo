@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { logoutUser } from '../../services/googleSheetService'
+import { logoutUser, getDashboardUrl, isProdDomain } from '../../services/googleSheetService'
 import { showNotification } from './GsapNotification'
 
 const UserProfileDropdown = ({ currentUser }) => {
@@ -49,7 +49,11 @@ const UserProfileDropdown = ({ currentUser }) => {
     setIsOpen(false)
     logoutUser()
     showNotification('Signed out successfully.', 'info')
-    navigate('/')
+    if (isProdDomain()) {
+      window.location.href = 'https://apollogroup.click/'
+    } else {
+      navigate('/')
+    }
   }
 
   return (
@@ -101,16 +105,16 @@ const UserProfileDropdown = ({ currentUser }) => {
 
           {/* Menu Items */}
           <div className="py-1">
-            <Link
-              to="/dashboard"
+            <a
+              href={getDashboardUrl()}
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 text-[13px] font-semibold text-[#0099ff] hover:text-white hover:bg-[#0099ff]/15 rounded-lg transition-colors border border-[#0099ff]/20 mb-1"
+              className="flex items-center gap-2.5 px-3 py-2 text-[13px] font-semibold text-[#0099ff] hover:text-white hover:bg-[#0099ff]/15 rounded-lg transition-colors border border-[#0099ff]/20 mb-1 cursor-pointer"
             >
               <svg className="w-4 h-4 text-[#0099ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
               </svg>
               <span>Customer Dashboard</span>
-            </Link>
+            </a>
 
             <Link
               to="/services"

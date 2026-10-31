@@ -1,13 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import SEO from '../components/common/SEO'
 import bannerImg from '../assets/login_signup.jfif'
-import { loginUser } from '../services/googleSheetService'
+import { loginUser, getCurrentUser, isProdDomain } from '../services/googleSheetService'
 import { showNotification } from '../components/common/GsapNotification'
 
 const Login = () => {
   const navigate = useNavigate()
+
+  // If user is already authenticated, forward straight to dashboard
+  useEffect(() => {
+    const user = getCurrentUser()
+    if (user) {
+      if (isProdDomain()) {
+        window.location.href = 'https://dashboard.apollogroup.click/dashboard'
+      } else {
+        navigate('/dashboard')
+      }
+    }
+  }, [navigate])
 
   const [formData, setFormData] = useState({
     identifier: '', // username or email
@@ -61,7 +73,11 @@ const Login = () => {
         setSuccessMessage(welcome)
         showNotification(welcome, 'success')
         setTimeout(() => {
-          navigate('/dashboard')
+          if (isProdDomain()) {
+            window.location.href = 'https://dashboard.apollogroup.click/dashboard'
+          } else {
+            navigate('/dashboard')
+          }
         }, 1000)
       } else {
         const err = res.message || 'Invalid username/email or password.'

@@ -36,6 +36,21 @@ const App = () => {
     verifySession()
   }, [])
 
+  // Subdomain intelligent routing:
+  // - portal.apollogroup.click/ -> auto redirect to /login
+  // - dashboard.apollogroup.click/ -> auto redirect to /dashboard
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const host = window.location.hostname.toLowerCase()
+    const path = window.location.pathname
+
+    if (host.startsWith('portal.') && (path === '/' || path === '')) {
+      window.location.replace('/login')
+    } else if (host.startsWith('dashboard.') && (path === '/' || path === '')) {
+      window.location.replace('/dashboard')
+    }
+  }, [])
+
   // Controlled deferred route transition:
   // Loader shows FIRST, covers the screen, swaps route BEHIND the loader, then reveals new page.
   useEffect(() => {
