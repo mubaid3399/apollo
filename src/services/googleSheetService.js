@@ -9,7 +9,16 @@
  * - Local fallback storage when VITE_GOOGLE_SHEET_API_URL is not yet configured.
  */
 
-const API_URL = import.meta.env.VITE_GOOGLE_SHEET_API_URL || ''
+const API_URL =
+  import.meta.env.VITE_GOOGLE_SHEET_API_URL ||
+  'https://script.google.com/macros/s/AKfycbzCG-IC3AhMwL7XyCrRa1t78LMV_gcZ0xFFX_ea5XFFnU8DCh3m8V57voJT3apaNzW6SQ/exec'
+
+// Clean up any stale local mock users so authentication is strictly live with Google Sheets
+if (typeof window !== 'undefined') {
+  try {
+    localStorage.removeItem('apollo_mock_users')
+  } catch {}
+}
 
 // Helper to check if Google Sheet URL is configured
 export const isGoogleSheetConfigured = () => {
@@ -210,46 +219,9 @@ export const registerUser = async (userData) => {
     }
   }
 
-  // --- DEMO / LOCAL FALLBACK MODE ---
-  // If the user hasn't connected Google Sheets yet, we allow seamless testing via localStorage
-  console.warn('[GoogleSheetService] VITE_GOOGLE_SHEET_API_URL is not set. Using local mock database.')
-  await new Promise((r) => setTimeout(r, 800))
-
-  const existingUsers = JSON.parse(localStorage.getItem('apollo_mock_users') || '[]')
-  const emailExists = existingUsers.some(
-    (u) => u.email.toLowerCase() === (userData.email || '').toLowerCase()
-  )
-  const usernameExists = existingUsers.some(
-    (u) => u.username.toLowerCase() === (userData.username || '').toLowerCase()
-  )
-
-  if (emailExists) {
-    return { success: false, message: 'An account with this email address already exists.' }
-  }
-  if (usernameExists) {
-    return { success: false, message: 'This username is already taken. Please choose another.' }
-  }
-
-  const newUser = {
-    id: 'USR-' + Date.now().toString(36).toUpperCase(),
-    created_at: new Date().toISOString(),
-    firstName: userData.firstName || '',
-    lastName: userData.lastName || '',
-    username: userData.username || '',
-    email: userData.email || '',
-    country: userData.country || '',
-    state: userData.state || '',
-    phoneNumber: userData.phoneNumber || '',
-    password: userData.password || '',
-  }
-
-  existingUsers.push(newUser)
-  localStorage.setItem('apollo_mock_users', JSON.stringify(existingUsers))
-
   return {
-    success: true,
-    message: 'Account registered successfully in local preview! Connect your Google Sheet for live sync.',
-    user: newUser,
+    success: false,
+    message: 'Google Sheets API is currently unavailable. Please try again in a few moments.',
   }
 }
 
@@ -258,7 +230,7 @@ export const registerUser = async (userData) => {
  * @param {Object} credentials - { identifier, password }
  */
 export const loginUser = async ({ identifier, password }) => {
-  // If Google Sheet API URL is configured, call the live Google Apps Script Web App
+  // Call the live Google Apps Script Web App
   if (isGoogleSheetConfigured()) {
     try {
       const payload = {
@@ -289,42 +261,9 @@ export const loginUser = async ({ identifier, password }) => {
     }
   }
 
-  // --- DEMO / LOCAL FALLBACK MODE ---
-  console.warn('[GoogleSheetService] VITE_GOOGLE_SHEET_API_URL is not set. Using local mock database.')
-  await new Promise((r) => setTimeout(r, 800))
-
-  const existingUsers = JSON.parse(localStorage.getItem('apollo_mock_users') || '[]')
-  const cleanId = (identifier || '').trim().toLowerCase()
-
-  const user = existingUsers.find(
-    (u) =>
-      u.email.toLowerCase() === cleanId ||
-      u.username.toLowerCase() === cleanId
-  )
-
-  if (!user) {
-    return {
-      success: false,
-      message: 'No account found with this username or email. Please sign up first.',
-    }
-  }
-
-  if (user.password !== password) {
-    return {
-      success: false,
-      message: 'Incorrect password. Please try again.',
-    }
-  }
-
-  // Store user session (omit password for security)
-  const sessionUser = { ...user }
-  delete sessionUser.password
-  setCurrentUser(sessionUser)
-
   return {
-    success: true,
-    message: 'Welcome back, ' + (sessionUser.firstName || sessionUser.username) + '!',
-    user: sessionUser,
+    success: false,
+    message: 'Authentication service is currently unavailable. Please try again later.',
   }
 }
 

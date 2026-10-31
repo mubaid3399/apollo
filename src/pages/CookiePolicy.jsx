@@ -27,7 +27,7 @@ const CookiePolicy = () => {
 
         {/* Clean, Simple Content */}
         <article className="space-y-10 text-slate-300 text-base leading-relaxed">
-          
+
           <section className="space-y-3">
             <h2 className="text-xl sm:text-2xl font-semibold text-white tracking-tight">
               1. What Are Cookies?
@@ -57,7 +57,7 @@ const CookiePolicy = () => {
               3. Categories of Cookies We Use
             </h2>
             <div className="space-y-6 pt-2">
-              
+
               <div className="space-y-2">
                 <h3 className="text-base sm:text-lg font-semibold text-white">
                   A. Strictly Necessary & Authentication Cookies
