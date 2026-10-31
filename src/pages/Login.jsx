@@ -99,8 +99,8 @@ const Login = () => {
         description="Sign in to your Apollo Group TV account to manage active devices, playlists, and subscription renewals."
         canonical="/login"
       />
-      {/* Left Column: 50% Full-Bleed Clean Banner Image (No border, No text overwrite) */}
-      <div className="w-full lg:w-1/2 min-h-[360px] sm:min-h-[480px] lg:min-h-screen relative overflow-hidden bg-black shrink-0">
+      {/* Left Column: 50% Full-Bleed Clean Banner Image (Sticky on desktop so it stays pinned as user reads guide) */}
+      <div className="w-full lg:w-1/2 min-h-[360px] sm:min-h-[480px] lg:h-screen lg:sticky lg:top-0 relative overflow-hidden bg-black shrink-0">
         <img
           src={bannerImg}
           alt="Apollo Group TV Experience"
@@ -108,8 +108,8 @@ const Login = () => {
         />
       </div>
 
-      {/* Right Column: 50% Login Form (No outer card border, seamless dark theme) */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-10 lg:p-12 xl:p-16">
+      {/* Right Column: 50% Login Form + SEO Guide Article */}
+      <div className="w-full lg:w-1/2 flex items-start justify-center p-6 sm:p-10 lg:p-12 xl:p-16">
         <div className="w-full max-w-xl mx-auto py-6">
           {/* Header */}
           <div className="mb-8 text-left">
@@ -255,6 +255,117 @@ const Login = () => {
               </p>
             </div>
           </form>
+
+          {/* ------------------------------------------------------------- */}
+          {/* SEO GUIDE ARTICLE: APOLLO GROUP TV LOGIN & PORTAL ACCESS      */}
+          {/* ------------------------------------------------------------- */}
+          <div className="mt-10 pt-8 border-t border-white/10 text-left space-y-5">
+            {/* Tag / Badge */}
+            {/* Main Article Title */}
+            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+              Complete Guide to Your <strong className="text-[#0099ff] font-bold">Apollo Group TV Login</strong> & Account Portal
+            </h2>
+
+            {/* Intro Paragraph */}
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              Logging into your <strong className="text-[#0099ff] font-bold">Apollo Group TV login</strong> account grants you immediate access to over 20,000+ live HD and 4K channels, 100,000+ Video On Demand (VOD) cinema releases, and Pay-Per-View sporting events. Whether accessing your customer dashboard through a desktop web browser, smartphone, Amazon Firestick, or Android TV, understanding how to navigate the <strong className="text-[#0099ff] font-bold">Apollo Group TV portal</strong> ensures an uninterrupted, buffer-free viewing experience across all your screens.
+            </p>
+
+            {/* Section 1 */}
+            <div className="space-y-2 pt-1">
+              <h3 className="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0099ff]"></span>
+                <span>1. How to Sign In to the Official Apollo Group TV Portal</span>
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                To sign in, enter the username or primary email address linked to your active <strong className="text-[#0099ff] font-bold">Apollo Group TV subscription</strong> along with your account password in the form above. Once authenticated, your customer dashboard allows you to monitor active subscription cycles, view transaction receipts, download custom M3U playlist URLs, and manage simultaneous streaming connections. If you are currently evaluating our service with an official <strong className="text-[#0099ff] font-bold">Apollo Group TV free trial</strong>, input the automated trial credentials dispatched to your email inbox immediately upon trial request.
+              </p>
+            </div>
+
+            {/* Section 2 */}
+            <div className="space-y-2 pt-1">
+              <h3 className="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0099ff]"></span>
+                <span>2. Logging In on Firestick, Smart TVs & the Apollo Group TV APK</span>
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                While you can manage account billing and subscription renewals directly through the <strong className="text-[#0099ff] font-bold">Apollo Group TV web player</strong> on desktop and mobile browsers, live TV streaming is optimized through our dedicated applications. To log in on Amazon Fire TV Stick, Nvidia Shield, or Android boxes:
+              </p>
+              <ul className="space-y-1.5 pl-3 border-l-2 border-[#0099ff]/30 text-xs sm:text-sm text-slate-300">
+                <li>
+                  <strong className="text-white font-medium">Download the App:</strong> Sideload the official <strong className="text-[#0099ff] font-bold">Apollo Group TV APK</strong> using verified Downloader codes (<strong className="text-[#0099ff] font-bold">1036442</strong> for Golden Smart or <strong className="text-[#0099ff] font-bold">8045867</strong> for Z Player).
+                </li>
+                <li>
+                  <strong className="text-white font-medium">Select Login Method:</strong> Open the player and choose your preferred authentication protocol—either Xtream Codes API or M3U playlist link.
+                </li>
+                <li>
+                  <strong className="text-white font-medium">Enter Credentials:</strong> Input your <strong className="text-[#0099ff] font-bold">Apollo TV login credentials</strong> (Username, Password, and Server Portal URL).
+                </li>
+                <li>
+                  <strong className="text-white font-medium">Sync Channels:</strong> Save your details to sync electronic program guides (EPG) and stream 4K feeds simultaneously across up to 5 household devices.
+                </li>
+              </ul>
+            </div>
+
+            {/* Section 3 */}
+            <div className="space-y-2 pt-1">
+              <h3 className="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0099ff]"></span>
+                <span>3. Troubleshooting Login Errors & Status Code 400</span>
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                If you encounter difficulty signing in or receive an <strong className="text-[#0099ff] font-bold">Apollo Group TV status code 400</strong>, this typically indicates an incorrect server URL, trailing blank spaces in your username, or an expired session token. Follow these quick troubleshooting tips:
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10 text-xs text-slate-300 space-y-1">
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <i className="ph-shield-warning-bold text-[#0099ff]"></i>
+                    <span>Verify Portal URL</span>
+                  </div>
+                  <p className="text-slate-400">Ensure the server address contains no trailing slashes or inadvertent typos before submitting.</p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10 text-xs text-slate-300 space-y-1">
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <i className="ph-arrows-clockwise-bold text-[#0099ff]"></i>
+                    <span>Clear App Cache</span>
+                  </div>
+                  <p className="text-slate-400">Force stop the player app in device settings and clear cache to remove outdated playlist tokens.</p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10 text-xs text-slate-300 space-y-1">
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <i className="ph-globe-bold text-[#0099ff]"></i>
+                    <span>Zero IP Locks</span>
+                  </div>
+                  <p className="text-slate-400">Our platform is 100% VPN friendly. Toggle VPN server location if your ISP throttles high-bandwidth feeds.</p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-white/[0.02] border border-white/10 text-xs text-slate-300 space-y-1">
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    <i className="ph-key-bold text-[#0099ff]"></i>
+                    <span>Password Reset</span>
+                  </div>
+                  <p className="text-slate-400">Click the <strong className="text-[#0099ff] font-bold">Apollo Group TV password reset</strong> link or reach 24/7 support for immediate credential retrieval.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Support Callout Pill */}
+            <div className="p-3.5 rounded-xl bg-[#0099ff]/10 border border-[#0099ff]/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+              <span className="text-slate-200">
+                Need immediate help with your account? Our human <strong className="text-[#0099ff] font-bold">Apollo Group TV support</strong> team is available 24/7.
+              </span>
+              <a
+                href="https://wa.me/message/YOUR_WHATSAPP_ID"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3.5 py-1.5 rounded-lg bg-[#0099ff] text-white font-bold shrink-0 hover:bg-[#0088ee] transition-all cursor-pointer"
+              >
+                Get Support
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
