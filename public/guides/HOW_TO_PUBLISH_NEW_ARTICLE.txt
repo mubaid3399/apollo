@@ -1,0 +1,70 @@
+==============================================================================
+APOLLO GROUP TV - HOW TO PUBLISH A NEW ARTICLE ON CPANEL (ZERO CODE)
+==============================================================================
+
+Whenever you want to post a new article or guide on your website, you NEVER need
+to rebuild the code or hire a developer. Follow these 3 simple steps:
+
+------------------------------------------------------------------------------
+STEP 1: GIVE THIS PROMPT TO CHATGPT, GEMINI, OR CLAUDE
+------------------------------------------------------------------------------
+Copy and paste this exact prompt into your AI:
+
+"""
+You are an expert SEO content writer for Apollo Group TV (https://apollogroup.click).
+Write a comprehensive, engaging 1,000 to 1,500-word guide about: [ENTER YOUR TOPIC HERE].
+
+CRITICAL FORMATTING INSTRUCTIONS:
+1. At the very top of your response, output ONLY a metadata comment block like this:
+<!--
+Title: [Catchy Article Title with Primary Keyword]
+MetaTitle: [SEO Meta Title Under 60 Characters]
+Description: [Compelling 150-character Meta Description for Google Search]
+Image: [A relevant high-resolution landscape Unsplash image URL]
+Category: [Choose from: Guides, Movies, Sports, Live TV, or Featured]
+Date: [Today's Date, e.g. October 31, 2026]
+ReadTime: [Estimated read time, e.g. 7 min read]
+Author: [Author Name or Apollo Group TV Editorial]
+AuthorRole: [e.g. Senior Streaming Specialist]
+Slug: [clean-url-slug-using-hyphens]
+-->
+
+2. Followed directly by the clean HTML article body:
+- Use <h2> for major sections (Introduction, Step-by-Step Guide, Device Setup, FAQs, Conclusion)
+- Use <h3> for sub-points
+- Bold important keywords with <strong> (e.g. <strong>Apollo Group TV</strong>, <strong>4K streaming</strong>)
+- Include at least one comparison table or feature breakdown table:
+  <div class="table-responsive"><table class="guide-table">...</table></div>
+- Include an FAQ section with <details class="faq-item"><summary class="faq-question">Question</summary><div class="faq-answer"><p>Answer</p></div></details>
+- Output ONLY the HTML code without any markdown backticks.
+"""
+
+------------------------------------------------------------------------------
+STEP 2: SAVE THE FILE
+------------------------------------------------------------------------------
+1. Copy the code that the AI generates.
+2. Save it on your computer with the filename matching the slug:
+   Example: how-to-install-firestick.html
+
+------------------------------------------------------------------------------
+STEP 3: UPLOAD TO CPANEL
+------------------------------------------------------------------------------
+1. Log in to your cPanel.
+2. Go to File Manager -> public_html -> guides/
+3. Click "Upload" at the top toolbar and upload your file (e.g. how-to-install-firestick.html).
+
+------------------------------------------------------------------------------
+THAT'S IT! WHAT HAPPENS AUTOMATICALLY:
+------------------------------------------------------------------------------
+✓ Your article is instantly live at:
+  https://apollogroup.click/guides/how-to-install-firestick
+
+✓ It automatically has the official Apollo Group TV dark theme, electric blue accents,
+  sticky Table of Contents sidebar, and full Header & Footer!
+
+✓ Google's sitemap at https://apollogroup.click/sitemap.xml is updated automatically
+  within 1 second of uploading so Googlebot discovers and indexes your article.
+
+✓ Your article automatically appears on the https://apollogroup.click/blog page!
+==============================================================================
+

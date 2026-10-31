@@ -10,11 +10,15 @@ const BlogDetails = () => {
 
   const article = blogsData.find(
     (b) => b.slug === slug || String(b.id) === slug
-  ) || blogsData[0]
+  )
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [slug])
+    if (!article && slug) {
+      // Forward to server-rendered guide template for dynamically dropped-in guides
+      window.location.replace(`/guides/${slug}`)
+    }
+  }, [slug, article])
 
   // Track active section for Table of Contents
   useEffect(() => {

@@ -1,25 +1,43 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import SEO from '../components/common/SEO'
 import { blogsData } from '../assets/data/blogsData'
 
-const categories = ['All', 'Featured', 'Live TV', 'Movies', 'Sports', 'TV Shows']
+const categories = ['All', 'Featured', 'Live TV', 'Movies', 'Sports', 'TV Shows', 'Guides']
 
 const Blog = () => {
+  const [articles, setArticles] = useState(blogsData)
   const [activeCategory, setActiveCategory] = useState('All')
   const [currentPage, setCurrentPage] = useState(1)
   const blogListRef = useRef(null)
+
+  // Dynamically load any guides dropped into /guides/*.html
+  useEffect(() => {
+    fetch('/api/guides.php')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.success && Array.isArray(data.articles) && data.articles.length > 0) {
+          // Merge server articles with existing fallback, avoiding duplicate slugs
+          const serverSlugs = new Set(data.articles.map((a) => a.slug))
+          const remainingStatic = blogsData.filter((b) => !serverSlugs.has(b.slug))
+          setArticles([...data.articles, ...remainingStatic])
+        }
+      })
+      .catch(() => {
+        // Fallback gracefully to blogsData
+      })
+  }, [])
 
   const itemsPerPage = 3
 
   // Filter articles based on active category
   const filteredArticles =
     activeCategory === 'All'
-      ? blogsData
-      : blogsData.filter(
-          (article) =>
-            article.category.toLowerCase() === activeCategory.toLowerCase()
-        )
+      ? articles
+      : articles.filter(
+        (article) =>
+          (article.category || '').toLowerCase() === activeCategory.toLowerCase()
+      )
 
   // Calculate pagination
   const totalPages = Math.ceil(filteredArticles.length / itemsPerPage) || 1
@@ -72,11 +90,10 @@ const Blog = () => {
                 key={cat}
                 type="button"
                 onClick={() => handleCategoryChange(cat)}
-                className={`px-5 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                  isActive
+                className={`px-5 sm:px-6 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${isActive
                     ? 'bg-[#0099ff] text-white shadow-md shadow-[#0099ff]/30'
                     : 'bg-[#0c1015] text-slate-300 hover:text-white hover:bg-white/[0.06] border border-white/10'
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -251,11 +268,10 @@ const Blog = () => {
                     key={pageNum}
                     type="button"
                     onClick={() => handlePageChange(pageNum)}
-                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center ${
-                      isActive
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center ${isActive
                         ? 'bg-[#0099ff] text-white shadow-md shadow-[#0099ff]/30'
                         : 'bg-[#0c1015] text-slate-300 hover:text-white hover:bg-white/[0.06] border border-white/10'
-                    }`}
+                      }`}
                   >
                     {pageNum}
                   </button>

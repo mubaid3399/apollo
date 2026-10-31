@@ -10,6 +10,14 @@
   RewriteCond %{HTTPS} off
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
+  # 2. Dynamic XML Sitemap (Automatically includes all dropped-in guides)
+  RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+  # 3. Dynamic Drop-in Guides (Wraps any uploaded HTML file with official styling)
+  RewriteCond %{REQUEST_URI} ^/guides [NC]
+  RewriteCond %{REQUEST_URI} !\.(css|js|png|jpg|jpeg|gif|webp|svg|ico)$ [NC]
+  RewriteRule ^guides/?(.*)$ guides/index.php?file=$1 [QSA,L]
+
   # 2. Prevent rewrite loop for existing physical files, directories, and assets
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} -f [OR]
