@@ -9,7 +9,7 @@ const values = [
     icon: 'ph-lightning-bold',
     title: 'Uncompromised 4K Quality',
     description:
-      'We never downscale or overly compress video feeds. Our high-bitrate 60FPS streams deliver cinema-grade clarity and razor-sharp sports motion directly to your living room.',
+      'We never downscale or overly compress feeds. Our high-bitrate 60FPS streams deliver cinema-grade clarity and razor-sharp sports motion directly to your living room.',
   },
   {
     icon: 'ph-globe-hemisphere-west-bold',
@@ -54,26 +54,152 @@ const milestones = [
   },
 ]
 
+const ecosystemCards = [
+  {
+    icon: 'ph-sign-in-bold',
+    tag: 'Authentication & Access',
+    title: 'Apollo Group TV Login',
+    desc: (
+      <>
+        Experience frictionless, single-click access with the official{' '}
+        <strong className="text-[#0099ff] font-bold">Apollo Group TV login</strong> portal. Your
+        verified subscription credentials grant instant connectivity across web browsers, mobile
+        devices, and television player apps with zero complicated setup steps.
+      </>
+    ),
+  },
+  {
+    icon: 'ph-browser-bold',
+    tag: 'Web Player & Playlists',
+    title: 'Apollo Group TV Portal',
+    desc: (
+      <>
+        Manage active devices, inspect playlists, and stream right inside your browser with the{' '}
+        <strong className="text-[#0099ff] font-bold">Apollo Group TV portal</strong>. Fully
+        compatible with standard M3U playlists, EPG television guides, and Xtream Codes API
+        parameters.
+      </>
+    ),
+  },
+  {
+    icon: 'ph-download-simple-bold',
+    tag: 'Firestick & Android',
+    title: 'Apollo Group TV APK',
+    desc: (
+      <>
+        Sideload and install in under two minutes using the official{' '}
+        <strong className="text-[#0099ff] font-bold">Apollo Group TV APK</strong> and Downloader
+        app codes. Optimized for Amazon Firestick 4K, Android TV, Google TV, and NVIDIA Shield with
+        native remote control navigation.
+      </>
+    ),
+  },
+  {
+    icon: 'ph-lifebuoy-bold',
+    tag: '24/7 Expert Help Desk',
+    title: 'Apollo Group TV Support',
+    desc: (
+      <>
+        Get direct human assistance through dedicated{' '}
+        <strong className="text-[#0099ff] font-bold">Apollo Group TV support</strong> channels.
+        Instant step-by-step guidance for password resets, playlist syncing, and resolving common{' '}
+        <strong className="text-[#0099ff] font-bold">status code 400</strong> connection errors.
+      </>
+    ),
+  },
+]
+
 const aboutFaqs = [
   {
-    question: 'What is the vision behind Apollo Group TV?',
-    answer:
-      'Apollo Group TV was built on a simple vision: to eliminate the monopoly of overpriced cable providers and fragmented subscription apps. We believe viewers deserve universal access to live global sports, news, and cinema under one transparent, contract-free subscription.',
+    question: 'What is Apollo Group TV and how does it work?',
+    answer: (
+      <>
+        <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong> is a next-generation
+        digital IPTV streaming platform delivering over 20,000 live international HD and 4K
+        television channels, sports Pay-Per-View (PPV) broadcasts, and an on-demand library of
+        100,000+ movies and series directly over your broadband connection without satellite dishes
+        or cable hardware.
+      </>
+    ),
   },
   {
-    question: 'How does Apollo Group TV maintain 99.99% server uptime during big events?',
-    answer:
-      'Unlike budget IPTV resellers using cheap shared servers, Apollo Group TV owns and operates dedicated 10Gbps CDN clusters in North America, Europe, and Asia. When millions tune into high-stakes sports finals like the Super Bowl or UFC, our automated traffic director balances the load to prevent lag and buffer loops.',
+    question: 'How do I perform an Apollo Group TV login on Firestick or web?',
+    answer: (
+      <>
+        Performing an <strong className="text-[#0099ff] font-bold">Apollo Group TV login</strong> is
+        quick and automated. Simply enter your credentials into our web player or input your M3U
+        playlist / Xtream Codes into apps like Golden Smart, Z Player, or TiviMate. Once signed in,
+        your channel lineup and bookmarks sync immediately.
+      </>
+    ),
   },
   {
-    question: 'Is Apollo Group TV friendly for international travelers and expats?',
-    answer:
-      'Yes! Apollo Group TV works worldwide anywhere you have internet connection. We enforce no IP locks or geo-blocks, and our network is 100% compatible with major VPN providers like ExpressVPN, Surfshark, and NordVPN.',
+    question: 'How much does an Apollo Group TV subscription cost?',
+    answer: (
+      <>
+        Our <strong className="text-[#0099ff] font-bold">Apollo Group TV pricing</strong> is
+        completely transparent and 100% contract-free, starting from as low as $13.33/month on
+        annual plans. Every <strong className="text-[#0099ff] font-bold">Apollo Group TV subscription</strong>{' '}
+        includes full 4K channels, multi-screen streaming on up to 5 simultaneous devices, and zero
+        cancellation penalties.
+      </>
+    ),
   },
   {
-    question: 'What is your refund and customer satisfaction policy?',
-    answer:
-      'We offer an unconditional 7-day money-back guarantee on all subscription plans. If you experience technical problems our 24/7 technical team cannot resolve, you are entitled to a full refund.',
+    question: 'Can I test the service with an Apollo Group TV free trial?',
+    answer: (
+      <>
+        Yes! We invite every prospective viewer to test our high-bitrate servers with an official{' '}
+        <strong className="text-[#0099ff] font-bold">Apollo Group TV free trial</strong>. Experience
+        our buffer-free playback, live sports channels, and VOD library risk-free for 10 full days
+        with zero credit card required.
+      </>
+    ),
+  },
+  {
+    question: 'How do I install Apollo Group TV on Amazon Firestick & Android?',
+    answer: (
+      <>
+        Installing on Firestick takes under 2 minutes: open the Downloader app, enter our official
+        Downloader codes (such as <strong className="text-[#0099ff] font-bold">1036442</strong> for
+        Golden Smart or <strong className="text-[#0099ff] font-bold">8045867</strong> for Z Player),
+        install the <strong className="text-[#0099ff] font-bold">Apollo Group TV APK</strong>, and
+        sign in with your streaming details.
+      </>
+    ),
+  },
+  {
+    question: 'How do I fix Apollo Group TV status code 400 or playlist errors?',
+    answer: (
+      <>
+        A <strong className="text-[#0099ff] font-bold">status code 400</strong> typically signifies
+        a minor typo in your portal URL or an expired session token. Simply verify your login details
+        in the <strong className="text-[#0099ff] font-bold">Apollo Group TV portal</strong>, refresh
+        your M3U playlist link, or contact our 24/7 support agents on WhatsApp for immediate
+        resolution.
+      </>
+    ),
+  },
+  {
+    question: 'How do I renew my Apollo Group TV subscription?',
+    answer: (
+      <>
+        When your plan approaches expiration, an{' '}
+        <strong className="text-[#0099ff] font-bold">Apollo Group TV renew</strong> prompt appears in
+        your dashboard. You can seamlessly renew your subscription using verified payment channels or
+        cryptocurrency (USDT TRC20, Bitcoin) with automated instant re-activation.
+      </>
+    ),
+  },
+  {
+    question: 'Is Apollo Group TV affiliated with other Apollo Group companies?',
+    answer: (
+      <>
+        No. <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong> is an independent
+        global digital streaming network and is completely separate from unrelated entities such as
+        Apollo Medical Group, Apollo Crewing, or Apollo Management.
+      </>
+    ),
   },
 ]
 
@@ -95,11 +221,12 @@ const About = () => {
   return (
     <div className="w-full bg-[#000304] text-white selection:bg-[#0099ff]/30 selection:text-white">
       <SEO
-        title="About Apollo Group TV | Vision, Mission & Global IPTV Network"
-        description="Learn about Apollo Group TV, our 10Gbps dedicated server backbone, zero-logs privacy architecture, and mission to deliver contract-free 4K streaming worldwide."
+        title="About Apollo Group TV | Login, Subscription, Pricing & IPTV Network"
+        description="Learn about Apollo Group TV: our 10Gbps dedicated anti-freeze servers, Apollo Group TV login portal, APK installation on Firestick, 20,000+ live channels, and 10-day free trial."
         canonical="/about"
         schema={aboutSchema}
       />
+
       {/* ------------------------------------------------------------- */}
       {/* 1. HERO HEADER WITH EXACT HERO H1 TYPOGRAPHY                  */}
       {/* ------------------------------------------------------------- */}
@@ -108,44 +235,94 @@ const About = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-[#0099ff]/10 rounded-full blur-[140px] pointer-events-none -z-10" />
 
         <div className="w-[88%] lg:w-[80%] mx-auto text-center space-y-6">
+          <div className="inline-block text-xs font-semibold tracking-wider text-[#0099ff] uppercase">
+            Official Apollo Group TV Infrastructure
+          </div>
 
-
-          {/* Exact Hero H1 Typography */}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[38px] xl:text-[42px] font-bold text-white tracking-tight leading-[1.18] max-w-4xl mx-auto">
-            Redefining How the World Experiences Television &{' '}
+            About <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong> — Redefining
+            How the World Experiences Television &{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0099ff] via-[#4db8ff] to-[#80ccff]">
               Live Entertainment
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
-            Founded on the belief that premium television should be borderless, contract-free, and affordable. Apollo Group TV empowers over 150,000 households across 90+ countries with uncompromised 4K streaming.
+          <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+            Welcome to the home of <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong>,
+            where high-definition streaming meets complete digital freedom. Empowering over{' '}
+            <strong className="text-[#0099ff] font-bold">150,000+ active households</strong> across 90+
+            countries, an <strong className="text-[#0099ff] font-bold">Apollo Group TV subscription</strong>{' '}
+            delivers 20,000+ live television feeds, Pay-Per-View sports, and 100,000+ on-demand movies
+            directly to your screens with zero cable lock-in contracts.
           </p>
 
           {/* Key Stat Counters */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 sm:pt-14 max-w-4xl mx-auto">
-            <div className="p-4 sm:p-5 rounded-sm bg-white/[0.02] border border-white/10 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 sm:pt-12 max-w-4xl mx-auto">
+            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/10 text-center hover:border-[#0099ff]/30 transition-all">
               <div className="text-2xl sm:text-3xl font-extrabold text-[#0099ff] tracking-tight">150,000+</div>
               <div className="text-xs text-slate-400 mt-1 font-medium">Active Subscribers</div>
             </div>
-            <div className="p-4 sm:p-5 rounded-sm bg-white/[0.02] border border-white/10 text-center">
+            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/10 text-center hover:border-[#0099ff]/30 transition-all">
               <div className="text-2xl sm:text-3xl font-extrabold text-[#0099ff] tracking-tight">99.99%</div>
               <div className="text-xs text-slate-400 mt-1 font-medium">Anti-Freeze Uptime SLA</div>
             </div>
-            <div className="p-4 sm:p-5 rounded-sm bg-white/[0.02] border border-white/10 text-center">
+            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/10 text-center hover:border-[#0099ff]/30 transition-all">
               <div className="text-2xl sm:text-3xl font-extrabold text-[#0099ff] tracking-tight">20,000+</div>
               <div className="text-xs text-slate-400 mt-1 font-medium">Live HD & 4K Channels</div>
             </div>
-            <div className="p-4 sm:p-5 rounded-sm bg-white/[0.02] border border-white/10 text-center">
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#0099ff] tracking-tight">90+</div>
-              <div className="text-xs text-slate-400 mt-1 font-medium">Countries Reached</div>
+            <div className="p-4 sm:p-5 rounded-xl bg-white/[0.02] border border-white/10 text-center hover:border-[#0099ff]/30 transition-all">
+              <div className="text-2xl sm:text-3xl font-extrabold text-[#0099ff] tracking-tight">5 Screens</div>
+              <div className="text-xs text-slate-400 mt-1 font-medium">Simultaneous Streaming</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 2. OUR STORY & MISSION (SPLIT MEDIA + EDITORIAL)             */}
+      {/* 2. THE COMPLETE APOLLO GROUP TV ECOSYSTEM                     */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304]">
+        <div className="w-[88%] lg:w-[80%] mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
+            <div className="inline-block text-xs font-semibold tracking-wider text-[#0099ff] uppercase">
+              The Complete Streaming Architecture
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+              One Unified Platform: <strong className="text-[#0099ff] font-bold">Apollo Group TV Login</strong>,{' '}
+              <strong className="text-[#0099ff] font-bold">Portal</strong> & Dedicated Apps
+            </h2>
+            <p className="text-xs sm:text-sm md:text-base text-slate-400 max-w-2xl mx-auto">
+              Engineered from the ground up for instantaneous response times, cross-device playlist
+              synchronization, and round-the-clock stability.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {ecosystemCards.map((card, idx) => (
+              <div
+                key={idx}
+                className="p-6 sm:p-7 rounded-2xl bg-[#0c1015] border border-white/10 hover:border-[#0099ff]/50 hover:bg-white/[0.04] transition-all flex flex-col justify-start text-left group"
+              >
+                <div className="w-12 h-12 rounded-xl bg-[#0099ff]/10 border border-[#0099ff]/30 text-[#0099ff] flex items-center justify-center text-2xl mb-5 group-hover:scale-105 group-hover:bg-[#0099ff]/20 transition-all shrink-0">
+                  <i className={card.icon}></i>
+                </div>
+                <span className="text-[11px] font-semibold tracking-wider uppercase text-slate-400 mb-1">
+                  {card.tag}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-white mb-2.5 tracking-tight group-hover:text-[#0099ff] transition-colors">
+                  {card.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+                  {card.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 3. OUR STORY & ANTI-FREEZE INFRASTRUCTURE                     */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 overflow-hidden">
         <div className="w-[88%] lg:w-[80%] mx-auto">
@@ -181,22 +358,48 @@ const About = () => {
               </div>
 
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
-                Breaking Free From the Monopoly of Traditional Cable
+                Why Viewers Choose <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong> Over Traditional Cable
               </h2>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-                For decades, television was dominated by legacy cable conglomerates that trapped customers into 2-year lock-in agreements, rented out overpriced hardware boxes, and nickel-and-dimed subscribers for sports channels and PPV events.
+                For decades, television was controlled by cable monopolies that locked viewers into expensive
+                two-year contracts, charged hefty equipment rental fees, and forced consumers into paying
+                $80+ extra every month just to catch local football games and Pay-Per-View fights.
               </p>
 
               <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-                In 2018, our team of seasoned networking architects and passionate sports enthusiasts set out with a clear purpose: build a high-performance, cloud-native television platform that puts viewers first. By cutting out middlemen and optimizing high-bandwidth CDNs, we bring the entire global television ecosystem to your screen at a fraction of the cost.
+                In 2018, the architects at <strong className="text-[#0099ff] font-bold">Apollo Group</strong> set
+                out with an unwavering mission: construct a high-capacity, fiber-optic distribution network that
+                delivers the entire world of live television directly to any smart device. Today, our{' '}
+                <strong className="text-[#0099ff] font-bold">Apollo Group TV subscription</strong> combines 20,000+
+                channels, regional sports networks, and daily on-demand cinema releases into one easy subscription.
               </p>
 
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-3">
-                <i className="ph-check-circle-bold text-emerald-400 text-2xl shrink-0"></i>
-                <span className="text-xs sm:text-sm text-slate-200 font-medium">
-                  100% Contract-Free with zero hidden activation fees or equipment rentals.
-                </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-3">
+                  <i className="ph-check-circle-bold text-[#0099ff] text-xl shrink-0"></i>
+                  <span className="text-xs sm:text-sm text-slate-200 font-medium">
+                    100% Contract-Free Freedom
+                  </span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-3">
+                  <i className="ph-check-circle-bold text-[#0099ff] text-xl shrink-0"></i>
+                  <span className="text-xs sm:text-sm text-slate-200 font-medium">
+                    Fast 60s Automated Activation
+                  </span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-3">
+                  <i className="ph-check-circle-bold text-[#0099ff] text-xl shrink-0"></i>
+                  <span className="text-xs sm:text-sm text-slate-200 font-medium">
+                    Zero IP Locks / VPN Friendly
+                  </span>
+                </div>
+                <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 flex items-center gap-3">
+                  <i className="ph-check-circle-bold text-[#0099ff] text-xl shrink-0"></i>
+                  <span className="text-xs sm:text-sm text-slate-200 font-medium">
+                    Up to 5 Simultaneous Screens
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -204,7 +407,157 @@ const About = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 3. CORE VALUES & PILLARS                                      */}
+      {/* 4. CHANNELS, SPORTS & CINEMA LINEUP                           */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#0c1015]">
+        <div className="w-[88%] lg:w-[80%] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+            
+            {/* Left Column: Editorial Information */}
+            <div className="lg:col-span-6 space-y-6 text-left order-2 lg:order-1">
+              <div className="inline-block text-xs font-semibold tracking-wider text-[#0099ff] uppercase">
+                Content & Programming
+              </div>
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+                Explore the Extensive <strong className="text-[#0099ff] font-bold">Apollo TV Channel List</strong> & Sports Vault
+              </h2>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                Never ask "what channel is the game on today" again. With the comprehensive{' '}
+                <strong className="text-[#0099ff] font-bold">Apollo TV channel list</strong>, you gain direct
+                access to regional local affiliates (CBS, FOX, NBC, ABC) from all 50 states, dedicated sports
+                broadcasters (ESPN, NFL Sunday Ticket, NBA League Pass, NHL Center Ice, Formula 1), and every major
+                UFC & Boxing PPV fight in crystal-clear 4K at 60 FPS.
+              </p>
+
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                Movie lovers enjoy over 100,000+ Video On Demand (VOD) titles, featuring new theater releases,
+                beloved Hollywood classics, and complete television box sets updated daily with multi-language
+                subtitles.
+              </p>
+
+              <div className="flex flex-wrap gap-3 pt-2">
+                <Link
+                  to="/services"
+                  className="px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-[#0099ff] hover:bg-[#0088ee] transition-all flex items-center gap-2 shadow-md shadow-[#0099ff]/25"
+                >
+                  <span>Explore Channel Lineup</span>
+                  <i className="ph-arrow-right-bold"></i>
+                </Link>
+                <Link
+                  to="/get-trail"
+                  className="px-6 py-3 rounded-xl font-semibold text-xs sm:text-sm text-slate-200 bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-2"
+                >
+                  <span>Test Channel Feeds</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column: Visual Video Display */}
+            <div className="lg:col-span-6 relative order-1 lg:order-2">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-[#090d12] group">
+                <div className="absolute -inset-1 bg-gradient-to-tr from-[#0099ff]/30 to-transparent blur-xl pointer-events-none -z-10" />
+                <img
+                  src={aboutVideoImg}
+                  alt="Apollo TV Channel List & Sports"
+                  className="w-full h-auto object-cover rounded-2xl group-hover:scale-[1.02] transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 text-left">
+                  <div className="text-xs font-bold text-[#0099ff] uppercase tracking-wider mb-1">
+                    Universal Broadcast Network
+                  </div>
+                  <h4 className="text-lg sm:text-xl font-bold text-white">
+                    20,000+ Live Channels with 7-Day Catch-Up EPG
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 5. PRICING, RENEWALS & FREE TRIAL PROMISE                     */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304]">
+        <div className="w-[88%] lg:w-[80%] mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-3">
+            <div className="inline-block text-xs font-semibold tracking-wider text-[#0099ff] uppercase">
+              Value & Flexibility
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+              Fair <strong className="text-[#0099ff] font-bold">Apollo Group TV Pricing</strong>, Easy{' '}
+              <strong className="text-[#0099ff] font-bold">Renewals</strong> & Risk-Free Trials
+            </h2>
+            <p className="text-xs sm:text-sm md:text-base text-slate-400 max-w-2xl mx-auto">
+              No contracts, no surprise price hikes, and no hidden cancellation hurdles. You have 100% control
+              over your streaming plan.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+            <div className="p-7 rounded-2xl bg-[#0c1015] border border-white/10 hover:border-[#0099ff]/40 transition-all flex flex-col justify-between space-y-4">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-[#0099ff]/10 text-[#0099ff] flex items-center justify-center text-xl">
+                  <i className="ph-tag-bold"></i>
+                </div>
+                <h3 className="text-lg font-bold text-white">Transparent Subscription Pricing</h3>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+                  Our <strong className="text-[#0099ff] font-bold">Apollo Group TV pricing</strong> starts at just
+                  $13.33/month on annual subscriptions. Includes 5 simultaneous connections, all 4K channels,
+                  sports PPVs, and round-the-clock server maintenance.
+                </p>
+              </div>
+              <Link to="/pricing" className="text-xs sm:text-sm font-semibold text-[#0099ff] hover:underline inline-flex items-center gap-1.5">
+                <span>View All Pricing Plans</span>
+                <i className="ph-arrow-right-bold"></i>
+              </Link>
+            </div>
+
+            <div className="p-7 rounded-2xl bg-[#0c1015] border border-white/10 hover:border-[#0099ff]/40 transition-all flex flex-col justify-between space-y-4">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-[#0099ff]/10 text-[#0099ff] flex items-center justify-center text-xl">
+                  <i className="ph-sparkle-bold"></i>
+                </div>
+                <h3 className="text-lg font-bold text-white">10-Day Free Trial Test Drive</h3>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+                  Evaluate server response times and channel switching with an official{' '}
+                  <strong className="text-[#0099ff] font-bold">Apollo Group TV free trial</strong>. Zero credit card
+                  required, zero auto-billing risk, and instant credential dispatch.
+                </p>
+              </div>
+              <Link to="/get-trail" className="text-xs sm:text-sm font-semibold text-[#0099ff] hover:underline inline-flex items-center gap-1.5">
+                <span>Claim 10-Day Trial</span>
+                <i className="ph-arrow-right-bold"></i>
+              </Link>
+            </div>
+
+            <div className="p-7 rounded-2xl bg-[#0c1015] border border-white/10 hover:border-[#0099ff]/40 transition-all flex flex-col justify-between space-y-4">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-[#0099ff]/10 text-[#0099ff] flex items-center justify-center text-xl">
+                  <i className="ph-arrows-clockwise-bold"></i>
+                </div>
+                <h3 className="text-lg font-bold text-white">1-Click Fast Account Renewal</h3>
+                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+                  Enjoy hassle-free continuity. The{' '}
+                  <strong className="text-[#0099ff] font-bold">Apollo Group TV renew</strong> system allows you to
+                  extend or upgrade your plan in seconds using credit cards or crypto (USDT TRC20, Bitcoin) with no service interruption.
+                </p>
+              </div>
+              <Link to="/pricing" className="text-xs sm:text-sm font-semibold text-[#0099ff] hover:underline inline-flex items-center gap-1.5">
+                <span>Renew Your Subscription</span>
+                <i className="ph-arrow-right-bold"></i>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 6. TECHNICAL EXCELLENCE & PILLARS                             */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304]">
         <div className="w-[88%] lg:w-[80%] mx-auto">
@@ -242,7 +595,7 @@ const About = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 4. COMPANY TIMELINE / MILESTONES                               */}
+      {/* 7. COMPANY TIMELINE / MILESTONES                              */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5">
         <div className="w-[88%] lg:w-[80%] mx-auto">
@@ -280,7 +633,7 @@ const About = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 5. VERIFIED TRUSTPILOT REVIEW BANNER                          */}
+      {/* 8. VERIFIED TRUSTPILOT REVIEW BANNER                         */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-12 lg:py-16 border-b border-white/5 bg-[#0c1015]">
         <div className="w-[88%] lg:w-[80%] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
@@ -320,7 +673,7 @@ const About = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 6. ABOUT FAQS                                                 */}
+      {/* 9. ABOUT FAQS (MATCHING GOOGLE PAA SEARCH QUERIES)            */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304]">
         <div className="w-[88%] lg:w-[80%] mx-auto">
@@ -329,10 +682,10 @@ const About = () => {
               Frequently Asked Questions
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
-              Everything You Need to Know About Us
+              Everything You Need to Know About <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong>
             </h2>
             <p className="text-xs sm:text-sm md:text-base text-slate-400 max-w-xl mx-auto">
-              Transparent answers regarding our infrastructure, privacy standards, and guarantees.
+              Clear, transparent answers regarding login access, subscriptions, device setup, and error resolutions.
             </p>
           </div>
 
@@ -382,7 +735,7 @@ const About = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 7. FINAL HIGH-CONVERTING CALL TO ACTION                        */}
+      {/* 10. FINAL HIGH-CONVERTING CALL TO ACTION                      */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-16 lg:py-20 bg-gradient-to-b from-[#000304] to-[#040c14] overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[250px] bg-[#0099ff]/15 rounded-full blur-[140px] pointer-events-none -z-10" />
@@ -393,7 +746,7 @@ const About = () => {
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight max-w-2xl mx-auto">
-            Ready to Cut the Cord for Good?
+            Ready to Stream with <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong>?
           </h2>
 
           <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
