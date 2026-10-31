@@ -607,7 +607,7 @@ if (!empty($slug) && file_exists($targetHtmlFile)) {
 
     <div class="header-actions">
       <a href="https://portal.apollogroup.click/login" class="btn-login">Log In</a>
-      <a href="/get-trail" class="btn-trial">Free Trial &rarr;</a>
+      <a href="/get-trail" class="btn-trial">10 Days Free Trial &rarr;</a>
     </div>
   </header>
 
@@ -853,7 +853,7 @@ usort($articlesList, function($a, $b) {
       <li><a href="/guides" style="color: var(--accent); font-weight: 700;">Guides</a></li>
     </ul>
     <div>
-      <a href="/get-trail" style="padding: 0.6rem 1.4rem; background: var(--accent); color: #fff; border-radius: 4px; font-weight: 700;">Free Trial &rarr;</a>
+      <a href="/get-trail" style="padding: 0.6rem 1.4rem; background: var(--accent); color: #fff; border-radius: 4px; font-weight: 700;">10 Days Free Trial &rarr;</a>
     </div>
   </header>
 

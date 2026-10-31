@@ -198,7 +198,7 @@ const Navbar = () => {
                             to="/get-trail"
                             className="px-7 py-3.5 text-base rounded-sm font-semibold text-white bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] shadow-md shadow-[#0099ff]/25 hover:shadow-lg hover:shadow-[#0099ff]/35 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2"
                         >
-                            <span>Free Trial</span>
+                            <span>10 Days Free Trial</span>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="w-5 h-5"
