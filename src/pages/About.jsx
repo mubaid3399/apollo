@@ -518,7 +518,213 @@ const About = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 5. PRICING, RENEWALS & FREE TRIAL PROMISE                     */}
+      {/* 5. FEATURED SERVICES SHOWCASE (MATCHING REFERENCE LAYOUT)     */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304] overflow-hidden">
+        {/* Ambient Glow */}
+        <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-[#0099ff]/10 rounded-full blur-[150px] pointer-events-none -z-10" />
+
+        <div className="w-[88%] lg:w-[80%] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 items-center">
+            
+            {/* Left Column: Staggered Double Media Cards (Matching Reference Image) */}
+            <div className="lg:col-span-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 items-start">
+                
+                {/* Card 1: Live Music & Events with Bottom Wave + Floating Play Button */}
+                <div className="relative rounded-[28px] overflow-hidden bg-[#080d12] border border-white/10 shadow-2xl flex flex-col justify-between group hover:border-[#0099ff]/50 transition-all duration-300">
+                  {/* Photo Container */}
+                  <div className="relative h-64 sm:h-72 lg:h-80 w-full overflow-hidden bg-slate-900">
+                    <img
+                      src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=800&q=80"
+                      alt="Apollo Group TV Live Entertainment and Concerts"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+
+                    {/* Organic Wave Transition into bottom accent */}
+                    <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none">
+                      <svg
+                        className="relative block w-full h-10 sm:h-12 fill-[#0099ff]"
+                        viewBox="0 0 500 150"
+                        preserveAspectRatio="none"
+                      >
+                        <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Solid Colored Bottom Block with Floating Orange Play Button */}
+                  <div className="bg-[#0099ff] px-5 pb-5 pt-1 text-left relative z-20">
+                    {/* Floating Orange Play Button (Exact match to reference) */}
+                    <div className="w-11 h-11 rounded-full bg-[#ff7a00] text-white flex items-center justify-center shadow-lg -mt-6 mb-2 hover:scale-110 transition-transform cursor-pointer">
+                      <i className="ph-play-fill text-lg ml-0.5"></i>
+                    </div>
+
+                    <h4 className="text-base sm:text-lg font-black text-white tracking-tight leading-tight">
+                      Live Concerts & Events
+                    </h4>
+                    <p className="text-xs text-white/90 font-medium mt-0.5">
+                      Raffle Draw & Worldwide PPVs
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 2: Mobile / Smart TV Streaming with Circular Price Pill (Staggered Offset) */}
+                <div className="relative rounded-[28px] overflow-hidden bg-[#080d12] border border-white/10 shadow-2xl flex flex-col justify-between group hover:border-[#0099ff]/50 transition-all duration-300 sm:translate-y-8 lg:translate-y-10">
+                  {/* Top Wave Accent Overlay */}
+                  <div className="absolute top-0 left-0 w-24 h-24 overflow-hidden z-20 pointer-events-none">
+                    <div className="w-24 h-24 rounded-br-[40px] bg-[#0099ff]/30 -translate-x-6 -translate-y-6 blur-[1px]"></div>
+                  </div>
+
+                  {/* Circular Price Pill (Matching "$20 monthly" in Reference) */}
+                  <div className="absolute top-4 left-4 z-30 w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-black/85 backdrop-blur-md border border-white/20 flex flex-col items-center justify-center text-center shadow-xl">
+                    <span className="text-sm sm:text-base font-extrabold text-white leading-none">$13.33</span>
+                    <span className="text-[10px] text-[#0099ff] font-bold tracking-tight mt-0.5">monthly</span>
+                  </div>
+
+                  {/* Photo Container */}
+                  <div className="relative h-80 sm:h-96 lg:h-[390px] w-full overflow-hidden bg-slate-900">
+                    <img
+                      src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&w=800&q=80"
+                      alt="Apollo Group TV Mobile and Smart TV Streaming"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+
+                    {/* Bottom Status Pill */}
+                    <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 flex items-center gap-2.5">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                      <span className="text-xs font-semibold text-white tracking-wide">
+                        100% Anti-Freeze Buffer Defense
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            {/* Right Column: Editorial Copy, Features & Video Preview (Matching Reference) */}
+            <div className="lg:col-span-6 space-y-6 text-left">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0099ff]/10 border border-[#0099ff]/30 text-xs font-bold text-[#0099ff] tracking-wider uppercase">
+                <i className="ph-hand-pointing-bold text-sm"></i>
+                <span>OUR BEST SERVICES</span>
+              </div>
+
+              {/* Main Headline */}
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[40px] font-bold text-white tracking-tight leading-[1.2]">
+                Best IPTV Streaming & Entertainment Platform Powered by{' '}
+                <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong>
+              </h2>
+
+              {/* Intro Narrative */}
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+                Since 2018, <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong> has pioneered specialist streaming infrastructure, sourcing knowledgeable network routing to deliver 20,000+ live television feeds, Pay-Per-View sports, and 100,000+ on-demand movies directly to your screens with zero cable lock-in contracts.
+              </p>
+
+              {/* Features & Video Widget Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 pt-2">
+                {/* 2 StStacked Features */}
+                <div className="sm:col-span-7 space-y-5">
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-11 h-11 rounded-xl bg-[#0099ff]/10 border border-[#0099ff]/30 text-[#0099ff] flex items-center justify-center shrink-0 text-xl">
+                      <i className="ph-television-simple-bold"></i>
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white tracking-tight">4K Award Winning</h4>
+                      <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-0.5">
+                        We deliver 20,000+ live HD & 4K channels with crisp 60FPS sports motion and zero latency.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3.5">
+                    <div className="w-11 h-11 rounded-xl bg-[#0099ff]/10 border border-[#0099ff]/30 text-[#0099ff] flex items-center justify-center shrink-0 text-xl">
+                      <i className="ph-headset-bold"></i>
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white tracking-tight">Best Support</h4>
+                      <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-0.5">
+                        Get dedicated human <strong className="text-[#0099ff] font-bold">Apollo Group TV support</strong> 365 days a year with instant setup help.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Right Feature Card: Video Preview Thumbnail & Checklist */}
+                <div className="sm:col-span-5 flex flex-col justify-between space-y-3.5 p-4 rounded-2xl bg-white/[0.02] border border-white/10">
+                  {/* Video Thumbnail Pill with Orange Play Button */}
+                  <div className="relative rounded-xl overflow-hidden h-20 w-full bg-gradient-to-r from-slate-900 to-[#0099ff]/20 flex items-center justify-center border border-white/10 group cursor-pointer">
+                    <img
+                      src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&q=80"
+                      alt="Apollo Group TV 4K Stream Sample"
+                      className="w-full h-full object-cover opacity-60 group-hover:scale-105 group-hover:opacity-75 transition-all duration-300"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-red-600/30 to-black/50" />
+                    <div className="relative z-10 w-9 h-9 rounded-full bg-[#ff7a00] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <i className="ph-play-fill text-sm ml-0.5"></i>
+                    </div>
+                  </div>
+
+                  {/* Checklist bullets matching reference */}
+                  <div className="space-y-1.5 text-left text-xs font-medium text-slate-300">
+                    <div className="flex items-center gap-2">
+                      <i className="ph-check-circle-fill text-[#0099ff] text-sm shrink-0"></i>
+                      <span>100 Mbps Anti-Freeze streaming</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <i className="ph-check-circle-fill text-[#0099ff] text-sm shrink-0"></i>
+                      <span>Connect up to 5 devices</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <i className="ph-check-circle-fill text-[#0099ff] text-sm shrink-0"></i>
+                      <span>WiFi Router & VPN Protection</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom CTA Row: Primary Button + Phone/WhatsApp support */}
+              <div className="flex flex-wrap items-center gap-5 sm:gap-6 pt-4">
+                <Link
+                  to="/get-trail"
+                  className="px-7 py-3.5 rounded-xl font-extrabold text-sm text-white bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] transition-all shadow-lg shadow-[#0099ff]/30 flex items-center gap-3 group"
+                >
+                  <span>GET STARTED</span>
+                  <span className="w-6 h-6 rounded-full bg-white text-[#0099ff] flex items-center justify-center text-xs group-hover:translate-x-0.5 transition-transform">
+                    <i className="ph-arrow-right-bold"></i>
+                  </span>
+                </Link>
+
+                <a
+                  href="https://wa.me/message/YOUR_WHATSAPP_ID"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3.5 group cursor-pointer"
+                >
+                  <div className="w-12 h-12 rounded-full bg-white text-slate-950 flex items-center justify-center text-xl shadow-md group-hover:scale-105 group-hover:text-[#0099ff] transition-all">
+                    <i className="ph-phone-call-bold"></i>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-[11px] text-slate-400 font-medium">Give us a call / 24/7 Chat</span>
+                    <span className="block text-sm sm:text-base font-bold text-white group-hover:text-[#0099ff] transition-colors">
+                      +1 (800) 276-5568
+                    </span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 6. PRICING, RENEWALS & FREE TRIAL PROMISE                     */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304]">
         <div className="w-[88%] lg:w-[80%] mx-auto">
