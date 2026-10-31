@@ -37,19 +37,34 @@ const App = () => {
   }, [])
 
   // Subdomain intelligent routing:
-  // - portal.apollogroup.click/ -> auto redirect to /login
-  // - dashboard.apollogroup.click/ -> auto redirect to /dashboard
+  // - portal.apollogroup.click:
+  //    * If path is '/' -> redirect to '/login'
+  //    * If path is not an auth route (/login, /register, /signup) -> redirect to https://apollogroup.click{path}
+  // - dashboard.apollogroup.click:
+  //    * If path is '/' -> redirect to '/dashboard'
+  //    * If path is not /dashboard -> redirect to https://apollogroup.click{path}
   useEffect(() => {
     if (typeof window === 'undefined') return
     const host = window.location.hostname.toLowerCase()
     const path = window.location.pathname
+    const search = window.location.search || ''
 
-    if (host.startsWith('portal.') && (path === '/' || path === '')) {
-      window.location.replace('/login')
-    } else if (host.startsWith('dashboard.') && (path === '/' || path === '')) {
-      window.location.replace('/dashboard')
+    if (host.startsWith('portal.')) {
+      if (path === '/' || path === '') {
+        window.location.replace('/login')
+      } else if (!['/login', '/register', '/signup'].includes(path)) {
+        // Any marketing or trial page (e.g. /get-trail, /services) belongs on the main domain
+        window.location.replace(`https://apollogroup.click${path}${search}`)
+      }
+    } else if (host.startsWith('dashboard.')) {
+      if (path === '/' || path === '') {
+        window.location.replace('/dashboard')
+      } else if (path !== '/dashboard') {
+        // Any non-dashboard page accessed while on dashboard subdomain belongs to the main domain
+        window.location.replace(`https://apollogroup.click${path}${search}`)
+      }
     }
-  }, [])
+  }, [location.pathname])
 
   // Controlled deferred route transition:
   // Loader shows FIRST, covers the screen, swaps route BEHIND the loader, then reveals new page.

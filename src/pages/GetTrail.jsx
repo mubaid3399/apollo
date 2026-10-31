@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import SEO from '../components/common/SEO'
@@ -51,6 +51,16 @@ const trialFaqs = [
 
 const GetTrail = () => {
   const geo = useCountryGeo()
+
+  // Ensure Free Trial always runs on main domain (apollogroup.click)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const host = window.location.hostname.toLowerCase()
+      if (host.startsWith('portal.') || host.startsWith('dashboard.')) {
+        window.location.replace(`https://apollogroup.click/get-trail${window.location.search || ''}`)
+      }
+    }
+  }, [])
 
   const [formData, setFormData] = useState({
     firstName: '',

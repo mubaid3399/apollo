@@ -217,22 +217,41 @@ const Navbar = () => {
                             </>
                         )}
 
-                        <Link
-                            to="/get-trail"
-                            className="px-7 py-3.5 text-base rounded-sm font-semibold text-white bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] shadow-md shadow-[#0099ff]/25 hover:shadow-lg hover:shadow-[#0099ff]/35 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2"
-                        >
-                            <span>10 Days Free Trial</span>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-5 h-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
+                        {isSubdomainHost() ? (
+                            <a
+                                href={getMainSiteUrl('/get-trail')}
+                                className="px-7 py-3.5 text-base rounded-sm font-semibold text-white bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] shadow-md shadow-[#0099ff]/25 hover:shadow-lg hover:shadow-[#0099ff]/35 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2"
                             >
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                        </Link>
+                                <span>10 Days Free Trial</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </a>
+                        ) : (
+                            <Link
+                                to="/get-trail"
+                                className="px-7 py-3.5 text-base rounded-sm font-semibold text-white bg-[#0099ff] hover:bg-[#0088ee] active:bg-[#0077dd] shadow-md shadow-[#0099ff]/25 hover:shadow-lg hover:shadow-[#0099ff]/35 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2"
+                            >
+                                <span>10 Days Free Trial</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="w-5 h-5"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </Link>
+                        )}
                     </div>
 
                     {/* Mobile / Tablet Hamburger (Custom 3 thin bars animating to a cross) */}
@@ -419,13 +438,23 @@ const Navbar = () => {
                         </>
                     )}
 
-                    <Link
-                        to="/get-trail"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="w-full py-3.5 rounded-xl bg-white text-[#0099ff] font-bold text-base flex items-center justify-center hover:bg-slate-100 transition-all shadow-md active:scale-[0.99]"
-                    >
-                        10 Days Free Trial
-                    </Link>
+                    {isSubdomainHost() ? (
+                        <a
+                            href={getMainSiteUrl('/get-trail')}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="w-full py-3.5 rounded-xl bg-white text-[#0099ff] font-bold text-base flex items-center justify-center hover:bg-slate-100 transition-all shadow-md active:scale-[0.99]"
+                        >
+                            10 Days Free Trial
+                        </a>
+                    ) : (
+                        <Link
+                            to="/get-trail"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="w-full py-3.5 rounded-xl bg-white text-[#0099ff] font-bold text-base flex items-center justify-center hover:bg-slate-100 transition-all shadow-md active:scale-[0.99]"
+                        >
+                            10 Days Free Trial
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.png'
+import { isSubdomainHost, getMainSiteUrl } from '../../services/googleSheetService'
 
 const quickLinks = [
   { label: 'Home', to: '/' },
@@ -37,16 +38,29 @@ const Footer = () => {
 
           {/* Brand & Overview Column */}
           <div className="lg:col-span-5 space-y-5 text-left">
-            <Link to="/" className="inline-flex items-center gap-3 group">
-              <img
-                src={logo}
-                alt="Apollo Logo"
-                className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-              <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#0099ff] transition-colors">
-                Apollo<span className="text-[#0099ff]">Group</span>TV
-              </span>
-            </Link>
+            {isSubdomainHost() ? (
+              <a href={getMainSiteUrl('/')} className="inline-flex items-center gap-3 group">
+                <img
+                  src={logo}
+                  alt="Apollo Logo"
+                  className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#0099ff] transition-colors">
+                  Apollo<span className="text-[#0099ff]">Group</span>TV
+                </span>
+              </a>
+            ) : (
+              <Link to="/" className="inline-flex items-center gap-3 group">
+                <img
+                  src={logo}
+                  alt="Apollo Logo"
+                  className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#0099ff] transition-colors">
+                  Apollo<span className="text-[#0099ff]">Group</span>TV
+                </span>
+              </Link>
+            )}
 
             <p className="text-sm text-slate-400 leading-relaxed max-w-sm font-normal">
               Premium digital IPTV streaming engineered for smooth, buffer-free playback. Access 20,000+ live HD channels, live global sports, and 500,000+ on-demand movies on any screen, anywhere.
@@ -61,12 +75,21 @@ const Footer = () => {
             <ul className="space-y-2.5 text-sm">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.to}
-                    className="text-slate-400 hover:text-[#0099ff] transition-colors font-normal inline-block"
-                  >
-                    {link.label}
-                  </Link>
+                  {isSubdomainHost() ? (
+                    <a
+                      href={getMainSiteUrl(link.to)}
+                      className="text-slate-400 hover:text-[#0099ff] transition-colors font-normal inline-block"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.to}
+                      className="text-slate-400 hover:text-[#0099ff] transition-colors font-normal inline-block"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -80,12 +103,21 @@ const Footer = () => {
             <ul className="space-y-2.5 text-sm">
               {planLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    to={link.to}
-                    className="text-slate-400 hover:text-[#0099ff] transition-colors font-normal inline-block"
-                  >
-                    {link.label}
-                  </Link>
+                  {isSubdomainHost() ? (
+                    <a
+                      href={getMainSiteUrl(link.to)}
+                      className="text-slate-400 hover:text-[#0099ff] transition-colors font-normal inline-block"
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.to}
+                      className="text-slate-400 hover:text-[#0099ff] transition-colors font-normal inline-block"
+                    >
+                      {link.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -114,13 +146,23 @@ const Footer = () => {
 
           <div className="flex items-center gap-6">
             {legalLinks.map((link) => (
-              <Link
-                key={link.label}
-                to={link.to}
-                className="hover:text-slate-300 transition-colors"
-              >
-                {link.label}
-              </Link>
+              isSubdomainHost() ? (
+                <a
+                  key={link.label}
+                  href={getMainSiteUrl(link.to)}
+                  className="hover:text-slate-300 transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.label}
+                  to={link.to}
+                  className="hover:text-slate-300 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
             ))}
           </div>
         </div>
