@@ -54,6 +54,44 @@ const milestones = [
   },
 ]
 
+const teamMembers = [
+  {
+    name: 'Jeoy Smith',
+    role: 'Chief Streaming Architect',
+    organization: 'Apollo Group TV',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+    bio: (
+      <>
+        Pioneered our single-sign-on <strong className="text-white font-semibold">Apollo Group TV login</strong> architecture, automated credential dispatch, and ultra-low latency Xtream Codes routing.
+      </>
+    ),
+  },
+  {
+    name: 'Samantha Riley',
+    role: 'VP of Network Infrastructure',
+    organization: 'Apollo Group',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80',
+    bio: (
+      <>
+        Manages dedicated 10Gbps server clusters, guaranteeing 99.99% uptime across the entire{' '}
+        <strong className="text-white font-semibold">Apollo TV channel list</strong> during peak 4K sports events.
+      </>
+    ),
+  },
+  {
+    name: 'Alfred Gilbert',
+    role: 'Head of Customer Operations',
+    organization: 'Apollo Group TV',
+    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80',
+    bio: (
+      <>
+        Oversees 24/7 human <strong className="text-white font-semibold">Apollo Group TV support</strong>, fast{' '}
+        <strong className="text-white font-semibold">Apollo Group TV APK</strong> sideloading guides on Firestick, and trial provisioning.
+      </>
+    ),
+  },
+]
+
 const ecosystemCards = [
   {
     icon: 'ph-sign-in-bold',
@@ -633,7 +671,89 @@ const About = () => {
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 8. VERIFIED TRUSTPILOT REVIEW BANNER                         */}
+      {/* 8. OUR EXPERT TEAM (MATCHING REFERENCE CURVED CARDS)          */}
+      {/* ------------------------------------------------------------- */}
+      <section className="relative z-10 w-full py-16 lg:py-24 border-b border-white/5 bg-[#000304]">
+        <div className="w-[88%] lg:w-[80%] mx-auto">
+          {/* Header (Matching Reference Typography) */}
+          <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-20 space-y-3">
+            <div className="inline-block text-xs font-semibold tracking-wider text-[#0099ff] uppercase">
+              OUR EXPERT TEAM
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-[42px] font-bold text-white tracking-tight leading-tight">
+              We Always Work With An Energetic Team
+            </h2>
+            <p className="text-xs sm:text-sm md:text-base text-slate-400 max-w-2xl mx-auto leading-relaxed">
+              Meet the specialists behind <strong className="text-[#0099ff] font-bold">Apollo Group TV</strong>.
+              From maintaining high-speed <strong className="text-[#0099ff] font-bold">anti-freeze servers</strong> to
+              delivering 24/7 dedicated <strong className="text-[#0099ff] font-bold">Apollo Group TV support</strong>,
+              our team ensures your streaming remains buffer-free 365 days a year.
+            </p>
+          </div>
+
+          {/* 3-Column Team Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10 max-w-6xl mx-auto">
+            {teamMembers.map((member, idx) => (
+              <div
+                key={idx}
+                className="relative rounded-3xl overflow-hidden bg-[#080d12] border border-white/10 hover:border-[#0099ff]/50 transition-all duration-300 group shadow-2xl flex flex-col justify-between"
+              >
+                {/* Member Photo Container */}
+                <div className="relative h-80 sm:h-96 w-full overflow-hidden bg-slate-900">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+
+                  {/* Organic Wave Transition (Exact Visual match to Reference Image) */}
+                  <div className="absolute -bottom-1 left-0 right-0 w-full overflow-hidden leading-none z-10 pointer-events-none">
+                    <svg
+                      className="relative block w-full h-12 sm:h-14 fill-[#0099ff]"
+                      viewBox="0 0 500 150"
+                      preserveAspectRatio="none"
+                    >
+                      <path d="M0.00,49.98 C149.99,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Solid Colored Bottom Section with floating button */}
+                <div className="bg-[#0099ff] px-6 pb-6 pt-2 text-left relative z-20">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="space-y-0.5">
+                      <h4 className="text-xl sm:text-2xl font-black text-white tracking-tight leading-tight">
+                        {member.name}
+                      </h4>
+                      <p className="text-xs sm:text-sm text-white/90 font-medium">
+                        {member.role}, {member.organization}
+                      </p>
+                    </div>
+
+                    {/* Circular Floating Action Button (Matching Reference) */}
+                    <button
+                      type="button"
+                      className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white text-slate-900 hover:text-[#0099ff] hover:scale-110 shadow-lg flex items-center justify-center transition-all shrink-0 cursor-pointer focus:outline-none"
+                      aria-label={`Connect with ${member.name}`}
+                    >
+                      <i className="ph-share-network-bold text-lg sm:text-xl"></i>
+                    </button>
+                  </div>
+
+                  {/* Keyword-Rich Member Bio */}
+                  <p className="text-xs text-white/85 mt-3 pt-3 border-t border-white/20 leading-relaxed font-normal">
+                    {member.bio}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 9. VERIFIED TRUSTPILOT REVIEW BANNER                         */}
       {/* ------------------------------------------------------------- */}
       <section className="relative z-10 w-full py-12 lg:py-16 border-b border-white/5 bg-[#0c1015]">
         <div className="w-[88%] lg:w-[80%] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
