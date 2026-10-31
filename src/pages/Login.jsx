@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import SEO from '../components/common/SEO'
 import bannerImg from '../assets/login_signup.jfif'
-import { loginUser, getCurrentUser, isProdDomain } from '../services/googleSheetService'
+import { loginUser, getCurrentUser, isProdDomain, getPortalRegisterUrl } from '../services/googleSheetService'
 import { showNotification } from '../components/common/GsapNotification'
 
 const Login = () => {
@@ -249,9 +249,9 @@ const Login = () => {
             <div className="text-center pt-2">
               <p className="text-xs sm:text-sm text-slate-400 font-normal">
                 Don't have an account?{' '}
-                <Link to="/register" className="text-[#0099ff] font-semibold hover:underline">
+                <a href={getPortalRegisterUrl()} className="text-[#0099ff] font-semibold hover:underline">
                   Create Account
-                </Link>
+                </a>
               </p>
             </div>
           </form>

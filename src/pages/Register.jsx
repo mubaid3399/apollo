@@ -5,7 +5,7 @@ import SEO from '../components/common/SEO'
 import bannerImg from '../assets/login_signup.jfif'
 import { useCountryGeo } from '../hooks/useCountryGeo'
 import CountryPhoneField from '../components/common/CountryPhoneField'
-import { registerUser } from '../services/googleSheetService'
+import { registerUser, isProdDomain, getPortalLoginUrl } from '../services/googleSheetService'
 import { showNotification } from '../components/common/GsapNotification'
 
 const Register = () => {
@@ -90,7 +90,11 @@ const Register = () => {
         setSuccessMessage(success)
         showNotification(success, 'success')
         setTimeout(() => {
-          navigate('/login')
+          if (isProdDomain()) {
+            window.location.href = 'https://portal.apollogroup.click/login'
+          } else {
+            navigate('/login')
+          }
         }, 1500)
       } else {
         const err = res.message || 'Registration failed. Please try again.'
@@ -410,9 +414,9 @@ const Register = () => {
             <div className="text-center pt-2">
               <p className="text-xs sm:text-sm text-slate-400 font-normal">
                 Already have an account?{' '}
-                <Link to="/login" className="text-[#0099ff] font-semibold hover:underline">
+                <a href={getPortalLoginUrl()} className="text-[#0099ff] font-semibold hover:underline">
                   Log In
-                </Link>
+                </a>
               </p>
             </div>
           </form>

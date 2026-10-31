@@ -20,14 +20,32 @@ export const isGoogleSheetConfigured = () => {
 export const isProdDomain = () =>
   typeof window !== 'undefined' && window.location.hostname.includes('apollogroup.click')
 
+export const isSubdomainHost = () => {
+  if (typeof window === 'undefined') return false
+  const h = window.location.hostname.toLowerCase()
+  return h.startsWith('portal.') || h.startsWith('dashboard.')
+}
+
 export const getPortalLoginUrl = () =>
   isProdDomain() ? 'https://portal.apollogroup.click/login' : '/login'
+
+export const getPortalRegisterUrl = () =>
+  isProdDomain() ? 'https://portal.apollogroup.click/register' : '/register'
 
 export const getDashboardUrl = () =>
   isProdDomain() ? 'https://dashboard.apollogroup.click/dashboard' : '/dashboard'
 
 export const getMainHomeUrl = () =>
   isProdDomain() ? 'https://apollogroup.click/' : '/'
+
+export const getMainSiteUrl = (path = '/') => {
+  if (typeof window === 'undefined') return path
+  if (isProdDomain()) {
+    const cleanPath = path.startsWith('/') ? path : '/' + path
+    return `https://apollogroup.click${cleanPath}`
+  }
+  return path
+}
 
 // Helper to set cookie accessible across main domain and all subdomains (*.apollogroup.click)
 export const setSubdomainCookie = (name, value, days = 30) => {

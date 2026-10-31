@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, useLocation, useMatch, useResolvedPath } from 'react-router-dom'
 import gsap from 'gsap'
 import logo from '../../assets/logo.png'
-import { getCurrentUser, logoutUser, getPortalLoginUrl, getDashboardUrl, isProdDomain } from '../../services/googleSheetService'
+import { getCurrentUser, logoutUser, getPortalLoginUrl, getPortalRegisterUrl, getDashboardUrl, isProdDomain, isSubdomainHost, getMainSiteUrl } from '../../services/googleSheetService'
 import UserProfileDropdown from './UserProfileDropdown'
 
 const navLinks = [
@@ -153,22 +153,45 @@ const Navbar = () => {
         <header className="sticky top-4 z-50 w-full px-2 sm:px-4">
             <nav className="w-[95%] xl:w-[92%] max-w-[1400px] mx-auto bg-[#000304]/85 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/60 rounded-2xl px-4 sm:px-6 py-3.5 transition-all duration-300">
                 <div className="flex items-center justify-between gap-4">
-                    {/* Logo & Brand (no border, no box) */}
-                    <Link to="/" className="flex items-center gap-3 group shrink-0">
-                        <img
-                            src={logo}
-                            alt="Apollo Logo"
-                            className="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-                        />
-                        <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#0099ff] transition-colors">
-                            Apollo<span className="text-[#0099ff]">Group</span>TV
-                        </span>
-                    </Link>
+                    {/* Logo & Brand: Points to main domain if on a subdomain, otherwise internal SPA root */}
+                    {isSubdomainHost() ? (
+                        <a href="https://apollogroup.click/" className="flex items-center gap-3 group shrink-0">
+                            <img
+                                src={logo}
+                                alt="Apollo Logo"
+                                className="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                            />
+                            <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#0099ff] transition-colors">
+                                Apollo<span className="text-[#0099ff]">Group</span>TV
+                            </span>
+                        </a>
+                    ) : (
+                        <Link to="/" className="flex items-center gap-3 group shrink-0">
+                            <img
+                                src={logo}
+                                alt="Apollo Logo"
+                                className="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                            />
+                            <span className="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#0099ff] transition-colors">
+                                Apollo<span className="text-[#0099ff]">Group</span>TV
+                            </span>
+                        </Link>
+                    )}
 
-                    {/* Desktop NavLinks */}
+                    {/* Desktop NavLinks: If on portal/dashboard subdomain, navigates back to main domain */}
                     <div className="hidden xl:flex items-center gap-1">
                         {navLinks.map((link) => (
-                            <DesktopNavItem key={link.to} {...link} />
+                            isSubdomainHost() ? (
+                                <a
+                                    key={link.to}
+                                    href={getMainSiteUrl(link.to)}
+                                    className="relative inline-flex items-center px-4 py-2.5 text-base font-medium text-slate-300 hover:text-white transition-colors"
+                                >
+                                    {link.label}
+                                </a>
+                            ) : (
+                                <DesktopNavItem key={link.to} {...link} />
+                            )
                         ))}
                     </div>
 
@@ -185,12 +208,12 @@ const Navbar = () => {
                                     Log In
                                 </a>
 
-                                <Link
-                                    to="/register"
-                                    className="px-6 py-3 text-base rounded-sm font-medium text-white hover:text-[#0099ff] bg-white/[0.06] hover:bg-white/[0.12] transition-all border border-white/10"
+                                <a
+                                    href={getPortalRegisterUrl()}
+                                    className="px-6 py-3 text-base rounded-sm font-medium text-white hover:text-[#0099ff] bg-white/[0.06] hover:bg-white/[0.12] transition-all border border-white/10 cursor-pointer"
                                 >
                                     Sign Up
-                                </Link>
+                                </a>
                             </>
                         )}
 
@@ -296,20 +319,31 @@ const Navbar = () => {
                 {/* Center Section: Centered Navigation Links (Mapped dynamically from navLinks array) */}
                 <div className="flex-1 flex flex-col items-center justify-center space-y-6 sm:space-y-7 my-8">
                     {navLinks.map((link) => (
-                        <NavLink
-                            key={link.id}
-                            to={link.to}
-                            end={link.end}
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className={({ isActive }) =>
-                                `text-2xl sm:text-3xl font-bold tracking-tight transition-colors ${isActive
-                                    ? 'text-[#0099ff]'
-                                    : 'text-white hover:text-[#0099ff]'
-                                }`
-                            }
-                        >
-                            {link.mobileLabel || link.label}
-                        </NavLink>
+                        isSubdomainHost() ? (
+                            <a
+                                key={link.id}
+                                href={getMainSiteUrl(link.to)}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="text-2xl sm:text-3xl font-bold tracking-tight text-white hover:text-[#0099ff] transition-colors"
+                            >
+                                {link.mobileLabel || link.label}
+                            </a>
+                        ) : (
+                            <NavLink
+                                key={link.id}
+                                to={link.to}
+                                end={link.end}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className={({ isActive }) =>
+                                    `text-2xl sm:text-3xl font-bold tracking-tight transition-colors ${isActive
+                                        ? 'text-[#0099ff]'
+                                        : 'text-white hover:text-[#0099ff]'
+                                    }`
+                                }
+                            >
+                                {link.mobileLabel || link.label}
+                            </NavLink>
+                        )
                     ))}
                 </div>
 
@@ -375,13 +409,13 @@ const Navbar = () => {
                                 Login
                             </a>
 
-                            <Link
-                                to="/register"
+                            <a
+                                href={getPortalRegisterUrl()}
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="w-full py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-bold text-base flex items-center justify-center transition-all shadow-md active:scale-[0.99]"
+                                className="w-full py-3.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-white font-bold text-base flex items-center justify-center transition-all shadow-md active:scale-[0.99] cursor-pointer"
                             >
                                 Create Account
-                            </Link>
+                            </a>
                         </>
                     )}
 
